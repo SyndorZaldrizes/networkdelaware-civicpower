@@ -3,67 +3,249 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About the From Civic Learning to Civic Power fellowship: what it is, who is behind it, and how it came together.">
-  <title>About the Fellowship | From Civic Learning to Civic Power</title>
+  <meta name="description" content="About the From Civic Learning to Civic Power fellowship — what it is, who built it, and how the research was conducted.">
+  <title>About | From Civic Learning to Civic Power</title>
   <link rel="stylesheet" href="styles/main.css">
   <style>
-    .page-hero { background: var(--blue); padding: 4.5rem 0 3.5rem; position: relative; overflow: hidden; }
-    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,145,58,0.04) 40px, rgba(201,145,58,0.04) 41px); }
-    .page-hero-inner { position: relative; z-index: 2; }
-    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1rem; }
-    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.8; }
-    .about-body p { font-size: 1rem; color: #3a3530; line-height: 1.85; margin-bottom: 1.4rem; max-width: 720px; }
-    .about-body h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--blue); margin: 2.5rem 0 0.8rem; }
-    .phase-list { list-style: none; padding: 0; margin: 1rem 0 1.5rem; }
-    .phase-list li { padding: 0.8rem 1rem; border-left: 3px solid var(--gold); background: var(--cream); margin-bottom: 0.6rem; font-size: 0.95rem; color: #444; line-height: 1.7; }
-    .phase-list li strong { font-family: var(--font-display); color: var(--blue); }
+    .page-hero {
+      background: var(--black); padding: 5rem 0 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(212,160,23,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,160,23,0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .hero-inner { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 9vw, 7.5rem);
+      color: var(--white); line-height: 0.9;
+      letter-spacing: 0.02em; margin-bottom: 1.5rem;
+    }
+    .page-hero h1 em { color: var(--gold); font-style: normal; }
+    .page-hero p {
+      font-size: 1.05rem; color: rgba(245,240,232,0.6);
+      max-width: 560px; line-height: 1.85;
+      border-left: 3px solid var(--gold); padding-left: 1.5rem;
+    }
+
+    /* MISSION STATEMENT */
+    .mission-statement { background: var(--gold); padding: 4rem 0; }
+    .mission-statement-inner { max-width: 900px; }
+    .ms-label {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(10,10,8,0.5); margin-bottom: 1rem; display: block;
+    }
+    .ms-text {
+      font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem);
+      color: var(--black); line-height: 1.05; letter-spacing: 0.01em;
+    }
+
+    /* WHAT THIS IS */
+    .what-wrap { background: var(--paper); padding: 5.5rem 0; }
+    .what-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .what-text p { font-size: 1rem; color: var(--gray); line-height: 1.9; margin-bottom: 1.4rem; }
+    .what-text p:last-child { margin-bottom: 0; }
+    .what-sidebar { display: flex; flex-direction: column; gap: 1.2rem; }
+    .sidebar-block {
+      padding: 1.8rem 2rem; border: 1px solid var(--border); background: var(--white);
+      border-left: 4px solid var(--gold);
+    }
+    .sidebar-block h4 {
+      font-family: var(--font-display); font-size: 1.3rem;
+      color: var(--black); margin-bottom: 0.6rem; letter-spacing: 0.01em;
+    }
+    .sidebar-block p { font-size: 0.88rem; color: var(--gray); line-height: 1.75; }
+    .sidebar-block.red { border-left-color: var(--red); }
+    .sidebar-block.black { background: var(--black); border-left-color: var(--gold); }
+    .sidebar-block.black h4 { color: var(--gold-lt); }
+    .sidebar-block.black p { color: rgba(245,240,232,0.55); }
+
+    /* PHASES */
+    .phases-wrap { background: var(--black); padding: 5.5rem 0; }
+    .phases-timeline { margin-top: 3rem; }
+    .phase-item {
+      display: grid; grid-template-columns: 180px 1fr;
+      gap: 0; border-bottom: 1px solid rgba(212,160,23,0.15);
+      padding: 2.5rem 0;
+    }
+    .phase-item:first-child { border-top: 1px solid rgba(212,160,23,0.15); }
+    .phase-tag {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); padding-right: 2rem;
+    }
+    .phase-content h3 {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: var(--white); margin-bottom: 0.6rem; letter-spacing: 0.02em;
+    }
+    .phase-content p { font-size: 0.9rem; color: rgba(245,240,232,0.55); line-height: 1.8; margin-bottom: 1rem; }
+    .phase-deliverables {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .phase-d-tag {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border: 1px solid var(--border);
+      color: rgba(245,240,232,0.45);
+    }
+
+    /* PEOPLE */
+    .people-wrap { background: var(--paper-dk); padding: 5.5rem 0; }
+    .people-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 3rem; }
+    .person-card { background: var(--white); padding: 2.5rem 2rem; }
+    .person-card h3 { font-family: var(--font-display); font-size: 1.8rem; color: var(--black); margin-bottom: 0.3rem; letter-spacing: 0.02em; }
+    .person-title {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem; display: block;
+    }
+    .person-card p { font-size: 0.9rem; color: var(--gray); line-height: 1.8; }
+    .person-card.dark { background: var(--black); }
+    .person-card.dark h3 { color: var(--white); }
+    .person-card.dark .person-title { color: var(--gold); }
+    .person-card.dark p { color: rgba(245,240,232,0.55); }
+
+    @media (max-width: 860px) {
+      .what-inner { grid-template-columns: 1fr; }
+      .phase-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .people-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
+  <div id="nav-placeholder"></div>
+  <main id="main">
 
-<div id="nav-placeholder"></div>
+    <section class="page-hero" aria-labelledby="about-heading">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="section-label" style="color:var(--gold)">About</p>
+        <h1 id="about-heading">ABOUT THE<br><em>FELLOWSHIP</em></h1>
+        <p>From Civic Learning to Civic Power is a Network Delaware civic education initiative developed through a structured research fellowship. Here's what it is and how it came together.</p>
+      </div>
+    </section>
 
-<main id="main">
-
-  <header class="page-hero">
-    <div class="container page-hero-inner">
-      <p class="section-label" style="color:var(--gold-lt)">About</p>
-      <h1>About the<br>Fellowship</h1>
-      <p>From Civic Learning to Civic Power is a Network Delaware civic education initiative developed through a structured research fellowship. Here's what it is and how it came together.</p>
+    <!-- MISSION STATEMENT -->
+    <div class="mission-statement">
+      <div class="container">
+        <div class="mission-statement-inner">
+          <span class="ms-label">// Core Argument</span>
+          <p class="ms-text">Delaware students are taught about democracy but are not prepared to practice it. This initiative addresses that gap by building civic capacity — the ability to think critically, organize collectively, make decisions, navigate conflict, and empower others.</p>
+        </div>
+      </div>
     </div>
-  </header>
 
-  <section class="section-pad" aria-label="About">
-    <div class="container about-body">
+    <!-- WHAT THIS IS -->
+    <section class="what-wrap" aria-labelledby="what-heading">
+      <div class="container">
+        <p class="section-label reveal">The Initiative</p>
+        <h2 class="section-title reveal" id="what-heading" style="margin-bottom:3rem">WHAT THIS IS</h2>
+        <div class="what-inner">
+          <div class="what-text reveal">
+            <p>From Civic Learning to Civic Power is a statewide K–12 civic education initiative developed by Network Delaware. It is built on the argument that Delaware students are not being prepared to practice democracy — only to read about it. The initiative proposes a multi-front strategy to close that gap, with specific attention to communities that existing programs have consistently failed to reach.</p>
+            <p>The work is organized around a four-front framework, a six-phase Civic Action Cycle, eight guiding equity principles, and six identified priority communities. All deliverables are grounded in primary research, CIRCLE data, and analysis of six comparison jurisdictions: Massachusetts, Illinois, Rhode Island, California, New York, and Puerto Rico.</p>
+            <p>This site serves as the public-facing home for the fellowship's research, tools, and policy documents — designed to be usable by school administrators, community organizations, educators, funders, and students alike.</p>
+            <div style="margin-top:2rem">
+              <a href="resources.html" class="btn btn-black">Access the Research Library →</a>
+            </div>
+          </div>
+          <div class="what-sidebar reveal reveal-delay-1">
+            <div class="sidebar-block">
+              <h4>The Central Gap</h4>
+              <p>Fewer than 1 in 4 eighth graders nationally demonstrate proficiency in civics. Delaware's standards contain no statutory mandate, no dedicated funding, and no accountability tied to LEA implementation. The gap is structural, not motivational.</p>
+            </div>
+            <div class="sidebar-block red">
+              <h4>What's Different</h4>
+              <p>Most civic education frameworks treat nonviolent strategy and leadership development as optional add-ons. This initiative treats them as a required core component — the differentiating argument — and is the first to propose codifying it in statute.</p>
+            </div>
+            <div class="sidebar-block black">
+              <h4>The Measure of Success</h4>
+              <p>Success is measured by what participants can do, analyze, and teach others — not by attendance counts or program exposure. Civic capacity, not civic exposure, is the goal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h2>What This Is</h2>
-      <p>From Civic Learning to Civic Power is a statewide K&ndash;12 civic education initiative developed by Network Delaware. It is built on the argument that Delaware students are not being prepared to practice democracy &mdash; only to read about it. The initiative proposes a multi-front strategy to close that gap, with specific attention to communities that existing programs have consistently failed to reach.</p>
-      <p>The work is organized around a four-front framework, a six-phase Civic Action Cycle, eight guiding equity principles, and six identified priority communities. All deliverables are grounded in primary research, CIRCLE data, and analysis of five comparison states.</p>
+    <!-- FELLOWSHIP PHASES -->
+    <section class="phases-wrap" aria-labelledby="phases-heading">
+      <div class="container">
+        <p class="section-label reveal" style="color:var(--gold)">Structure</p>
+        <h2 class="section-title reveal" id="phases-heading" style="color:var(--white)">FELLOWSHIP<br>PHASES</h2>
+        <div class="phases-timeline">
+          <div class="phase-item reveal">
+            <div class="phase-tag">Phase 1<br>Weeks 1–3<br>Delaware Foundation</div>
+            <div class="phase-content">
+              <h3>Delaware Foundation</h3>
+              <p>Landscape review of Delaware's K–12 civics standards and comparative analysis of how five comparison states implemented strong civic education systems. Documented the structural gaps in the current system and built the evidence base for the policy brief.</p>
+              <div class="phase-deliverables">
+                <span class="phase-d-tag">Standards Review</span>
+                <span class="phase-d-tag">Comparative State Analysis</span>
+                <span class="phase-d-tag">Work Plan</span>
+              </div>
+            </div>
+          </div>
+          <div class="phase-item reveal">
+            <div class="phase-tag">Phase 2<br>Weeks 4–8<br>Research + Tools</div>
+            <div class="phase-content">
+              <h3>Research and Tools</h3>
+              <p>Best practices memo on youth civic engagement, strategic nonviolence research brief, school-community partnership toolkit, and workshop implementation framework. Annotated citation library organizing all 31 cited sources by thematic section.</p>
+              <div class="phase-deliverables">
+                <span class="phase-d-tag">Youth Civic Engagement Memo</span>
+                <span class="phase-d-tag">Nonviolence Brief</span>
+                <span class="phase-d-tag">Partnership Toolkit</span>
+                <span class="phase-d-tag">Workshop Framework</span>
+                <span class="phase-d-tag">Citation Library</span>
+              </div>
+            </div>
+          </div>
+          <div class="phase-item reveal">
+            <div class="phase-tag">Phase 3<br>Weeks 9–12<br>Policy + Funding</div>
+            <div class="phase-content">
+              <h3>Policy and Funding</h3>
+              <p>K–12 civic education policy brief addressed to DDOE and the Delaware General Assembly with five integrated recommendations. Modular grant narrative language for funders. Summary presentation deck for Network Delaware staff and stakeholders.</p>
+              <div class="phase-deliverables">
+                <span class="phase-d-tag">Policy Brief</span>
+                <span class="phase-d-tag">Grant Narrative Language</span>
+                <span class="phase-d-tag">Summary Presentation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <h2>The Fellowship Structure</h2>
-      <p>The research and materials on this site were produced through a three-phase fellowship:</p>
-      <ul class="phase-list">
-        <li><strong>Phase 1 &mdash; Delaware Foundation:</strong> Landscape review of Delaware's K&ndash;12 civics standards and comparative analysis of Massachusetts, Illinois, Rhode Island, California, and New York.</li>
-        <li><strong>Phase 2 &mdash; Research and Tools:</strong> Best practices memo, strategic nonviolence brief, school-community partnership toolkit, workshop implementation framework, and annotated citation library.</li>
-        <li><strong>Phase 3 &mdash; Policy and Funding:</strong> K&ndash;12 civic education policy brief addressed to DDOE and the Delaware General Assembly, and modular grant narrative language for six identified funders.</li>
-      </ul>
-      <p>A voluntary side initiative &mdash; the Delaware Student Legislature &mdash; was also developed through the fellowship as a student-run civic practice model adapted from the Maryland Student Legislature.</p>
+    <!-- PEOPLE -->
+    <section class="people-wrap" aria-labelledby="people-heading">
+      <div class="container">
+        <p class="section-label reveal">Who Built This</p>
+        <h2 class="section-title reveal" id="people-heading" style="margin-bottom:3rem">THE TEAM</h2>
+        <div class="people-grid">
+          <div class="person-card reveal">
+            <h3>Nathan Sanchez</h3>
+            <span class="person-title">// Civic Education &amp; Policy Research Fellow</span>
+            <p>Research and materials for the From Civic Learning to Civic Power initiative. Network Delaware Research Fellowship, 2025. All deliverables on this site were researched, written, and produced through this fellowship.</p>
+          </div>
+          <div class="person-card dark reveal reveal-delay-1">
+            <h3>Network Delaware</h3>
+            <span class="person-title">// Host Organization</span>
+            <p>Network Delaware is a civic organization working to build civic capacity across Delaware communities. The organization describes itself as providing "a civics gym where we prepare individuals and partner groups to improve their skills and foster equitable civic change," rooted in the leadership development philosophy of Ella Baker.</p>
+          </div>
+        </div>
+        <div style="margin-top:3rem; padding:2.5rem 2rem; background:var(--white); border:1px solid var(--border); border-left:4px solid var(--gold)">
+          <p class="section-label">Institutional Partners</p>
+          <p style="font-size:0.95rem;color:var(--gray);line-height:1.85">Delaware Center for Civic Education at the University of Delaware Biden School · Delaware Civics Education Coalition · CIRCLE at Tufts University · La Esperanza · Latin American Community Center (LACC) · Equality Delaware · United Way of Delaware PRIDE Council · Delaware Hispanic Commission</p>
+        </div>
+      </div>
+    </section>
 
-      <h2>About Network Delaware</h2>
-      <p>Network Delaware is a civic organization working to build civic capacity across Delaware communities. This fellowship was conducted under Network Delaware's civic education program.</p>
-
-      <h2>Fellowship Lead</h2>
-      <p>Research and materials: <strong>Nathan Sanchez</strong>, Network Delaware Research Fellowship, 2025.</p>
-
-      <p style="margin-top:2.5rem"><a href="resources.html" class="btn btn-primary">Access the Research Library &rarr;</a></p>
-
-    </div>
-  </section>
-
-</main>
-
-<div id="footer-placeholder"></div>
-<script src="scripts/main.js"></script>
-
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="scripts/main.js"></script>
 </body>
 </html>

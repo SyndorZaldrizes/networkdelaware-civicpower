@@ -3,93 +3,302 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The six priority communities at the center of From Civic Learning to Civic Power: who they are, why they were identified, and how the initiative is designed to serve them.">
+  <meta name="description" content="The six priority communities at the center of From Civic Learning to Civic Power — and how the initiative is specifically designed to serve them.">
   <title>Priority Communities | From Civic Learning to Civic Power</title>
   <link rel="stylesheet" href="styles/main.css">
   <style>
-    .page-hero { background: var(--blue); padding: 4.5rem 0 3.5rem; position: relative; overflow: hidden; }
-    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,145,58,0.04) 40px, rgba(201,145,58,0.04) 41px); }
-    .page-hero-inner { position: relative; z-index: 2; }
-    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1rem; }
-    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.8; }
-    .communities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
-    .community-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; border-left: 3px solid var(--gold); }
-    .community-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--blue); margin-bottom: 0.6rem; }
-    .community-card p { font-size: 0.9rem; color: #555; line-height: 1.7; }
-    .why-note { margin-top: 1rem; font-size: 0.82rem; color: var(--gold); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; }
+    .page-hero {
+      background: var(--black); padding: 5rem 0 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(212,160,23,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,160,23,0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .hero-inner { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 9vw, 7.5rem);
+      color: var(--white); line-height: 0.9;
+      letter-spacing: 0.02em; margin-bottom: 1.5rem;
+    }
+    .page-hero h1 em { color: var(--gold); font-style: normal; }
+    .page-hero p {
+      font-size: 1.05rem; color: rgba(245,240,232,0.6);
+      max-width: 560px; line-height: 1.85;
+      border-left: 3px solid var(--gold); padding-left: 1.5rem;
+    }
+
+    /* DESIGN PRINCIPLE CALLOUT */
+    .design-callout {
+      background: var(--gold); padding: 2.5rem 0;
+    }
+    .design-callout-inner {
+      display: flex; align-items: center; gap: 3rem;
+    }
+    .design-callout-label {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(10,10,8,0.5); white-space: nowrap;
+    }
+    .design-callout-text {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: var(--black); line-height: 1.05; letter-spacing: 0.02em;
+    }
+
+    /* COMMUNITIES */
+    .communities-wrap { background: var(--paper); padding: 5.5rem 0; }
+    .community-block {
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: 0; border: 2px solid var(--black);
+      margin-bottom: 1.2rem; transition: box-shadow 0.2s;
+    }
+    .community-block:hover { box-shadow: var(--shadow); }
+    .comm-left {
+      background: var(--black); padding: 2.5rem 2rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .comm-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .comm-name {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: var(--white); line-height: 1; letter-spacing: 0.02em;
+    }
+    .comm-why {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); margin-top: 1.5rem;
+    }
+    .comm-right {
+      background: var(--white); padding: 2.5rem 3rem;
+    }
+    .comm-right h4 {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .comm-barriers { margin-bottom: 1.5rem; }
+    .comm-barriers p, .comm-practices p {
+      font-size: 0.95rem; color: var(--gray); line-height: 1.8;
+    }
+    .comm-practices {
+      padding: 1.2rem 1.5rem; background: var(--paper-dk);
+      border-left: 4px solid var(--gold);
+    }
+
+    /* STRUCTURAL NOTE */
+    .structural-wrap { background: var(--black); padding: 5.5rem 0; }
+    .structural-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border); margin-top: 3rem;
+    }
+    .structural-cell {
+      background: var(--black); padding: 2.5rem 2rem;
+    }
+    .structural-cell h3 {
+      font-family: var(--font-display); font-size: 1.5rem;
+      color: var(--gold-lt); margin-bottom: 0.8rem; letter-spacing: 0.02em;
+    }
+    .structural-cell p { font-size: 0.92rem; color: rgba(245,240,232,0.55); line-height: 1.8; }
+    .structural-cell .s-label {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 0.6rem;
+    }
+
+    @media (max-width: 860px) {
+      .community-block { grid-template-columns: 1fr; }
+      .comm-left { flex-direction: row; align-items: flex-start; flex-wrap: wrap; gap: 1rem; }
+      .structural-grid { grid-template-columns: 1fr; }
+      .design-callout-inner { flex-direction: column; gap: 1rem; }
+    }
   </style>
 </head>
 <body>
+  <div id="nav-placeholder"></div>
+  <main id="main">
 
-<div id="nav-placeholder"></div>
+    <section class="page-hero" aria-labelledby="comm-heading">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="section-label" style="color:var(--gold)">Priority Communities</p>
+        <h1 id="comm-heading">WHO THIS<br>IS <em>BUILT</em><br>FOR</h1>
+        <p>Six communities were identified as priority focus areas based on structural gaps in civic access, representation, and educational investment. Inclusion is a design requirement — not an afterthought.</p>
+      </div>
+    </section>
 
-<main id="main">
-
-  <header class="page-hero">
-    <div class="container page-hero-inner">
-      <p class="section-label" style="color:var(--gold-lt)">Priority Communities</p>
-      <h1>Who This<br>Is Built For</h1>
-      <p>Six communities were identified as priority focus areas based on structural gaps in civic access, representation, and educational investment. The initiative is designed around their specific conditions &mdash; not as a generic statewide rollout.</p>
+    <div class="design-callout" aria-hidden="true">
+      <div class="container">
+        <div class="design-callout-inner">
+          <span class="design-callout-label">Design Principle</span>
+          <p class="design-callout-text">A framework that produces gains for the average Delaware student while leaving priority communities behind has failed its purpose.</p>
+        </div>
+      </div>
     </div>
-  </header>
 
-  <section class="section-pad" aria-label="Priority Communities">
-    <div class="container">
-      <p class="section-label">The Six Communities</p>
-      <h2 class="section-title">Priority Focus Areas</h2>
-      <p style="font-size:1rem;color:#444;line-height:1.8;max-width:680px;margin-bottom:0.5rem">These communities were selected because existing civic education systems have consistently underserved them &mdash; not because of any deficit in the communities themselves.</p>
+    <!-- COMMUNITIES -->
+    <section class="communities-wrap" aria-labelledby="communities-list-heading">
+      <div class="container">
+        <p class="section-label reveal">The Six Communities</p>
+        <h2 class="section-title reveal" id="communities-list-heading" style="margin-bottom:3rem">PRIORITY<br>FOCUS AREAS</h2>
 
-      <div class="communities-grid">
-
-        <div class="community-card reveal">
-          <h3>Multilingual Learners</h3>
-          <p>New Castle County has over 19,000 multilingual learners. Delaware spends roughly $1,100 per multilingual learner &mdash; compared to $6&ndash;9K in neighboring states. Language access in civic education is not an accommodation. It is a baseline requirement.</p>
-          <p class="why-note">Why: Resource gap + civic access barrier</p>
+        <div class="community-block reveal">
+          <div class="comm-left">
+            <div>
+              <div class="comm-icon">🗣</div>
+              <div class="comm-name">MULTILINGUAL FAMILIES</div>
+            </div>
+            <div class="comm-why">// Language Access as Civic Infrastructure</div>
+          </div>
+          <div class="comm-right">
+            <div class="comm-barriers">
+              <h4>Structural Barriers</h4>
+              <p>New Castle County has over 19,000 multilingual learners. Delaware spends approximately $1,100 per multilingual learner compared to $6,000–$9,000 in neighboring states. English-only civic materials, inaccessible family engagement processes, and limited translation of school governance documents structurally exclude multilingual families from civic participation. Language access is not accommodation — it is baseline infrastructure.</p>
+            </div>
+            <div class="comm-practices">
+              <h4>Framework Response</h4>
+              <p>All civic learning materials provided in English and Spanish at minimum, with a language access plan for additional languages. Professional interpretation at all community-facing events. Family voice mechanisms available in home languages. Grant eligibility tied to multilingual integration requirements.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="community-card reveal">
-          <h3>Students with Disabilities</h3>
-          <p>Civic education programs rarely include explicit accessibility design. IEP accommodations address academic content, not civic participation. This initiative requires accessibility standards to be built in at the design stage, not retrofitted.</p>
-          <p class="why-note">Why: Structural exclusion from civic practice</p>
+        <div class="community-block reveal">
+          <div class="comm-left">
+            <div>
+              <div class="comm-icon">🛡</div>
+              <div class="comm-name">IMMIGRANT &amp; MIXED-STATUS FAMILIES</div>
+            </div>
+            <div class="comm-why">// Safety-Conscious Civic Engagement</div>
+          </div>
+          <div class="comm-right">
+            <div class="comm-barriers">
+              <h4>Structural Barriers</h4>
+              <p>Immigrant and mixed-status families face real safety concerns around civic participation. Being visible in a public civic context — presenting to a city council, leading a community meeting, being publicly quoted — carries legitimate risk that has nothing to do with civic confidence or knowledge. A civic education framework that does not address these barriers by design will not reach this community. Their exclusion is a design failure, not a personal one.</p>
+            </div>
+            <div class="comm-practices">
+              <h4>Framework Response</h4>
+              <p>No-disclosure-required participation pathways. Anonymous proposal submission and voting options for all activities. Know-your-rights education integrated into facilitator training. Partnerships with trusted community organizations — La Esperanza, LACC, Delaware Hispanic Commission — as intermediaries rather than direct outreach. Multiple participation modes so public presentation is never the only path.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="community-card reveal">
-          <h3>Rural Communities</h3>
-          <p>Rural Delaware students face transportation barriers to civic events, fewer local government touchpoints, and limited access to organizing infrastructure. Geographic isolation shapes civic access in ways that urban-designed programs don't account for.</p>
-          <p class="why-note">Why: Geographic and infrastructure barriers</p>
+        <div class="community-block reveal">
+          <div class="comm-left">
+            <div>
+              <div class="comm-icon">✊</div>
+              <div class="comm-name">BLACK AND BROWN YOUTH</div>
+            </div>
+            <div class="comm-why">// Organizing, Accountability, Collective Power</div>
+          </div>
+          <div class="comm-right">
+            <div class="comm-barriers">
+              <h4>Structural Barriers</h4>
+              <p>Black and Brown youth face school discipline disparities, over-policing, economic precarity, and fewer high-quality civic learning opportunities in under-resourced schools. Research on civic assets among youth of color identifies civic efficacy — the belief that one's actions can produce real change — as the asset most strongly associated with social activism. Critical consciousness without the accompanying efficacy produces disengagement. The mechanism for building efficacy is the experience of exercising real influence, not simulated influence.</p>
+            </div>
+            <div class="comm-practices">
+              <h4>Framework Response</h4>
+              <p>Action civics with culturally sustaining curricula and student-controlled issue selection. Paid youth organizing fellowships that address economic barriers to participation. Leadership roles in real, consequential decision-making bodies. Kingian Nonviolence curriculum as civic case study centered in Black-led organizing tradition. Equity disaggregation requirements in LEA reporting to surface implementation gaps.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="community-card reveal">
-          <h3>Incarcerated and System-Involved Youth</h3>
-          <p>Young people who have been involved in the juvenile justice system are among those with the greatest stake in civic outcomes &mdash; and among those least likely to receive structured civic education. This initiative specifically addresses re-entry and in-facility contexts.</p>
-          <p class="why-note">Why: Highest-stakes exclusion from civic systems</p>
+        <div class="community-block reveal">
+          <div class="comm-left">
+            <div>
+              <div class="comm-icon">♿</div>
+              <div class="comm-name">DISABLED STUDENTS AND FAMILIES</div>
+            </div>
+            <div class="comm-why">// Accessibility as Infrastructure</div>
+          </div>
+          <div class="comm-right">
+            <div class="comm-barriers">
+              <h4>Structural Barriers</h4>
+              <p>Civic participation models are built around physical presence and verbal performance. Disabled students and families face ableism in civic institutions, absence of disability justice framing in curriculum, and physical, communication, and sensory accessibility gaps in civic learning settings. IEP accommodations address academic content — not civic participation. Students with disabilities are suspended and expelled at disproportionately higher rates, a structural barrier to civic participation this framework directly addresses through restorative practices.</p>
+            </div>
+            <div class="comm-practices">
+              <h4>Framework Response</h4>
+              <p>Universal Design for Learning applied as a design standard, not an accommodation add-on. Disability justice as a civic history case study with contemporary relevance. Multiple communication modalities for all participation opportunities. Disabled students as co-designers of civic activities — not recipients. No comparison state fully addresses this front. Delaware has the opportunity to establish the national model.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="community-card reveal">
-          <h3>Tribal and Indigenous Communities</h3>
-          <p>The Nanticoke Lenni-Lenape and other Indigenous communities in Delaware have distinct civic relationships with the state that standard civics curricula don't reflect. Sovereign nation relationships, treaty history, and land governance require specific curricular attention.</p>
-          <p class="why-note">Why: Distinct civic relationship with state government</p>
+        <div class="community-block reveal">
+          <div class="comm-left">
+            <div>
+              <div class="comm-icon">🏳️‍🌈</div>
+              <div class="comm-name">LGBTQIA+ YOUTH</div>
+            </div>
+            <div class="comm-why">// Safety Before Participation</div>
+          </div>
+          <div class="comm-right">
+            <div class="comm-barriers">
+              <h4>Structural Barriers</h4>
+              <p>LGBTQIA+ students face safety and belonging deficits that suppress civic engagement before it begins. Hostile state and local policy environments in certain Delaware districts, absence of affirming civic spaces in most school settings, and fear of retaliation for visible participation create conditions where a civic education framework that doesn't provide a third path — beyond public exposure or withdrawal — is not serving these students. Trevor Project research (2025) documents that civic engagement correlates with better mental health outcomes among LGBTQIA+ young people when participation is safe.</p>
+            </div>
+            <div class="comm-practices">
+              <h4>Framework Response</h4>
+              <p>Affirming school climate as a prerequisite for civic participation. GSA and affinity-based leadership pathways embedded in civic education design. LGBTQIA+ history and organizing as civic curriculum content. No-disclosure-required participation pathways. Explicit institutional protections against retaliation. Partnerships with Equality Delaware, United Way of Delaware PRIDE Council, and I Am Me Inc.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="community-card reveal">
-          <h3>Immigrant Communities</h3>
-          <p>Immigrant families &mdash; including mixed-status households &mdash; face real safety concerns around civic participation. Programs that don't address these barriers by design will not reach this community. Civic safety is not a peripheral concern; it is a design requirement.</p>
-          <p class="why-note">Why: Safety barriers + underrepresentation</p>
+        <div class="community-block reveal">
+          <div class="comm-left">
+            <div>
+              <div class="comm-icon">🌎</div>
+              <div class="comm-name">HISPANIC AND LATINO COMMUNITIES</div>
+            </div>
+            <div class="comm-why">// Asset-Based, Not Pan-Ethnic</div>
+          </div>
+          <div class="comm-right">
+            <div class="comm-barriers">
+              <h4>Structural Barriers</h4>
+              <p>Delaware's Hispanic and Latino population is not monolithic — it includes Afro-Latino, Indigenous, multi-generational, recent immigrant, and U.S.-born communities across New Castle County and agricultural Sussex County. Treating them as a single pan-ethnic bloc is itself a design failure. Research from the Latino Policy Institute documents that these communities demonstrate strong familial relationships, high educational expectations, and intergenerational civic networks — civic assets, not deficits — that are rarely recognized or leveraged by existing programs.</p>
+            </div>
+            <div class="comm-practices">
+              <h4>Framework Response</h4>
+              <p>Heritage language integration in civics as an asset, not a bridge to English. Family civic literacy activities in home languages. School-community partnerships with Latino-serving organizations rather than state-led outreach. Explicit design attention to Afro-Latino and Indigenous community needs within the broader Latino category. Rejection of pan-ethnic assumptions in program design and evaluation.</p>
+            </div>
+          </div>
         </div>
 
       </div>
+    </section>
 
-      <div style="background:var(--cream);border-left:3px solid var(--gold);padding:1.5rem 2rem;border-radius:var(--radius);margin-top:3rem" class="reveal">
-        <h3 style="font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--blue);margin-bottom:0.5rem">A Note on How These Communities Were Identified</h3>
-        <p style="font-size:0.9rem;color:#555;line-height:1.75">Community identification was driven by three criteria: measurable gaps in civic access or educational investment, structural barriers that existing programs have not addressed, and communities with specific conditions that require tailored design &mdash; not just inclusion in a generic program.</p>
+    <!-- STRUCTURAL NOTE -->
+    <section class="structural-wrap" aria-labelledby="structural-heading">
+      <div class="container">
+        <p class="section-label reveal" style="color:var(--gold)">The Evidence</p>
+        <h2 class="section-title reveal" id="structural-heading" style="color:var(--white);margin-bottom:0">WHY THESE<br>COMMUNITIES</h2>
+        <div class="structural-grid">
+          <div class="structural-cell reveal">
+            <span class="s-label">Criterion 1</span>
+            <h3>Measurable Gaps in Civic Access</h3>
+            <p>Each community was identified based on documented, measurable gaps in civic access or educational investment — not assumptions. The multilingual learner funding gap, school discipline disparities, and language access barriers are empirically documented. The research base is cited in every deliverable.</p>
+          </div>
+          <div class="structural-cell reveal reveal-delay-1">
+            <span class="s-label">Criterion 2</span>
+            <h3>Structural Barriers Existing Programs Haven't Addressed</h3>
+            <p>These communities face barriers that generic civic education programs consistently fail to design for. Safety-conscious participation for immigrant youth. No-disclosure pathways for LGBTQIA+ students. Multi-modal design for disabled participants. If the design doesn't start with these requirements, they don't make it in.</p>
+          </div>
+          <div class="structural-cell reveal">
+            <span class="s-label">Criterion 3</span>
+            <h3>Conditions That Require Tailored Design</h3>
+            <p>Not just inclusion in a generic program — each community has specific conditions that require deliberate design choices. The framework is built around these conditions, not adapted to accommodate them after the fact. The distinction matters: retrofitted inclusion produces symbolic engagement, not real power.</p>
+          </div>
+          <div class="structural-cell reveal reveal-delay-1">
+            <span class="s-label">Design Principle</span>
+            <h3>These Are Not Deficits</h3>
+            <p>Community identification was driven by systemic failures, not community deficits. Immigrant families have strong civic assets — multilingual communication, intergenerational networks, organizing experience. LGBTQIA+ youth have demonstrated civic motivation. Black and Brown youth have organizing traditions. The framework builds on these assets, not around them.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-</main>
-
-<div id="footer-placeholder"></div>
-<script src="scripts/main.js"></script>
-
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="scripts/main.js"></script>
 </body>
 </html>

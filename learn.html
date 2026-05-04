@@ -3,420 +3,463 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Start learning about civic power, civic education, and democracy — designed for all ages from elementary school to adults.">
+  <meta name="description" content="Start learning about civic power — the Civic Action Cycle, key vocabulary, and interactive activities for students, families, and community members.">
   <title>Learn | From Civic Learning to Civic Power</title>
   <link rel="stylesheet" href="styles/main.css">
   <style>
     .page-hero {
-      background: var(--teal);
-      padding: 4.5rem 0 3.5rem;
-      position: relative;
-      overflow: hidden;
+      background: var(--black); padding: 5rem 0 4rem;
+      position: relative; overflow: hidden;
     }
-    .page-hero::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0; right: 0;
-      height: 40px;
-      background: var(--paper);
-      clip-path: ellipse(55% 100% at 50% 100%);
+    .page-hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(212,160,23,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,160,23,0.05) 1px, transparent 1px);
+      background-size: 50px 50px; pointer-events: none;
     }
+    .page-hero-inner { position: relative; z-index: 2; }
     .page-hero h1 {
       font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 8rem);
+      color: var(--white); line-height: 0.9;
+      letter-spacing: 0.02em; margin-bottom: 1.5rem;
+    }
+    .page-hero h1 em { color: var(--gold); font-style: normal; }
+    .page-hero .hero-sub {
+      font-size: 1.05rem; color: rgba(245,240,232,0.6);
+      max-width: 540px; line-height: 1.85;
+      border-left: 3px solid var(--gold); padding-left: 1.5rem;
+    }
+
+    /* CYCLE EXPLORER */
+    .cycle-explorer { background: var(--paper); padding: 5.5rem 0; }
+    .cycle-explorer-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; }
+    .cycle-nav { display: flex; flex-direction: column; gap: 0; }
+    .cycle-nav-btn {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.4rem 1.6rem; background: var(--white);
+      border: 1px solid var(--border); border-bottom: none;
+      cursor: pointer; transition: all 0.2s; text-align: left; width: 100%;
+    }
+    .cycle-nav-btn:last-child { border-bottom: 1px solid var(--border); }
+    .cycle-nav-btn:hover { background: var(--gold-dim); }
+    .cycle-nav-btn.active { background: var(--black); border-color: var(--black); }
+    .cycle-nav-btn.active .cnav-num, .cycle-nav-btn.active .cnav-name { color: var(--gold); }
+    .cycle-nav-btn.active .cnav-desc { color: rgba(245,240,232,0.5); }
+    .cnav-num {
+      font-family: var(--font-display); font-size: 2rem;
+      color: rgba(10,10,8,0.15); line-height: 1;
+      min-width: 40px; transition: color 0.2s;
+    }
+    .cnav-content { flex: 1; }
+    .cnav-name {
+      font-family: var(--font-display); font-size: 1.3rem;
+      color: var(--black); letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .cnav-desc {
+      font-size: 0.82rem; color: var(--gray-lt); margin-top: 0.2rem;
+      font-family: var(--font-mono); letter-spacing: 0.08em; transition: color 0.2s;
+    }
+    .cycle-panels { position: relative; }
+    .cycle-panel { display: none; animation: panelIn 0.35s var(--ease-out); }
+    .cycle-panel.active { display: block; }
+    @keyframes panelIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
+    .panel-badge {
+      display: inline-block; padding: 0.4rem 1rem;
+      background: var(--gold); color: var(--black);
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .panel-title {
+      font-family: var(--font-display);
       font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.8rem;
+      color: var(--black); line-height: 0.95; margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
     }
-    .page-hero p {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.72);
-      max-width: 540px;
-      line-height: 1.8;
+    .panel-body { font-size: 1rem; color: var(--gray); line-height: 1.85; margin-bottom: 1.5rem; }
+    .panel-box {
+      background: var(--black); padding: 1.8rem 2rem; margin-bottom: 1rem;
     }
-
-    /* AGE TABS */
-    .age-tabs {
-      display: flex;
-      gap: 0;
-      border-bottom: 2px solid var(--border);
-      margin-bottom: 2.5rem;
+    .panel-box h4 {
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
     }
-    .age-tab {
-      padding: 0.9rem 1.8rem;
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      color: #888;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      transition: all 0.2s;
-    }
-    .age-tab:hover { color: var(--blue); }
-    .age-tab[aria-selected="true"] {
-      color: var(--blue);
-      border-bottom-color: var(--gold);
-      font-weight: 500;
+    .panel-box p { color: rgba(245,240,232,0.65); font-size: 0.95rem; line-height: 1.8; }
+    .panel-question {
+      background: var(--paper-dk); border-left: 4px solid var(--gold);
+      padding: 1.2rem 1.5rem; font-family: var(--font-serif);
+      font-style: italic; font-size: 1rem; color: var(--ink); line-height: 1.7;
     }
 
-    .tab-panel { display: none; animation: fadeIn 0.35s ease; }
-    .tab-panel:not([hidden]) { display: block; }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    /* VOCAB CARDS */
+    /* VOCAB SECTION */
+    .vocab-wrap { background: var(--black); padding: 5.5rem 0; }
     .vocab-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border: 2px solid var(--border);
+      margin-top: 3rem;
     }
     .vocab-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.4rem;
-      border-left: 3px solid var(--gold);
+      padding: 2rem; border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s; cursor: default;
     }
+    .vocab-card:nth-child(3n) { border-right: none; }
+    .vocab-card:nth-last-child(-n+3) { border-bottom: none; }
+    .vocab-card:hover { background: rgba(212,160,23,0.08); }
     .vocab-term {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 0.4rem;
+      font-family: var(--font-display); font-size: 1.5rem;
+      color: var(--gold-lt); margin-bottom: 0.6rem; letter-spacing: 0.02em;
     }
-    .vocab-def { font-size: 0.88rem; color: #555; line-height: 1.65; }
-    .vocab-kids-note {
-      font-size: 0.82rem;
-      color: var(--teal);
-      margin-top: 0.5rem;
-      font-style: italic;
-    }
+    .vocab-def { font-size: 0.9rem; color: rgba(245,240,232,0.55); line-height: 1.75; }
 
-    /* CYCLE INTERACTIVE */
-    .cycle-tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 2rem;
+    /* POWER MAP BUILDER */
+    .powermap-wrap { background: var(--paper-dk); padding: 5.5rem 0; }
+    .powermap-inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: start; }
+    .pm-tool {
+      background: var(--white); border: 2px solid var(--black);
+      padding: 2rem;
     }
-    .cycle-tab {
-      padding: 0.5rem 1.1rem;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border: 1px solid var(--border-dk);
-      border-radius: 100px;
-      cursor: pointer;
-      transition: all 0.2s;
-      background: transparent;
-      color: var(--ink);
+    .pm-tool h3 {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: var(--black); margin-bottom: 0.4rem; letter-spacing: 0.02em;
     }
-    .cycle-tab:hover { border-color: var(--gold); color: var(--gold); }
-    .cycle-tab.active { background: var(--gold); border-color: var(--gold); color: var(--blue); }
-    .cycle-detail-box {
-      background: var(--blue);
-      padding: 2.5rem;
-      border-radius: var(--radius);
-      display: none;
-      animation: fadeIn 0.3s ease;
+    .pm-tool .pm-sub {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gray-lt); margin-bottom: 1.5rem;
     }
-    .cycle-detail-box.active { display: block; }
-    .cycle-detail-box h3 {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--gold-lt);
-      margin-bottom: 1rem;
+    .pm-field-group { margin-bottom: 1.2rem; }
+    .pm-label {
+      display: block; font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.4rem;
     }
-    .cycle-detail-box p {
-      color: rgba(255,255,255,0.65);
-      line-height: 1.8;
-      margin-bottom: 0.8rem;
+    .pm-input, .pm-textarea {
+      width: 100%; padding: 0.7rem 0.9rem;
+      border: 1px solid var(--border); background: var(--paper);
+      font-family: var(--font-body); font-size: 0.92rem; color: var(--ink);
+      outline: none; transition: border-color 0.2s;
     }
-    .cycle-detail-box .kids-explain {
-      background: rgba(26,107,107,0.2);
-      border-left: 3px solid var(--teal-lt);
-      padding: 1rem 1.2rem;
-      margin-top: 1.2rem;
-      border-radius: 0 var(--radius) var(--radius) 0;
+    .pm-input:focus, .pm-textarea:focus { border-color: var(--gold); background: var(--white); }
+    .pm-textarea { resize: vertical; min-height: 60px; }
+    .pm-btn {
+      width: 100%; padding: 1rem;
+      background: var(--black); color: var(--gold);
+      font-family: var(--font-mono); font-size: 0.68rem;
+      letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+      border: 2px solid var(--black); cursor: pointer; transition: all 0.2s;
     }
-    .cycle-detail-box .kids-explain p { color: rgba(255,255,255,0.75); margin: 0; }
-    .kids-only .cycle-detail-box p { font-size: 1.05rem; }
+    .pm-btn:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+    .pm-output {
+      background: var(--black); padding: 2rem;
+      display: none; animation: panelIn 0.35s var(--ease-out);
+    }
+    .pm-output.visible { display: block; }
+    .pm-output h4 {
+      font-family: var(--font-display); font-size: 1.5rem;
+      color: var(--gold-lt); margin-bottom: 1.5rem; letter-spacing: 0.02em;
+    }
+    .pm-row { margin-bottom: 1.2rem; }
+    .pm-row-label {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.3rem;
+    }
+    .pm-row-val {
+      font-size: 0.92rem; color: rgba(245,240,232,0.75); line-height: 1.7;
+    }
+    .pm-next-steps {
+      margin-top: 1.5rem; padding: 1rem 1.2rem;
+      background: rgba(212,160,23,0.1); border-left: 3px solid var(--gold);
+    }
+    .pm-next-steps p { font-size: 0.88rem; color: rgba(245,240,232,0.65); line-height: 1.75; }
 
-    /* MISSIONS */
-    .missions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
+    @media (max-width: 900px) {
+      .cycle-explorer-inner, .powermap-inner { grid-template-columns: 1fr; }
+      .vocab-grid { grid-template-columns: 1fr 1fr; }
+      .vocab-card:nth-child(2n) { border-right: none; }
+      .vocab-card:nth-child(3n) { border-right: 1px solid var(--border); }
     }
-    .mission-card {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.6rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .mission-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-    .mission-num {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.6rem;
-    }
-    .mission-card h4 {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 0.5rem;
-    }
-    .mission-card p { font-size: 0.88rem; color: #555; line-height: 1.65; }
-
-    /* CIVIC MATH */
-    .math-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-    .math-icon {
-      width: 40px; height: 40px;
-      background: var(--gold-pale);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    .math-card h4 {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 0.3rem;
-    }
-    .math-card p { font-size: 0.88rem; color: #555; line-height: 1.65; }
-
     @media (max-width: 600px) {
-      .age-tabs { flex-wrap: wrap; }
-      .vocab-grid, .missions-grid { grid-template-columns: 1fr; }
+      .vocab-grid { grid-template-columns: 1fr; }
+      .vocab-card { border-right: none !important; }
     }
   </style>
 </head>
 <body>
   <div id="nav-placeholder"></div>
-
   <main id="main">
 
+    <!-- HERO -->
     <section class="page-hero" aria-labelledby="learn-heading">
-      <div class="container">
-        <p class="section-label" style="color:rgba(255,255,255,0.6)">Start Here</p>
-        <h1 id="learn-heading">Learn About<br>Civic Power</h1>
-        <p>Pick your reading level using the bar at the top of the page, then explore at your own pace. There's no wrong place to start.</p>
+      <div class="page-hero-grid" aria-hidden="true"></div>
+      <div class="container page-hero-inner">
+        <p class="section-label" style="color:var(--gold)">Start Here</p>
+        <h1 id="learn-heading">LEARN<br>CIVIC<br><em>POWER</em></h1>
+        <p class="hero-sub">The Civic Action Cycle, key vocabulary, and interactive tools. No wrong place to start — pick a stage, build a power map, check off a mission.</p>
       </div>
     </section>
 
-    <div class="container section-pad">
-
-      <!-- AGE TABS -->
-      <div class="age-tabs" role="tablist" aria-label="Select your level">
-        <button class="age-tab" role="tab" aria-selected="true" aria-controls="tab-kids" id="tab-btn-kids">🧒 For Kids</button>
-        <button class="age-tab" role="tab" aria-selected="false" aria-controls="tab-teens" id="tab-btn-teens">📚 For Teens</button>
-        <button class="age-tab" role="tab" aria-selected="false" aria-controls="tab-adults" id="tab-btn-adults">🎓 For Adults &amp; Partners</button>
+    <!-- MARQUEE -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Learn</span><span>Analyze</span><span>Organize</span><span>Act</span>
+        <span>Teach Back</span><span>Reflect</span><span>Repeat</span>
+        <span>Civic Multiplier</span><span>Power Map</span><span>Political Home</span>
+        <span>Learn</span><span>Analyze</span><span>Organize</span><span>Act</span>
+        <span>Teach Back</span><span>Reflect</span><span>Repeat</span>
+        <span>Civic Multiplier</span><span>Power Map</span><span>Political Home</span>
       </div>
-
-      <!-- KIDS TAB -->
-      <div id="tab-kids" role="tabpanel" aria-labelledby="tab-btn-kids">
-        <p class="section-label">The Big Idea</p>
-        <h2 class="section-title">What Is Civic Power?</h2>
-        <div class="callout-kids" style="margin-bottom:2rem">
-          <span class="callout-icon">💡</span>
-          <div>
-            <h4>In simple words...</h4>
-            <p><strong>Civic power</strong> means being able to shape the rules and decisions that affect your life — in your school, your neighborhood, and your town. Everyone has it. Not everyone knows how to use it yet.</p>
-          </div>
-        </div>
-
-        <p style="font-size:1.05rem;line-height:1.9;margin-bottom:1.5rem">Civics class teaches you <em>about</em> government. Civic power is what you do <em>with</em> what you learn. Think of it like this: learning to read music is great. But civic power is actually playing the song — together, with others, in front of people who can hear you.</p>
-
-        <h3 class="section-title" style="font-size:1.6rem;margin-top:2.5rem">The 6 Steps (The Civic Action Cycle)</h3>
-        <p style="margin-bottom:1.5rem;color:#555">Civic power is built through a repeating loop of six steps. Click any step to learn more:</p>
-        <div class="cycle-tabs" id="cycleTabs-kids" role="tablist">
-          <button class="cycle-tab active" data-target="ck-learn" onclick="switchCycle('kids',0)">1. Learn</button>
-          <button class="cycle-tab" data-target="ck-analyze" onclick="switchCycle('kids',1)">2. Analyze</button>
-          <button class="cycle-tab" data-target="ck-organize" onclick="switchCycle('kids',2)">3. Organize</button>
-          <button class="cycle-tab" data-target="ck-act" onclick="switchCycle('kids',3)">4. Act</button>
-          <button class="cycle-tab" data-target="ck-teach" onclick="switchCycle('kids',4)">5. Teach Back</button>
-          <button class="cycle-tab" data-target="ck-reflect" onclick="switchCycle('kids',5)">6. Reflect</button>
-        </div>
-        <div id="ck-learn" class="cycle-detail-box active">
-          <h3>Step 1: Learn 🔍</h3>
-          <p>Find out about a real issue in your community. Don't just read a textbook — talk to people, look at real data, and connect big ideas to things you can see in your own neighborhood.</p>
-          <div class="kids-explain"><p>🏫 <strong>Example:</strong> Your school doesn't have enough supplies. You learn who decides the school budget and how.</p></div>
-        </div>
-        <div id="ck-analyze" class="cycle-detail-box">
-          <h3>Step 2: Analyze ⚖️</h3>
-          <p>Look carefully at the issue. Who has the power to change things? Who is being hurt? What are the real reasons the problem exists?</p>
-          <div class="kids-explain"><p>🗺 <strong>Example:</strong> You make a "power map" — a diagram showing who controls the school budget and who you'd need to convince to change it.</p></div>
-        </div>
-        <div id="ck-organize" class="cycle-detail-box">
-          <h3>Step 3: Organize 🤝</h3>
-          <p>You can't change things alone. Build a team, divide up jobs, agree on a shared plan. Real organizing means everyone has a role — not just one hero at the front.</p>
-          <div class="kids-explain"><p>👥 <strong>Example:</strong> You split into groups — one researches, one writes the proposal, one practices the presentation, one reaches out to parents.</p></div>
-        </div>
-        <div id="ck-act" class="cycle-detail-box">
-          <h3>Step 4: Act ⚡</h3>
-          <p>Do the real thing. Talk to a real decision-maker. Present your research at a school board meeting. Submit a petition. Civic action means connecting to a real process, not just practicing it.</p>
-          <div class="kids-explain"><p>🏛 <strong>Example:</strong> You present your budget proposal to the school board and ask for a specific change. They respond — and you have a record of what they said.</p></div>
-        </div>
-        <div id="ck-teach" class="cycle-detail-box">
-          <h3>Step 5: Teach Back 📣</h3>
-          <p>Share what you learned with friends, family, and your community. When you teach someone else, you become a <strong>civic multiplier</strong> — someone who spreads the knowledge and the power.</p>
-          <div class="kids-explain"><p>🎤 <strong>Example:</strong> You run a 30-minute workshop for younger students showing them exactly what you did and how they can do it too.</p></div>
-        </div>
-        <div id="ck-reflect" class="cycle-detail-box">
-          <h3>Step 6: Reflect &amp; Iterate 🔄</h3>
-          <p>Honestly ask: what worked? What didn't? What would you change next time? Then start the cycle again — better and smarter than before.</p>
-          <div class="kids-explain"><p>✏️ <strong>Example:</strong> The board only agreed to one of your three asks. You debrief: what made that one land? Who do you need to build relationships with before the next meeting?</p></div>
-        </div>
-
-        <!-- VOCAB -->
-        <h3 class="section-title" style="font-size:1.5rem;margin-top:3rem">Words to Know</h3>
-        <div class="vocab-grid">
-          <div class="vocab-card"><div class="vocab-term">Civic Multiplier</div><div class="vocab-def">Someone who learns civic skills and then teaches them to others, spreading power through a community.</div><p class="vocab-kids-note">🧒 Like a math tutor — except you're teaching people how to change the rules!</p></div>
-          <div class="vocab-card"><div class="vocab-term">Power Map</div><div class="vocab-def">A diagram showing who has the authority to make a decision, who is affected, and what relationships connect them.</div><p class="vocab-kids-note">🧒 Think of it like a map of who's in charge of what.</p></div>
-          <div class="vocab-card"><div class="vocab-term">Action Civics</div><div class="vocab-def">A way of learning civics by actually doing it — researching real issues, building real strategies, and talking to real decision-makers.</div><p class="vocab-kids-note">🧒 The difference between reading about swimming and actually jumping in.</p></div>
-          <div class="vocab-card"><div class="vocab-term">Deliberation</div><div class="vocab-def">Carefully discussing different sides of an issue with others before making a decision together.</div><p class="vocab-kids-note">🧒 When your group has a real conversation before deciding what to do — not just voting who's loudest.</p></div>
-          <div class="vocab-card"><div class="vocab-term">Strategic Nonviolence</div><div class="vocab-def">Using organized, peaceful action to change unjust systems — based on planning and discipline, not passivity.</div><p class="vocab-kids-note">🧒 It's not just being quiet. It's being smart about how you push for change.</p></div>
-          <div class="vocab-card"><div class="vocab-term">Political Home</div><div class="vocab-def">An organization or space where young people feel they belong, can develop their voice, and take action together.</div><p class="vocab-kids-note">🧒 A place where people show up for each other and help each other grow.</p></div>
-        </div>
-
-        <!-- MINI MISSIONS -->
-        <h3 class="section-title" style="font-size:1.5rem;margin-top:3rem">🎯 Mini Missions for Future Civic Leaders</h3>
-        <p style="margin-bottom:1.5rem;color:#555">Try these with a grown-up, teacher, or older sibling. None require taking a political side — they're about learning the system.</p>
-        <div class="missions-grid">
-          <div class="mission-card"><div class="mission-num">Mission 1</div><h4>Find Your Representatives</h4><p>With an adult, look up who represents your area in the Delaware General Assembly. What committees are they on? Have they ever voted on education?</p></div>
-          <div class="mission-card"><div class="mission-num">Mission 2</div><h4>Spot a Local Rule</h4><p>Pick one rule at your school. Ask: why does it exist, who decided it, and how would a student change it if they wanted to?</p></div>
-          <div class="mission-card"><div class="mission-num">Mission 3</div><h4>Write a One-Sentence Bill</h4><p>In one sentence, describe a change that could make your school, neighborhood, or city safer, fairer, or kinder.</p></div>
-          <div class="mission-card"><div class="mission-num">Mission 4</div><h4>Draw a Power Map</h4><p>Pick an issue at your school. Draw a diagram: who decides? Who is affected? Who could be allies in pushing for change?</p></div>
-          <div class="mission-card"><div class="mission-num">Mission 5</div><h4>Teach Someone Something</h4><p>Pick one thing you learned from this page and explain it to someone else in your own words. That makes you a civic multiplier.</p></div>
-          <div class="mission-card"><div class="mission-num">Mission 6</div><h4>Civic Math Corner</h4><p>A class has 28 students. A bill needs more than half to pass. How many yes votes does it need? (Hint: think about what "majority" means.)</p></div>
-        </div>
-      </div>
-
-      <!-- TEENS TAB -->
-      <div id="tab-teens" role="tabpanel" aria-labelledby="tab-btn-teens" hidden>
-        <p class="section-label">For High School Students</p>
-        <h2 class="section-title">Civic Power Starts Now</h2>
-        <p style="font-size:1.05rem;color:#3a3530;line-height:1.85;max-width:660px;margin-bottom:2rem">You are old enough to participate in real civic processes — and yet most civic education programs treat you as a future citizen rather than a current one. The research is clear: the gap between wanting to participate and actually participating is not motivation. It is access, safety, and invitation.</p>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem">
-          <div class="card">
-            <span class="card-icon">📊</span>
-            <h3>The Numbers That Matter</h3>
-            <p>Among youth who voted in 2024, 22% reported protesting or attending demonstrations, compared to 8% of non-voters. The difference isn't character — it's civic ecosystem. Do you have a political home?</p>
-          </div>
-          <div class="card">
-            <span class="card-icon">💬</span>
-            <h3>Action Civics vs. Service Learning</h3>
-            <p>Service learning does things <em>for</em> communities. Action civics works <em>with</em> communities to influence the decisions and systems that affect them. The second one builds civic efficacy. The first can reinforce paternalism.</p>
-          </div>
-        </div>
-
-        <h3 class="section-title" style="font-size:1.5rem">The Six-Phase Civic Action Cycle</h3>
-        <div class="cycle-tabs" id="cycleTabs-teens" role="tablist">
-          <button class="cycle-tab active" onclick="switchCycle('teens',0)">Learn</button>
-          <button class="cycle-tab" onclick="switchCycle('teens',1)">Analyze</button>
-          <button class="cycle-tab" onclick="switchCycle('teens',2)">Organize</button>
-          <button class="cycle-tab" onclick="switchCycle('teens',3)">Act</button>
-          <button class="cycle-tab" onclick="switchCycle('teens',4)">Teach Back</button>
-          <button class="cycle-tab" onclick="switchCycle('teens',5)">Reflect</button>
-        </div>
-        <div id="ct-learn" class="cycle-detail-box active"><h3>Learn</h3><p>Connect civic knowledge to real issues in your community. Read actual policy documents. Research who holds the power over the problem you care about — and how that power was acquired.</p></div>
-        <div id="ct-analyze" class="cycle-detail-box"><h3>Analyze</h3><p>Map the stakeholders. Identify root causes vs. surface symptoms. Ask: whose voices are missing from the current process? What would have to change for those voices to matter?</p></div>
-        <div id="ct-organize" class="cycle-detail-box"><h3>Organize</h3><p>Build the coalition. Distribute roles based on skills, not seniority. Agree on a shared strategy, not just a shared goal. Collective strategy is different from individual plans added together.</p></div>
-        <div id="ct-act" class="cycle-detail-box"><h3>Act</h3><p>Engage a real decision-making space. Testimony. Participatory budgeting. A formal proposal to a school board. The measure of the action is whether it creates institutional accountability, not whether it gets covered in a newsletter.</p></div>
-        <div id="ct-teach" class="cycle-detail-box"><h3>Teach Back</h3><p>Share what you learned. Not as a summary — as a facilitated experience that builds the next person's capacity to do what you just did. This is how you become a civic multiplier.</p></div>
-        <div id="ct-reflect" class="cycle-detail-box"><h3>Reflect &amp; Iterate</h3><p>Be honest. What did the action actually accomplish? What would you change? Reflection is not celebration — it's the structural analysis that makes the next cycle more effective.</p></div>
-      </div>
-
-      <!-- ADULTS TAB -->
-      <div id="tab-adults" role="tabpanel" aria-labelledby="tab-btn-adults" hidden>
-        <p class="section-label">For Partners, Educators, and Community Leaders</p>
-        <h2 class="section-title">The Evidence and the Opportunity</h2>
-        <p style="font-size:1.05rem;color:#3a3530;line-height:1.85;max-width:660px;margin-bottom:2rem">Delaware's K–12 civics standards were last revised in 2018. They contain no statutory mandate, no dedicated funding, and no accountability mechanism tied to LEA implementation. The five comparison states with the strongest civic education systems all have something Delaware lacks: a legislative floor paired with funded infrastructure, equity disaggregation requirements, and community partnership mandates in the same vehicle.</p>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:3rem">
-          <div class="card">
-            <span class="badge badge-blue" style="margin-bottom:0.8rem">Finding 1</span>
-            <h3>Mandates Without Infrastructure Reproduce Inequity</h3>
-            <p>Illinois HB 4025 created a floor, not an equitable starting point. Implementation was significantly worse in under-resourced schools — even with the mandate in place. The lesson: equity requirements must be in the same legislative vehicle as the mandate.</p>
-          </div>
-          <div class="card">
-            <span class="badge badge-blue" style="margin-bottom:0.8rem">Finding 2</span>
-            <h3>Decision-Maker Contact Is the Mechanism</h3>
-            <p>Action civics research shows that civic self-efficacy gains were strongest for Black and Latino youth — and specifically driven by direct decision-maker contact. Proximity to real decisions is non-negotiable.</p>
-          </div>
-          <div class="card">
-            <span class="badge badge-blue" style="margin-bottom:0.8rem">Finding 3</span>
-            <h3>The Gap Is Supply-Side</h3>
-            <p>For every form of civic action CIRCLE surveyed, more youth said they would participate if given a structured opportunity than had actually done so. The barrier is access, safety, and invitation — not motivation.</p>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:1rem;flex-wrap:wrap">
-          <a href="resources.html" class="btn btn-primary">Access the Research Library →</a>
-          <a href="resources.html#toolkits" class="btn btn-outline">Download Toolkits →</a>
-          <a href="framework.html" class="btn btn-outline">Explore the Full Framework →</a>
-        </div>
-      </div>
-
     </div>
-  </main>
 
+    <!-- CIVIC ACTION CYCLE EXPLORER -->
+    <section class="cycle-explorer" aria-labelledby="cycle-heading">
+      <div class="container">
+        <p class="section-label reveal">The Method</p>
+        <h2 class="section-title reveal" id="cycle-heading" style="margin-bottom:3rem">THE CIVIC<br>ACTION CYCLE</h2>
+        <div class="cycle-explorer-inner">
+          <nav class="cycle-nav" aria-label="Civic Action Cycle stages">
+            <button class="cycle-nav-btn active" data-panel="0">
+              <span class="cnav-num">01</span>
+              <div class="cnav-content">
+                <div class="cnav-name">LEARN</div>
+                <div class="cnav-desc">Ground knowledge in reality</div>
+              </div>
+            </button>
+            <button class="cycle-nav-btn" data-panel="1">
+              <span class="cnav-num">02</span>
+              <div class="cnav-content">
+                <div class="cnav-name">ANALYZE</div>
+                <div class="cnav-desc">Map power and possibility</div>
+              </div>
+            </button>
+            <button class="cycle-nav-btn" data-panel="2">
+              <span class="cnav-num">03</span>
+              <div class="cnav-content">
+                <div class="cnav-name">ORGANIZE</div>
+                <div class="cnav-desc">Build collective strategy</div>
+              </div>
+            </button>
+            <button class="cycle-nav-btn" data-panel="3">
+              <span class="cnav-num">04</span>
+              <div class="cnav-content">
+                <div class="cnav-name">ACT</div>
+                <div class="cnav-desc">Engage decision-making spaces</div>
+              </div>
+            </button>
+            <button class="cycle-nav-btn" data-panel="4">
+              <span class="cnav-num">05</span>
+              <div class="cnav-content">
+                <div class="cnav-name">TEACH BACK</div>
+                <div class="cnav-desc">Extend learning, multiply capacity</div>
+              </div>
+            </button>
+            <button class="cycle-nav-btn" data-panel="5">
+              <span class="cnav-num">06</span>
+              <div class="cnav-content">
+                <div class="cnav-name">REFLECT + ITERATE</div>
+                <div class="cnav-desc">Analyze what changed, start again</div>
+              </div>
+            </button>
+          </nav>
+
+          <div class="cycle-panels">
+            <div class="cycle-panel active" id="panel-0">
+              <div class="panel-badge">Stage 01</div>
+              <h3 class="panel-title">LEARN</h3>
+              <p class="panel-body">Connect civic knowledge to real issues affecting your school and community. Reading about government isn't enough — the Learn stage means engaging with primary sources: actual policy documents, budget reports, school board minutes. The goal is to understand not just what exists, but who created it and why.</p>
+              <div class="panel-box">
+                <h4>In Practice</h4>
+                <p>Students read the actual Delaware DOE civics standards document, identify what's required vs. what's discretionary, and map which school districts have the most flexibility — and which students that affects.</p>
+              </div>
+              <div class="panel-question">Research question: How do strong models make civic knowledge relevant rather than abstract? How is knowledge connected to lived experience and real issues?</div>
+            </div>
+            <div class="cycle-panel" id="panel-1">
+              <div class="panel-badge">Stage 02</div>
+              <h3 class="panel-title">ANALYZE</h3>
+              <p class="panel-body">Map stakeholders and identify root causes vs. surface symptoms. The Analyze stage asks harder questions: whose voices are missing from the current process? What would have to change for those voices to matter? Who benefits from the current system? This is where power mapping happens.</p>
+              <div class="panel-box">
+                <h4>In Practice</h4>
+                <p>Students build a stakeholder map of Delaware's civic education system — identifying DDOE, LEAs, the General Assembly, community organizations, and the six priority communities — and mark where each group has real vs. symbolic influence.</p>
+              </div>
+              <div class="panel-question">Research question: How do peer frameworks help students examine systems, power, and who makes decisions — not just describe how government works?</div>
+            </div>
+            <div class="cycle-panel" id="panel-2">
+              <div class="panel-badge">Stage 03</div>
+              <h3 class="panel-title">ORGANIZE</h3>
+              <p class="panel-body">Build the coalition. Distribute roles based on skills, not seniority. Collective strategy is different from individual plans added together. The Organize stage is where most civic education programs fail — they stop at awareness. Real organizing means outreach, coalition-building, task division, and deliberation toward shared goals.</p>
+              <div class="panel-box">
+                <h4>In Practice</h4>
+                <p>A student cohort divides into teams: research, communications, decision-maker outreach, and community liaison. Each team has a clear deliverable before the action date. The group votes on the strategy together using a structured consensus process.</p>
+              </div>
+              <div class="panel-question">Research question: What models develop organizing capacity in young people — especially in communities new to civic participation?</div>
+            </div>
+            <div class="cycle-panel" id="panel-3">
+              <div class="panel-badge">Stage 04</div>
+              <h3 class="panel-title">ACT</h3>
+              <p class="panel-body">Engage a real decision-making space. Testimony. A formal budget proposal. Participatory budgeting. The measure of the Act stage is institutional accountability — not whether it got covered, but whether a decision-maker had to respond. Action civics research shows that direct decision-maker contact is the mechanism for civic efficacy gains.</p>
+              <div class="panel-box">
+                <h4>In Practice</h4>
+                <p>Students present a community-sourced budget proposal to the school board. The board is required to provide a written response within 30 days. The group documents both what was said and what was committed to — holding the institution accountable to its own process.</p>
+              </div>
+              <div class="panel-question">Research question: What does high-quality hands-on civic practice look like? What are the safety and access considerations for priority communities?</div>
+            </div>
+            <div class="cycle-panel" id="panel-4">
+              <div class="panel-badge">Stage 05</div>
+              <h3 class="panel-title">TEACH BACK</h3>
+              <p class="panel-body">Share what you learned — not as a summary, but as a facilitated experience that builds the next person's capacity to do what you just did. This is the mechanism that turns participants into civic multipliers. Every trained participant becomes a potential trainer. The Teach Back stage is how civic capacity scales without proportional increases in external cost or staffing.</p>
+              <div class="panel-box">
+                <h4>In Practice</h4>
+                <p>Students run a 30-minute workshop for a younger cohort, walking them through the power map they built and what changed (or didn't) because of their action. The younger cohort leaves with a tool they can use immediately.</p>
+              </div>
+              <div class="panel-question">Research question: How do programs build civic multipliers — not just informed participants — who carry knowledge forward into families and communities?</div>
+            </div>
+            <div class="cycle-panel" id="panel-5">
+              <div class="panel-badge">Stage 06</div>
+              <h3 class="panel-title">REFLECT + ITERATE</h3>
+              <p class="panel-body">Be honest. What did the action actually accomplish? Reflection is not celebration — it is structural analysis that makes the next cycle more effective. The group examines what worked, what failed, what would change the outcome next time, and who needs to be in the room that wasn't. Then the cycle begins again.</p>
+              <div class="panel-box">
+                <h4>In Practice</h4>
+                <p>The group reviews which of their three asks the board agreed to and why. They identify what gave that ask traction — media attention, community turnout, or the specific framing. That analysis shapes the strategy for the next campaign cycle.</p>
+              </div>
+              <div class="panel-question">Research question: How do strong programs evaluate civic capacity growth — not just attendance or output counts?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VOCABULARY -->
+    <section class="vocab-wrap" aria-labelledby="vocab-heading">
+      <div class="container">
+        <p class="section-label reveal" style="color:var(--gold)">Key Concepts</p>
+        <h2 class="section-title reveal" id="vocab-heading" style="color:var(--white)">VOCABULARY<br>OF CIVIC POWER</h2>
+        <div class="vocab-grid">
+          <div class="vocab-card reveal">
+            <div class="vocab-term">Civic Multiplier</div>
+            <div class="vocab-def">Someone who learns civic skills and then teaches them to others, spreading capacity through a community. The goal of this framework is to build civic multipliers — not just informed participants.</div>
+          </div>
+          <div class="vocab-card reveal reveal-delay-1">
+            <div class="vocab-term">Power Map</div>
+            <div class="vocab-def">A diagram showing who has decision-making authority over a given issue, who is most affected, who are potential allies, and where leverage for change exists. A tool — not just a concept.</div>
+          </div>
+          <div class="vocab-card reveal reveal-delay-2">
+            <div class="vocab-term">Action Civics</div>
+            <div class="vocab-def">A model of civic education built around students working with communities to influence real decisions — not service learning, not simulation. Distinct from learning about government, it requires students to actually engage it.</div>
+          </div>
+          <div class="vocab-card reveal">
+            <div class="vocab-term">Power Literacy</div>
+            <div class="vocab-def">The ability to analyze how power operates in institutions and systems, identify points of leverage, and understand the strategic logic of collective civic action. A core component of Front 4.</div>
+          </div>
+          <div class="vocab-card reveal reveal-delay-1">
+            <div class="vocab-term">Political Home</div>
+            <div class="vocab-def">An organization or space where young people feel they belong, can develop their voice, and take real action together. CIRCLE research shows that having a political home is strongly associated with higher civic participation across all 17 engagement measures.</div>
+          </div>
+          <div class="vocab-card reveal reveal-delay-2">
+            <div class="vocab-term">Strategic Nonviolence</div>
+            <div class="vocab-def">A framework for engaging unjust systems through principled, purposeful action rather than avoidance or reactive escalation. Based on the Kingian Nonviolence tradition — disciplined, strategic, and rooted in collective organization. Not passivity.</div>
+          </div>
+          <div class="vocab-card reveal">
+            <div class="vocab-term">Civic Efficacy</div>
+            <div class="vocab-def">The belief that one's civic actions can produce real change. Research identifies civic efficacy as the asset most strongly associated with long-term political participation among youth of color — built through authentic action, not simulation.</div>
+          </div>
+          <div class="vocab-card reveal reveal-delay-1">
+            <div class="vocab-term">Supply-Side Gap</div>
+            <div class="vocab-def">CIRCLE's framework for understanding why youth don't participate: it is not a lack of motivation but a lack of access, safety, and structured invitation. The civic engagement gap is a supply-side failure — the system isn't creating conditions for participation.</div>
+          </div>
+          <div class="vocab-card reveal reveal-delay-2">
+            <div class="vocab-term">Deliberation</div>
+            <div class="vocab-def">Structured, evidence-grounded discussion of multiple perspectives before making a collective decision. One of the four required pedagogical components under Illinois HB 4025 — the most comprehensive civic education mandate in the comparison field.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POWER MAP BUILDER -->
+    <section class="powermap-wrap" aria-labelledby="pm-heading">
+      <div class="container">
+        <div class="powermap-inner">
+          <div>
+            <p class="section-label reveal">Interactive Tool</p>
+            <h2 class="section-title reveal" id="pm-heading">BUILD YOUR<br>POWER MAP</h2>
+            <p class="reveal" style="color:var(--gray);line-height:1.85;margin-bottom:2rem">A power map is one of the most useful tools in civic organizing. It helps you understand who holds authority, who is most affected, and where your leverage is. Fill in the fields to build one for an issue you care about.</p>
+            <p class="reveal reveal-delay-1" style="color:var(--gray-lt);font-size:0.9rem;line-height:1.8">You can use this for any issue — school policy, local zoning, budget decisions, or state legislation. The point is to see the system, not just the problem.</p>
+          </div>
+          <div>
+            <div class="pm-tool reveal">
+              <h3>POWER MAP BUILDER</h3>
+              <p class="pm-sub">// Civic Analysis Tool</p>
+              <div class="pm-field-group">
+                <label class="pm-label">The Issue You Care About</label>
+                <input class="pm-input" id="pm-issue" type="text" placeholder="e.g. Lack of bilingual civics materials in Delaware schools">
+              </div>
+              <div class="pm-field-group">
+                <label class="pm-label">Who Has Decision-Making Authority?</label>
+                <textarea class="pm-textarea" id="pm-decision" placeholder="e.g. Delaware DOE, school board, state legislature..."></textarea>
+              </div>
+              <div class="pm-field-group">
+                <label class="pm-label">Who Is Most Affected?</label>
+                <textarea class="pm-textarea" id="pm-affected" placeholder="e.g. Multilingual learners, immigrant families, ESL teachers..."></textarea>
+              </div>
+              <div class="pm-field-group">
+                <label class="pm-label">Who Are Potential Allies?</label>
+                <textarea class="pm-textarea" id="pm-allies" placeholder="e.g. LACC, La Esperanza, Delaware Civics Education Coalition..."></textarea>
+              </div>
+              <div class="pm-field-group">
+                <label class="pm-label">What Is Your Leverage?</label>
+                <textarea class="pm-textarea" id="pm-leverage" placeholder="e.g. Public comment at board meetings, data on funding gaps, parent coalition organizing..."></textarea>
+              </div>
+              <button class="pm-btn" onclick="buildMap()">GENERATE MY POWER MAP</button>
+            </div>
+            <div class="pm-output" id="pm-output">
+              <h4>YOUR POWER MAP</h4>
+              <div class="pm-row"><div class="pm-row-label">Issue</div><div class="pm-row-val" id="out-issue"></div></div>
+              <div class="pm-row"><div class="pm-row-label">Decision Makers</div><div class="pm-row-val" id="out-decision"></div></div>
+              <div class="pm-row"><div class="pm-row-label">Most Affected</div><div class="pm-row-val" id="out-affected"></div></div>
+              <div class="pm-row"><div class="pm-row-label">Allies</div><div class="pm-row-val" id="out-allies"></div></div>
+              <div class="pm-row"><div class="pm-row-label">Leverage Points</div><div class="pm-row-val" id="out-leverage"></div></div>
+              <div class="pm-next-steps">
+                <p><strong style="color:var(--gold-lt)">Next step:</strong> Take this map into the Organize stage. Share it with your team. Ask: who else needs to be in the room? What relationships do you need to build before you can act? Which lever is most accessible right now?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
   <div id="footer-placeholder"></div>
   <script src="scripts/main.js"></script>
   <script>
-    // Tab switching
-    document.querySelectorAll('.age-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.age-tab').forEach(t => {
-          t.setAttribute('aria-selected', 'false');
-        });
-        document.querySelectorAll('.tab-panel').forEach(p => {
-          p.setAttribute('hidden', '');
-        });
-        tab.setAttribute('aria-selected', 'true');
-        document.getElementById(tab.getAttribute('aria-controls'))?.removeAttribute('hidden');
+    // Cycle explorer
+    document.querySelectorAll('.cycle-nav-btn').forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cycle-nav-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.cycle-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + i)?.classList.add('active');
       });
     });
 
-    // Cycle tab switching
-    function switchCycle(group, idx) {
-      const prefixes = { kids: 'ck', teens: 'ct' };
-      const ids = ['learn','analyze','organize','act','teach','reflect'];
-      const prefix = prefixes[group];
-      if (!prefix) return;
-      const listId = 'cycleTabs-' + group;
-      document.querySelectorAll(`#${listId} .cycle-tab`).forEach((b, i) => {
-        b.classList.toggle('active', i === idx);
-      });
-      ids.forEach((id, i) => {
-        const el = document.getElementById(`${prefix}-${id}`);
-        if (el) el.classList.toggle('active', i === idx);
-      });
+    // Power map builder
+    function buildMap() {
+      const issue = document.getElementById('pm-issue').value.trim();
+      const decision = document.getElementById('pm-decision').value.trim();
+      const affected = document.getElementById('pm-affected').value.trim();
+      const allies = document.getElementById('pm-allies').value.trim();
+      const leverage = document.getElementById('pm-leverage').value.trim();
+      if (!issue) { alert('Please describe the issue you care about first.'); return; }
+      document.getElementById('out-issue').textContent = issue || '—';
+      document.getElementById('out-decision').textContent = decision || 'Not yet identified';
+      document.getElementById('out-affected').textContent = affected || 'Not yet identified';
+      document.getElementById('out-allies').textContent = allies || 'Not yet identified';
+      document.getElementById('out-leverage').textContent = leverage || 'Not yet identified';
+      const out = document.getElementById('pm-output');
+      out.classList.add('visible');
+      out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   </script>
 </body>

@@ -3,101 +3,421 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Civic Action Framework: four strategic fronts, eight guiding principles, and the Civic Action Cycle that drive From Civic Learning to Civic Power.">
+  <meta name="description" content="The Civic Action Framework — four strategic fronts, eight guiding principles, and the Civic Action Cycle that drive From Civic Learning to Civic Power.">
   <title>The Framework | From Civic Learning to Civic Power</title>
   <link rel="stylesheet" href="styles/main.css">
   <style>
-    .page-hero { background: var(--blue); padding: 4.5rem 0 3.5rem; position: relative; overflow: hidden; }
-    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,145,58,0.04) 40px, rgba(201,145,58,0.04) 41px); }
-    .page-hero-inner { position: relative; z-index: 2; }
-    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1rem; }
-    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.8; }
-    .front-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; border-top: 3px solid var(--gold); margin-bottom: 1.2rem; }
-    .front-num { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-    .front-card h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--blue); margin-bottom: 0.8rem; }
-    .front-card p { font-size: 0.95rem; color: #444; line-height: 1.75; }
-    .principles-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
-    .principles-list li { background: var(--cream); border-left: 3px solid var(--gold); padding: 1rem 1.2rem; font-size: 0.92rem; color: var(--ink); line-height: 1.6; }
-    .principles-list li strong { display: block; font-family: var(--font-display); color: var(--blue); margin-bottom: 0.3rem; }
+    .page-hero {
+      background: var(--black); padding: 5rem 0 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(212,160,23,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,160,23,0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .hero-inner { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 8rem);
+      color: var(--white); line-height: 0.9;
+      letter-spacing: 0.02em; margin-bottom: 1.5rem;
+    }
+    .page-hero h1 em { color: var(--gold); font-style: normal; }
+    .page-hero p {
+      font-size: 1.05rem; color: rgba(245,240,232,0.6);
+      max-width: 540px; line-height: 1.85;
+      border-left: 3px solid var(--gold); padding-left: 1.5rem;
+    }
+
+    /* NON-NEGOTIABLES STRIP */
+    .nonneg-strip { background: var(--red); padding: 3.5rem 0; }
+    .nonneg-inner {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; border: 2px solid rgba(245,240,232,0.15);
+    }
+    .nonneg-cell {
+      padding: 1.8rem 1.5rem; border-right: 1px solid rgba(245,240,232,0.15);
+      text-align: center;
+    }
+    .nonneg-cell:last-child { border-right: none; }
+    .nonneg-check {
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: var(--white); opacity: 0.3; display: block; margin-bottom: 0.8rem;
+    }
+    .nonneg-text {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(245,240,232,0.85); line-height: 1.6;
+    }
+    .nonneg-header {
+      text-align: center; margin-bottom: 2rem;
+    }
+    .nonneg-header p {
+      font-family: var(--font-mono); font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(245,240,232,0.6); margin-bottom: 0.5rem;
+    }
+    .nonneg-header h2 {
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: var(--white); letter-spacing: 0.02em;
+    }
+
+    /* FRONTS */
+    .fronts-wrap { background: var(--paper); padding: 5.5rem 0; }
+    .front-block {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 0; border: 2px solid var(--black); margin-bottom: 1.2rem;
+      transition: box-shadow 0.2s;
+    }
+    .front-block:hover { box-shadow: var(--shadow); }
+    .front-num-col {
+      background: var(--black); padding: 3rem 2rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .front-big-num {
+      font-family: var(--font-display); font-size: 6rem;
+      color: var(--gold); line-height: 1; letter-spacing: 0.02em;
+    }
+    .front-tag {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(245,240,232,0.35); margin-top: auto;
+    }
+    .front-body { padding: 3rem; background: var(--white); }
+    .front-body h3 {
+      font-family: var(--font-display); font-size: 2.2rem;
+      color: var(--black); margin-bottom: 1rem;
+      line-height: 1; letter-spacing: 0.02em;
+    }
+    .front-body p { font-size: 0.97rem; color: var(--gray); line-height: 1.85; margin-bottom: 1rem; }
+    .front-body p:last-child { margin-bottom: 0; }
+    .front-deliverables {
+      margin-top: 1.5rem; padding: 1.2rem 1.5rem;
+      background: var(--paper-dk); border-left: 4px solid var(--gold);
+    }
+    .front-deliverables h4 {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .front-deliverables ul { list-style: none; padding: 0; }
+    .front-deliverables li {
+      font-size: 0.88rem; color: var(--gray); line-height: 1.65;
+      padding: 0.3rem 0; border-bottom: 1px solid var(--border);
+    }
+    .front-deliverables li:last-child { border-bottom: none; }
+    .front-deliverables li::before { content: '→ '; color: var(--gold); font-weight: 700; }
+
+    /* PRINCIPLES */
+    .principles-wrap { background: var(--black); padding: 5.5rem 0; }
+    .principles-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; border: 1px solid var(--border); margin-top: 3rem;
+    }
+    .principle-card {
+      padding: 2rem 1.8rem; border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .principle-card:nth-child(4n) { border-right: none; }
+    .principle-card:nth-child(n+5) { border-bottom: none; }
+    .principle-card:hover { background: rgba(212,160,23,0.08); }
+    .p-num {
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: rgba(212,160,23,0.2); line-height: 1; margin-bottom: 1rem;
+    }
+    .p-name {
+      font-family: var(--font-display); font-size: 1.3rem;
+      color: var(--gold-lt); margin-bottom: 0.6rem; letter-spacing: 0.02em;
+    }
+    .p-desc { font-size: 0.88rem; color: rgba(245,240,232,0.5); line-height: 1.75; }
+
+    /* CYCLE SUMMARY */
+    .cycle-summary { background: var(--paper-dk); padding: 5.5rem 0; }
+    .cycle-timeline {
+      display: grid; grid-template-columns: repeat(6,1fr);
+      gap: 0; margin-top: 3rem; border: 2px solid var(--black);
+    }
+    .cycle-step {
+      padding: 2rem 1.5rem; border-right: 2px solid var(--black);
+      background: var(--white); transition: background 0.2s;
+    }
+    .cycle-step:last-child { border-right: none; }
+    .cycle-step:hover { background: var(--black); }
+    .cycle-step:hover .cs-num { color: var(--gold); }
+    .cycle-step:hover .cs-name { color: var(--white); }
+    .cycle-step:hover .cs-desc { color: rgba(245,240,232,0.5); }
+    .cs-num {
+      font-family: var(--font-display); font-size: 3rem;
+      color: rgba(10,10,8,0.08); line-height: 1;
+      margin-bottom: 0.8rem; transition: color 0.2s;
+    }
+    .cs-name {
+      font-family: var(--font-display); font-size: 1.1rem;
+      color: var(--black); letter-spacing: 0.02em;
+      margin-bottom: 0.5rem; transition: color 0.2s;
+    }
+    .cs-desc { font-size: 0.82rem; color: var(--gray-lt); line-height: 1.7; transition: color 0.2s; }
+
+    @media (max-width: 1000px) {
+      .principles-grid { grid-template-columns: repeat(2,1fr); }
+      .principle-card:nth-child(4n) { border-right: 1px solid var(--border); }
+      .principle-card:nth-child(2n) { border-right: none; }
+      .principle-card:nth-child(n+7) { border-bottom: none; }
+      .principle-card:nth-child(n+5) { border-bottom: 1px solid var(--border); }
+      .nonneg-inner { grid-template-columns: 1fr 1fr; }
+      .nonneg-cell:nth-child(2) { border-right: none; }
+      .nonneg-cell:nth-child(3) { border-right: 1px solid rgba(245,240,232,0.15); }
+      .cycle-timeline { grid-template-columns: repeat(3,1fr); }
+      .cycle-step:nth-child(3) { border-right: none; }
+      .cycle-step:nth-child(n+4) { border-top: 2px solid var(--black); }
+    }
+    @media (max-width: 700px) {
+      .front-block { grid-template-columns: 1fr; }
+      .front-num-col { flex-direction: row; align-items: center; padding: 1.5rem 2rem; }
+      .front-tag { margin-top: 0; margin-left: auto; }
+      .cycle-timeline { grid-template-columns: 1fr 1fr; }
+      .cycle-step:nth-child(2n) { border-right: none; }
+      .cycle-step:nth-child(3) { border-right: 2px solid var(--black); }
+      .cycle-step { border-top: 2px solid var(--black); border-right: 2px solid var(--black); }
+    }
   </style>
 </head>
 <body>
+  <div id="nav-placeholder"></div>
+  <main id="main">
 
-<div id="nav-placeholder"></div>
-
-<main id="main">
-
-  <header class="page-hero">
-    <div class="container page-hero-inner">
-      <p class="section-label" style="color:var(--gold-lt)">The Framework</p>
-      <h1>Civic Action<br>Framework</h1>
-      <p>Four strategic fronts, eight guiding principles, and the Civic Action Cycle. This is how From Civic Learning to Civic Power is structured — and how it moves.</p>
-    </div>
-  </header>
-
-  <section class="section-pad" aria-label="The Four Fronts" id="front1">
-    <div class="container">
-      <p class="section-label">The Strategy</p>
-      <h2 class="section-title">Four Strategic Fronts</h2>
-      <p style="font-size:1rem;color:#444;line-height:1.8;max-width:680px;margin-bottom:2.5rem">The framework advances four fronts at the same time. Every deliverable maps to one or more of these fronts.</p>
-
-      <div class="front-card reveal" id="front1">
-        <p class="front-num">Front 1</p>
-        <h2>Statewide Policy + LEA Implementation</h2>
-        <p>Strengthen Delaware's K&ndash;12 civics expectations at the state level while supporting Local Education Agencies in alignment, educator development, and implementation. This means pushing for a statutory mandate, dedicated funding, and accountability measures that apply to all LEAs &mdash; not just willing ones.</p>
+    <section class="page-hero" aria-labelledby="framework-heading">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="section-label" style="color:var(--gold)">The Strategy</p>
+        <h1 id="framework-heading">CIVIC<br>ACTION<br><em>FRAMEWORK</em></h1>
+        <p>Four strategic fronts, eight guiding principles, and the Civic Action Cycle. This is how From Civic Learning to Civic Power is structured — and how it moves.</p>
       </div>
+    </section>
 
-      <div class="front-card reveal" id="front2">
-        <p class="front-num">Front 2</p>
-        <h2>Community-Rooted Power Building</h2>
-        <p>Establish parent and student leadership labs, youth organizing pathways, and structured feedback mechanisms that give communities real &mdash; not symbolic &mdash; influence. Representation without power is not the goal.</p>
-      </div>
-
-      <div class="front-card reveal" id="front3">
-        <p class="front-num">Front 3</p>
-        <h2>School-Based Partnerships + Hands-On Practice</h2>
-        <p>Pilot hands-on civic learning through participatory budgeting, community mapping, policy simulations, and direct engagement with real decision-makers. Schools can't do this alone &mdash; community partnerships are how this scales.</p>
-      </div>
-
-      <div class="front-card reveal" id="front4">
-        <p class="front-num">Front 4</p>
-        <h2>Strategic Nonviolence + Leadership Development</h2>
-        <p>The differentiating argument. Equipping students to understand power, navigate conflict constructively, and build collective influence. No comparison state has written this into statute. Delaware can go first.</p>
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Front 1: Policy</span><span>Front 2: Community Power</span><span>Front 3: Hands-On Practice</span><span>Front 4: Strategic Nonviolence</span>
+        <span>Eight Principles</span><span>Civic Action Cycle</span><span>Four Non-Negotiables</span><span>Delaware Leads</span>
+        <span>Front 1: Policy</span><span>Front 2: Community Power</span><span>Front 3: Hands-On Practice</span><span>Front 4: Strategic Nonviolence</span>
+        <span>Eight Principles</span><span>Civic Action Cycle</span><span>Four Non-Negotiables</span><span>Delaware Leads</span>
       </div>
     </div>
-  </section>
 
-  <section class="section-pad" style="background:var(--cream)" aria-label="Guiding Principles">
-    <div class="container">
-      <p class="section-label">Design Standards</p>
-      <h2 class="section-title">Eight Guiding Principles</h2>
-      <ul class="principles-list">
-        <li><strong>Equity by Design</strong>Equity requirements must be in the same legislative vehicle as the mandate &mdash; not added later.</li>
-        <li><strong>Community as Co-Designer</strong>Affected communities shape the initiative, not just receive it.</li>
-        <li><strong>Action Over Abstraction</strong>Civic learning is measured by what students do, not what they can recite.</li>
-        <li><strong>Decision-Maker Contact</strong>Proximity to real decisions is non-negotiable for civic efficacy gains.</li>
-        <li><strong>Safety and Structured Invitation</strong>Participation gaps are supply-side failures. Remove the barriers.</li>
-        <li><strong>Political Homes</strong>Young people need organizations and spaces where they belong and can develop their voice.</li>
-        <li><strong>Civic Multiplication</strong>Every trained participant becomes a potential trainer. Scale through people, not programs.</li>
-        <li><strong>Honest Reflection</strong>Every action cycle ends with structural analysis, not celebration. What changed? What didn't?</li>
-      </ul>
-    </div>
-  </section>
+    <!-- FOUR NON-NEGOTIABLES -->
+    <section class="nonneg-strip" aria-labelledby="nonneg-heading">
+      <div class="container">
+        <div class="nonneg-header">
+          <p>Filter Every Recommendation</p>
+          <h2 id="nonneg-heading">THE FOUR NON-NEGOTIABLES</h2>
+        </div>
+        <div class="nonneg-inner">
+          <div class="nonneg-cell reveal">
+            <span class="nonneg-check">□</span>
+            <p class="nonneg-text">Does it strengthen statewide civics coherence AND local LEA implementation?</p>
+          </div>
+          <div class="nonneg-cell reveal reveal-delay-1">
+            <span class="nonneg-check">□</span>
+            <p class="nonneg-text">Does it give families and students REAL power — not symbolic engagement?</p>
+          </div>
+          <div class="nonneg-cell reveal reveal-delay-2">
+            <span class="nonneg-check">□</span>
+            <p class="nonneg-text">Does it lead to hands-on civic practice tied to real decisions?</p>
+          </div>
+          <div class="nonneg-cell reveal reveal-delay-3">
+            <span class="nonneg-check">□</span>
+            <p class="nonneg-text">Does it build strategic nonviolence and leadership capacity that can be paid forward?</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section class="section-pad" aria-label="The Civic Action Cycle">
-    <div class="container">
-      <p class="section-label">The Cycle</p>
-      <h2 class="section-title">The Civic Action Cycle</h2>
-      <p style="font-size:1rem;color:#444;line-height:1.8;max-width:680px;margin-bottom:2rem">Civic power is built through a repeating loop. The cycle doesn't end at action &mdash; it ends at reflection, which feeds back into the next loop.</p>
-      <p style="font-size:0.95rem;color:#555;line-height:1.9"><strong style="color:var(--blue)">1. Learn</strong> &rarr; Connect civic knowledge to real community issues.<br><strong style="color:var(--blue)">2. Analyze</strong> &rarr; Map stakeholders, identify root causes, name whose voices are missing.<br><strong style="color:var(--blue)">3. Organize</strong> &rarr; Build the coalition. Distribute roles. Agree on a shared strategy.<br><strong style="color:var(--blue)">4. Act</strong> &rarr; Engage a real decision-making space. Create institutional accountability.<br><strong style="color:var(--blue)">5. Teach Back</strong> &rarr; Facilitate an experience that builds the next person's capacity.<br><strong style="color:var(--blue)">6. Reflect &amp; Iterate</strong> &rarr; Analyze what actually changed. Start the next cycle smarter.</p>
-      <p style="margin-top:2rem"><a href="learn.html" class="btn btn-primary">Explore the Cycle in Detail &rarr;</a></p>
-    </div>
-  </section>
+    <!-- FOUR FRONTS -->
+    <section class="fronts-wrap" aria-labelledby="fronts-heading" id="front1">
+      <div class="container">
+        <p class="section-label reveal">The Strategy</p>
+        <h2 class="section-title reveal" id="fronts-heading" style="margin-bottom:3rem">FOUR STRATEGIC<br>FRONTS</h2>
 
-</main>
+        <div class="front-block reveal" id="front1">
+          <div class="front-num-col">
+            <span class="front-big-num">01</span>
+            <span class="front-tag">// Statewide Policy + LEA Implementation</span>
+          </div>
+          <div class="front-body">
+            <h3>STATEWIDE POLICY + LEA IMPLEMENTATION</h3>
+            <p>Strengthen Delaware's K–12 civics expectations at the state level while supporting Local Education Agencies in curriculum alignment, educator development, and implementation. The goal is statewide coherence with local flexibility — but not so much flexibility that equity becomes optional.</p>
+            <p>Delaware's 2018 standards carry no statutory mandate, no dedicated funding, and no accountability structure tied to LEA implementation. The result is a system where access to quality civic education depends on which district a student attends. That is a design failure, not a funding gap.</p>
+            <div class="front-deliverables">
+              <h4>Fellowship Deliverables — Front 1</h4>
+              <ul>
+                <li>Delaware Civic Education Landscape Review</li>
+                <li>Comparative State Analysis (MA, IL, RI, CA, NY, PR)</li>
+                <li>K–12 Civic Education Policy Brief</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-<div id="footer-placeholder"></div>
-<script src="scripts/main.js"></script>
+        <div class="front-block reveal" id="front2">
+          <div class="front-num-col">
+            <span class="front-big-num">02</span>
+            <span class="front-tag">// Community-Rooted Power Building</span>
+          </div>
+          <div class="front-body">
+            <h3>COMMUNITY-ROOTED POWER BUILDING</h3>
+            <p>Establish parent and student leadership labs, youth organizing pathways, and structured feedback mechanisms that give communities real — not symbolic — influence over how civic education is designed, resourced, and held accountable in their schools and districts.</p>
+            <p>CIRCLE's 2025 research shows that young people's civic trust clusters around personal networks and local institutions rather than state-level political institutions. Community infrastructure, not classroom instruction alone, is the primary intervention point.</p>
+            <div class="front-deliverables">
+              <h4>Fellowship Deliverables — Front 2</h4>
+              <ul>
+                <li>Youth Civic Engagement Best Practices Memo</li>
+                <li>School and Community Partnership Toolkit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
+        <div class="front-block reveal" id="front3">
+          <div class="front-num-col">
+            <span class="front-big-num">03</span>
+            <span class="front-tag">// School-Based Partnerships + Hands-On Practice</span>
+          </div>
+          <div class="front-body">
+            <h3>SCHOOL-BASED PARTNERSHIPS + HANDS-ON PRACTICE</h3>
+            <p>Pilot hands-on civic learning models through assemblies, workshops, and leadership modules tied to real decisions — participatory budgeting, community mapping, policy simulations, and direct engagement with decision-makers. Schools cannot do this alone. Community partnerships are how this scales.</p>
+            <p>The critical distinction: action civics requires students to work with communities to influence the decisions and systems that affect them. Service learning may involve students doing things for communities. Only the former produces civic efficacy. Delaware's standards mandate neither.</p>
+            <div class="front-deliverables">
+              <h4>Fellowship Deliverables — Front 3</h4>
+              <ul>
+                <li>School and Community Partnership Toolkit</li>
+                <li>Workshop Implementation Framework</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="front-block reveal" id="front4">
+          <div class="front-num-col">
+            <span class="front-big-num">04</span>
+            <span class="front-tag">// Strategic Nonviolence + Leadership Development</span>
+          </div>
+          <div class="front-body">
+            <h3>STRATEGIC NONVIOLENCE + LEADERSHIP DEVELOPMENT</h3>
+            <p>The differentiating argument of the proposal. Most civics models emphasize knowledge or participation. This framework adds strategic nonviolence and leadership development — equipping students to understand power, navigate conflict constructively, and build collective influence through disciplined strategic action.</p>
+            <p>No comparison state has codified strategic nonviolence and leadership development in statute or integrated it into a formal civic education framework. Delaware has a genuine opportunity to lead. The evidence base is strong — the Kingian Nonviolence tradition, restorative practices research, and CIRCLE data on civic efficacy among youth of color all point in the same direction.</p>
+            <div class="front-deliverables">
+              <h4>Fellowship Deliverables — Front 4</h4>
+              <ul>
+                <li>Strategic Nonviolence in Civic Education Research Brief</li>
+                <li>Workshop Implementation Framework (Sessions 3–4)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EIGHT PRINCIPLES -->
+    <section class="principles-wrap" aria-labelledby="principles-heading">
+      <div class="container">
+        <p class="section-label reveal" style="color:var(--gold)">Design Standards</p>
+        <h2 class="section-title reveal" id="principles-heading" style="color:var(--white)">EIGHT GUIDING<br>PRINCIPLES</h2>
+        <p class="reveal" style="color:rgba(245,240,232,0.55);line-height:1.85;max-width:600px">Every design decision in the framework is tested against these eight principles. Strong research findings align with most or all of them.</p>
+        <div class="principles-grid">
+          <div class="principle-card reveal">
+            <div class="p-num">01</div>
+            <div class="p-name">Civics as Practice, Not Just Knowledge</div>
+            <div class="p-desc">Does the model go beyond teaching about government — does it support students in actually engaging civic life? Knowledge is necessary but insufficient.</div>
+          </div>
+          <div class="principle-card reveal reveal-delay-1">
+            <div class="p-num">02</div>
+            <div class="p-name">Popular Education and Lived Experience</div>
+            <div class="p-desc">Does it start with what students and communities already know? Does it treat them as holders of knowledge, not just recipients of instruction?</div>
+          </div>
+          <div class="principle-card reveal reveal-delay-2">
+            <div class="p-num">03</div>
+            <div class="p-name">Truth-Telling Without Blame</div>
+            <div class="p-desc">Does it address historical and structural realities honestly — without assigning individual blame or moral shame? Structural analysis, not personal indictment.</div>
+          </div>
+          <div class="principle-card reveal reveal-delay-3">
+            <div class="p-num">04</div>
+            <div class="p-name">Perspective Literacy and Critical Thinking</div>
+            <div class="p-desc">Does it build the ability to hold multiple perspectives while grounding analysis in evidence and context? Critical thinking that produces conclusions, not just questions.</div>
+          </div>
+          <div class="principle-card reveal">
+            <div class="p-num">05</div>
+            <div class="p-name">Civic Participation as Power, Not Performance</div>
+            <div class="p-desc">Does it create real influence over decisions — or does it stop at symbolic engagement? Attending meetings, writing letters that go nowhere — these are not civic power.</div>
+          </div>
+          <div class="principle-card reveal reveal-delay-1">
+            <div class="p-num">06</div>
+            <div class="p-name">Nonviolence as Strategy, Discipline, and Care</div>
+            <div class="p-desc">Does it include conflict navigation, de-escalation, or constructive collective action? Nonviolence is not passivity — it is the strategic discipline of principled civic engagement.</div>
+          </div>
+          <div class="principle-card reveal reveal-delay-2">
+            <div class="p-num">07</div>
+            <div class="p-name">Accessibility, Dignity, and Safety by Design</div>
+            <div class="p-desc">Is the model built for students who face real risk from civic participation? Does it offer multiple pathways — not just public-facing ones? Safety is infrastructure.</div>
+          </div>
+          <div class="principle-card reveal reveal-delay-3">
+            <div class="p-num">08</div>
+            <div class="p-name">Leadership as Shared and Transferable</div>
+            <div class="p-desc">Does it develop civic multipliers — people who share what they learn? Or does it focus only on individual leaders? Scale requires multiplication, not concentration.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CIVIC ACTION CYCLE -->
+    <section class="cycle-summary" aria-labelledby="cycle-sum-heading">
+      <div class="container">
+        <p class="section-label reveal">The Method</p>
+        <h2 class="section-title reveal" id="cycle-sum-heading">THE CIVIC<br>ACTION CYCLE</h2>
+        <p class="section-body reveal" style="margin-bottom:0">A repeating six-stage loop. The cycle doesn't end at action — it ends at reflection, which feeds back into the next loop. Hover each stage. <a href="learn.html" style="color:var(--gold);text-decoration:underline">Explore every stage in depth →</a></p>
+        <div class="cycle-timeline">
+          <div class="cycle-step reveal">
+            <div class="cs-num">01</div>
+            <div class="cs-name">LEARN</div>
+            <div class="cs-desc">Ground civic knowledge in real community issues. Read actual policy. Map who holds power.</div>
+          </div>
+          <div class="cycle-step reveal reveal-delay-1">
+            <div class="cs-num">02</div>
+            <div class="cs-name">ANALYZE</div>
+            <div class="cs-desc">Map stakeholders. Identify root causes. Ask whose voices are missing and why.</div>
+          </div>
+          <div class="cycle-step reveal reveal-delay-2">
+            <div class="cs-num">03</div>
+            <div class="cs-name">ORGANIZE</div>
+            <div class="cs-desc">Build the coalition. Distribute roles. Agree on shared strategy, not just shared goals.</div>
+          </div>
+          <div class="cycle-step reveal reveal-delay-3">
+            <div class="cs-num">04</div>
+            <div class="cs-name">ACT</div>
+            <div class="cs-desc">Engage a real decision-making space. Create institutional accountability — not symbolic access.</div>
+          </div>
+          <div class="cycle-step reveal reveal-delay-4">
+            <div class="cs-num">05</div>
+            <div class="cs-name">TEACH BACK</div>
+            <div class="cs-desc">Facilitate an experience that builds the next person's capacity. Become a civic multiplier.</div>
+          </div>
+          <div class="cycle-step reveal">
+            <div class="cs-num">06</div>
+            <div class="cs-name">REFLECT + ITERATE</div>
+            <div class="cs-desc">Analyze what actually changed. Start the next cycle smarter. Reflection is structural analysis.</div>
+          </div>
+        </div>
+        <div style="margin-top:2rem">
+          <a href="learn.html" class="btn btn-black">Explore Each Stage in Detail →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="scripts/main.js"></script>
 </body>
 </html>

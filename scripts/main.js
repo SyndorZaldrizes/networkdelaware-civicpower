@@ -1,6 +1,6 @@
 /* ============================================================
    FROM CIVIC LEARNING TO CIVIC POWER — Network Delaware
-   Universal JavaScript
+   Revamped JavaScript — No reading level system
    ============================================================ */
 
 (function () {
@@ -11,7 +11,7 @@
     <a href="#main" class="skip-link">Skip to main content</a>
     <nav id="site-nav" role="navigation" aria-label="Main navigation">
       <div class="nav-inner">
-        <a href="index.html" class="nav-brand" aria-label="Network Delaware — From Civic Learning to Civic Power home">
+        <a href="index.html" class="nav-brand" aria-label="From Civic Learning to Civic Power — Home">
           <span class="nav-brand-top">Network Delaware</span>
           <span class="nav-brand-main">Civic Power</span>
         </a>
@@ -25,16 +25,10 @@
           <li><a href="communities.html">Communities</a></li>
           <li><a href="resources.html">Resources</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="#act" class="nav-cta">Take Action</a></li>
+          <li><a href="index.html#act" class="nav-cta">Take Action</a></li>
         </ul>
       </div>
     </nav>
-    <div class="age-bar" id="age-bar" role="toolbar" aria-label="Select reading level">
-      <span class="age-bar-label">Reading level:</span>
-      <button class="age-btn" data-mode="kids" aria-pressed="false">🧒 Kids</button>
-      <button class="age-btn" data-mode="teen" aria-pressed="false">📚 Teens</button>
-      <button class="age-btn active" data-mode="adult" aria-pressed="true">🎓 Adults</button>
-    </div>
   `;
 
   /* ── FOOTER HTML ─────────────────────────────────────────── */
@@ -43,7 +37,7 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <h3>From Civic Learning<br>to Civic Power</h3>
+            <h3>FROM CIVIC<br>LEARNING TO<br>CIVIC POWER</h3>
             <p>A statewide civic education initiative building the infrastructure that makes equitable civic engagement the default condition in Delaware — not the exception.</p>
           </div>
           <div class="footer-col">
@@ -73,22 +67,16 @@
     </footer>
   `;
 
-  /* ── INJECT NAV + FOOTER ─────────────────────────────────── */
   function injectNav() {
-    const placeholder = document.getElementById('nav-placeholder');
-    if (placeholder) {
-      placeholder.outerHTML = NAV_HTML;
-    }
+    const p = document.getElementById('nav-placeholder');
+    if (p) p.outerHTML = NAV_HTML;
   }
 
   function injectFooter() {
-    const placeholder = document.getElementById('footer-placeholder');
-    if (placeholder) {
-      placeholder.outerHTML = FOOTER_HTML;
-    }
+    const p = document.getElementById('footer-placeholder');
+    if (p) p.outerHTML = FOOTER_HTML;
   }
 
-  /* ── SET ACTIVE NAV LINK ─────────────────────────────────── */
   function setActiveNavLink() {
     const current = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('#nav-menu a').forEach(a => {
@@ -99,14 +87,13 @@
     });
   }
 
-  /* ── HAMBURGER TOGGLE ────────────────────────────────────── */
   function initHamburger() {
     const toggle = document.querySelector('.nav-toggle');
     const menu = document.getElementById('nav-menu');
     if (!toggle || !menu) return;
     toggle.addEventListener('click', () => {
       const open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', !open);
+      toggle.setAttribute('aria-expanded', String(!open));
       menu.classList.toggle('open', !open);
     });
     document.addEventListener('click', e => {
@@ -117,32 +104,8 @@
     });
   }
 
-  /* ── AGE MODE ────────────────────────────────────────────── */
-  function initAgeMode() {
-    const saved = localStorage.getItem('civicpower-agemode') || 'adult';
-    applyAgeMode(saved, false);
-
-    document.querySelectorAll('.age-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        applyAgeMode(btn.dataset.mode, true);
-      });
-    });
-  }
-
-  function applyAgeMode(mode, save) {
-    document.body.classList.remove('mode-kids', 'mode-teen', 'mode-adult');
-    document.body.classList.add('mode-' + mode);
-    document.querySelectorAll('.age-btn').forEach(b => {
-      const active = b.dataset.mode === mode;
-      b.classList.toggle('active', active);
-      b.setAttribute('aria-pressed', active);
-    });
-    if (save) localStorage.setItem('civicpower-agemode', mode);
-  }
-
-  /* ── SCROLL REVEAL ───────────────────────────────────────── */
   function initReveal() {
-    const els = document.querySelectorAll('.reveal');
+    const els = document.querySelectorAll('.reveal, .reveal-left');
     if (!els.length) return;
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -151,42 +114,17 @@
           io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
     els.forEach(el => io.observe(el));
   }
 
-  /* ── ACCORDION ───────────────────────────────────────────── */
-  function initAccordions() {
-    document.querySelectorAll('[data-accordion]').forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const target = document.getElementById(trigger.dataset.accordion);
-        if (!target) return;
-        const open = trigger.getAttribute('aria-expanded') === 'true';
-        trigger.setAttribute('aria-expanded', !open);
-        target.hidden = open;
-        trigger.querySelector('.accordion-arrow')?.classList.toggle('open', !open);
-      });
+  function initMarquee() {
+    document.querySelectorAll('.marquee-track').forEach(track => {
+      track.parentElement.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+      track.parentElement.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
     });
   }
 
-  /* ── TABS ─────────────────────────────────────────────────── */
-  function initTabs() {
-    document.querySelectorAll('[role="tablist"]').forEach(tablist => {
-      const tabs = tablist.querySelectorAll('[role="tab"]');
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-          tabs.forEach(t => {
-            t.setAttribute('aria-selected', 'false');
-            document.getElementById(t.getAttribute('aria-controls'))?.setAttribute('hidden', '');
-          });
-          tab.setAttribute('aria-selected', 'true');
-          document.getElementById(tab.getAttribute('aria-controls'))?.removeAttribute('hidden');
-        });
-      });
-    });
-  }
-
-  /* ── SMOOTH SCROLL FOR IN-PAGE ANCHORS ───────────────────── */
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
@@ -198,30 +136,65 @@
     });
   }
 
-  /* ── MARQUEE PAUSE ON HOVER ──────────────────────────────── */
-  function initMarquee() {
-    document.querySelectorAll('.marquee-track').forEach(track => {
-      track.parentElement.addEventListener('mouseenter', () => {
-        track.style.animationPlayState = 'paused';
+  /* ── COUNTER ANIMATION ───────────────────────────────────── */
+  function initCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+    if (!counters.length) return;
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseFloat(el.dataset.count);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const dur = 1600;
+        const start = performance.now();
+        const isInt = Number.isInteger(target);
+        function tick(now) {
+          const p = Math.min((now - start) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = target * eased;
+          el.textContent = prefix + (isInt ? Math.round(val) : val.toFixed(1)) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        io.unobserve(el);
       });
-      track.parentElement.addEventListener('mouseleave', () => {
-        track.style.animationPlayState = 'running';
+    }, { threshold: 0.5 });
+    counters.forEach(el => io.observe(el));
+  }
+
+  /* ── TABS ─────────────────────────────────────────────────── */
+  function initTabs() {
+    document.querySelectorAll('[role="tablist"]').forEach(tablist => {
+      const tabs = tablist.querySelectorAll('[role="tab"]');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.setAttribute('aria-selected', 'false');
+            t.classList.remove('active');
+            const panel = document.getElementById(t.getAttribute('aria-controls'));
+            if (panel) panel.setAttribute('hidden', '');
+          });
+          tab.setAttribute('aria-selected', 'true');
+          tab.classList.add('active');
+          const panel = document.getElementById(tab.getAttribute('aria-controls'));
+          if (panel) panel.removeAttribute('hidden');
+        });
       });
     });
   }
 
-  /* ── INIT ALL ────────────────────────────────────────────── */
   function init() {
     injectNav();
     injectFooter();
     setActiveNavLink();
     initHamburger();
-    initAgeMode();
     initReveal();
-    initAccordions();
-    initTabs();
-    initSmoothScroll();
     initMarquee();
+    initSmoothScroll();
+    initCounters();
+    initTabs();
   }
 
   if (document.readyState === 'loading') {

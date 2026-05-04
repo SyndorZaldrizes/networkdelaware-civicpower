@@ -3,481 +3,632 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="From Civic Learning to Civic Power is a statewide K–12 civic education initiative by Network Delaware, building equitable civic capacity across all communities.">
+  <meta name="description" content="From Civic Learning to Civic Power — Network Delaware's statewide K–12 civic education initiative building equitable civic capacity across all communities.">
   <title>From Civic Learning to Civic Power | Network Delaware</title>
   <link rel="stylesheet" href="styles/main.css">
   <style>
-    /* ── PAGE-SPECIFIC ────────────────────────────────── */
-
-    /* HERO */
+    /* ── HERO ─────────────────────────────────────────────── */
     .hero {
-      background: var(--blue);
-      padding: 5rem 0 4rem;
+      background: var(--black);
+      min-height: 92vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+    .hero-grid-bg {
+      position: absolute; inset: 0; pointer-events: none;
       background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(201,145,58,0.06) 48px),
-        repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(201,145,58,0.06) 48px);
-      pointer-events: none;
+        linear-gradient(rgba(212,160,23,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,160,23,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      z-index: 2;
+    .hero-diagonal {
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      height: 120px; background: var(--paper);
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    }
+    .hero-content {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 0 3rem;
+      position: relative; z-index: 2;
     }
     .hero-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      animation: fadeUp 0.7s var(--ease-out) 0.1s forwards;
+      font-family: var(--font-mono); font-size: 0.62rem;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 1rem;
+      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.1s forwards;
     }
+    .hero-eyebrow::before { content: ''; width: 40px; height: 2px; background: var(--gold); }
+    .hero-main { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: end; }
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.6rem, 5vw, 4.4rem);
-      font-weight: 900;
-      line-height: 1.05;
-      color: #fff;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.7s var(--ease-out) 0.25s forwards;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.9; color: var(--white);
+      letter-spacing: 0.02em;
+      opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.25s forwards;
     }
-    .hero-title em { font-style: italic; color: var(--gold-lt); }
-    .hero-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.62);
-      line-height: 1.85;
-      max-width: 500px;
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      animation: fadeUp 0.7s var(--ease-out) 0.4s forwards;
-    }
-    .hero-btns {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.55s forwards;
-    }
-
-    /* HERO STATS */
-    .hero-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: rgba(201,145,58,0.18);
-      opacity: 0;
-      animation: fadeIn 0.8s ease 0.8s forwards;
-    }
-    .stat-cell {
-      background: rgba(14,32,64,0.85);
-      padding: 1.8rem 1.5rem;
-      text-align: center;
-      backdrop-filter: blur(4px);
-    }
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2.6rem;
-      font-weight: 700;
-      color: var(--gold-lt);
-      line-height: 1;
-      display: block;
-    }
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-top: 0.5rem;
-      display: block;
-    }
-
-    /* MARQUEE */
-    .marquee-wrap {
-      background: var(--gold);
-      padding: 0.7rem 0;
-      overflow: hidden;
-    }
-    .marquee-track {
-      display: inline-flex;
-      animation: marquee 28s linear infinite;
-      white-space: nowrap;
-    }
-    .marquee-track span {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      padding: 0 2.5rem;
-    }
-    .marquee-track span::before { content: '◆ '; opacity: 0.35; }
-
-    /* THE ARGUMENT */
-    .argument-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-    .argument-text p {
-      font-size: 1.05rem;
-      color: #3a3530;
-      line-height: 1.85;
-      margin-bottom: 1.4rem;
-    }
-    .pull-quote {
-      border-left: 3px solid var(--gold);
-      padding: 1.2rem 0 1.2rem 1.8rem;
-      margin: 2rem 0;
-      background: var(--gold-pale);
-    }
-    .pull-quote p {
-      font-family: var(--font-display);
-      font-size: 1.35rem !important;
-      font-style: italic;
-      color: var(--blue) !important;
-      margin: 0 !important;
-      line-height: 1.5;
-    }
-    .data-pills {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .data-pill {
-      background: var(--blue);
-      padding: 1.6rem 1.8rem;
-      border-left: 3px solid var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .data-pill-num {
-      font-family: var(--font-display);
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: var(--gold-lt);
-      line-height: 1;
-      min-width: 90px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-    .data-pill-body { flex: 1; }
-    .data-pill-body p { font-size: 0.88rem; color: rgba(255,255,255,0.62); line-height: 1.65; }
-    .data-pill-body small {
-      font-family: var(--font-mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
-      margin-top: 0.4rem;
-      display: block;
-    }
-
-    /* FOUR FRONTS PREVIEW */
-    .fronts-bg { background: var(--cream); }
-    .fronts-preview {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
-      margin-top: 3rem;
-    }
-    .front-preview-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      padding: 2rem;
-      border-radius: var(--radius);
-      transition: all 0.25s;
+    .hero-title .gold { color: var(--gold); }
+    .hero-title .strike {
+      position: relative; display: inline-block;
       text-decoration: none;
-      color: inherit;
-      display: block;
     }
-    .front-preview-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
-      border-color: var(--gold);
+    .hero-title .strike::after {
+      content: ''; position: absolute;
+      left: 0; right: 0; top: 50%; height: 6px;
+      background: var(--red); transform: rotate(-1deg);
     }
+    .hero-right {
+      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.45s forwards;
+      padding-bottom: 1rem;
+    }
+    .hero-sub {
+      font-family: var(--font-serif); font-size: 1.1rem; font-style: italic;
+      color: rgba(245,240,232,0.65); line-height: 1.8;
+      margin-bottom: 2.5rem; border-left: 3px solid var(--gold);
+      padding-left: 1.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-ticker {
+      background: rgba(212,160,23,0.08); border: 1px solid var(--border);
+      padding: 1rem 1.5rem; margin-top: 2.5rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+    }
+    .ticker-cell {
+      background: rgba(10,10,8,0.85);
+      padding: 1.2rem 1rem; text-align: center;
+    }
+    .ticker-num {
+      font-family: var(--font-display); font-size: 2.8rem;
+      color: var(--gold-lt); display: block; line-height: 1;
+    }
+    .ticker-label {
+      font-family: var(--font-mono); font-size: 0.52rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(245,240,232,0.35); display: block; margin-top: 0.4rem;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+    /* ── ARGUMENT SECTION ─────────────────────────────────── */
+    .argument-wrap { background: var(--paper); }
+    .argument-inner {
+      display: grid; grid-template-columns: 0.9fr 1.1fr;
+      gap: 0; min-height: 480px;
+    }
+    .argument-left {
+      background: var(--black); padding: 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .argument-left .section-label { color: var(--gold); }
+    .argument-left .section-title { color: var(--white); font-size: clamp(2.5rem, 5vw, 4rem); }
+    .argument-left p {
+      color: rgba(245,240,232,0.62); line-height: 1.85;
+      font-size: 1rem; margin-bottom: 1.2rem;
+    }
+    .argument-right {
+      background: var(--paper-dk); padding: 4rem;
+      display: flex; flex-direction: column; gap: 1.2rem; justify-content: center;
+    }
+    .data-block {
+      background: var(--white); border-left: 4px solid var(--gold);
+      padding: 1.4rem 1.6rem; display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .data-block.red-accent { border-left-color: var(--red); }
+    .data-num {
+      font-family: var(--font-display); font-size: 3rem;
+      color: var(--gold); line-height: 1; flex-shrink: 0; min-width: 80px;
+    }
+    .data-num.red { color: var(--red); }
+    .data-body p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+    .data-body small {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gray-lt); display: block; margin-top: 0.4rem;
+    }
+    .blockquote-pull {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--white); line-height: 1.1; margin-top: 1.5rem;
+      letter-spacing: 0.01em;
+    }
+    .blockquote-pull span { color: var(--gold); }
+
+    /* ── FRONTS ───────────────────────────────────────────── */
+    .fronts-wrap { background: var(--paper); overflow: hidden; }
+    .fronts-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: end; margin-bottom: 3rem;
+    }
+    .fronts-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border: 2px solid var(--black);
+    }
+    .front-card {
+      border-right: 2px solid var(--black);
+      border-bottom: 2px solid var(--black);
+      padding: 2.5rem; background: var(--white);
+      transition: background 0.25s; cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .front-card:nth-child(2n) { border-right: none; }
+    .front-card:nth-child(3), .front-card:nth-child(4) { border-bottom: none; }
+    .front-card::before {
+      content: attr(data-num);
+      font-family: var(--font-display); font-size: 8rem;
+      color: rgba(10,10,8,0.04); position: absolute;
+      bottom: -1rem; right: 1rem; line-height: 1;
+      pointer-events: none; transition: color 0.25s;
+    }
+    .front-card:hover { background: var(--black); }
+    .front-card:hover .front-num { color: var(--gold); }
+    .front-card:hover h3 { color: var(--white); }
+    .front-card:hover p { color: rgba(245,240,232,0.55); }
+    .front-card:hover .front-arrow { color: var(--gold); }
+    .front-card:hover::before { color: rgba(212,160,23,0.08); }
     .front-num {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.6rem;
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem; display: block;
+      transition: color 0.25s;
     }
-    .front-preview-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 0.6rem;
-      line-height: 1.3;
+    .front-card h3 {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: var(--black); margin-bottom: 0.8rem; line-height: 1.05;
+      letter-spacing: 0.02em; transition: color 0.25s;
     }
-    .front-preview-card p {
-      font-size: 0.88rem;
-      color: #555;
-      line-height: 1.7;
+    .front-card p {
+      font-size: 0.9rem; color: var(--gray); line-height: 1.75;
+      position: relative; z-index: 1; transition: color 0.25s;
     }
     .front-arrow {
-      margin-top: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
+      margin-top: 1.5rem; display: block;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gray-lt); transition: color 0.25s;
     }
 
-    /* QUICK ACCESS */
-    .quick-access-bg { background: var(--blue); }
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(201,145,58,0.18);
-      margin-top: 3rem;
+    /* ── CIVIC ACTION WHEEL ───────────────────────────────── */
+    .cycle-wrap { background: var(--black); padding: 6rem 0; overflow: hidden; }
+    .cycle-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .cycle-left .section-label { color: var(--gold); }
+    .cycle-left .section-title { color: var(--white); font-size: clamp(2.5rem, 5vw, 4rem); }
+    .cycle-left p { color: rgba(245,240,232,0.6); line-height: 1.85; margin-bottom: 2rem; }
+    .cycle-visual { position: relative; }
+    .cycle-wheel {
+      width: 340px; height: 340px; position: relative; margin: 0 auto;
     }
-    .quick-card {
-      background: var(--blue);
-      padding: 2.5rem 2rem;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: background 0.2s;
+    .cycle-svg { width: 100%; height: 100%; }
+    .cycle-detail {
+      background: rgba(245,240,232,0.05); border: 1px solid var(--border);
+      padding: 2rem; margin-top: 2rem;
     }
-    .quick-card:hover { background: rgba(28,61,114,0.8); }
-    .quick-card .card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
-    .quick-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--gold-lt);
-      margin-bottom: 0.5rem;
+    .cycle-detail h4 {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--gold-lt); margin-bottom: 0.8rem; letter-spacing: 0.02em;
     }
-    .quick-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
-
-    /* KIDS SECTION */
-    .kids-intro-bg { background: var(--teal-lt); }
-    .kids-intro-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
+    .cycle-detail p { color: rgba(245,240,232,0.65); font-size: 0.95rem; line-height: 1.8; }
+    .cycle-detail .cycle-example {
+      margin-top: 1rem; padding: 0.8rem 1rem;
+      background: rgba(212,160,23,0.1); border-left: 3px solid var(--gold);
+      font-size: 0.88rem; color: rgba(245,240,232,0.7);
     }
-    .kids-intro-text p { font-size: 1.05rem; color: #1a4040; line-height: 1.85; margin-bottom: 1.2rem; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: none; }
+    .cycle-steps { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 2rem; }
+    .cycle-step-btn {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 1.2rem; background: rgba(245,240,232,0.04);
+      border: 1px solid rgba(245,240,232,0.08); cursor: pointer;
+      transition: all 0.2s; text-align: left; width: 100%;
     }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    .cycle-step-btn:hover { background: rgba(212,160,23,0.1); border-color: var(--border); }
+    .cycle-step-btn.active { background: var(--gold); border-color: var(--gold); }
+    .cycle-step-btn.active .step-num, .cycle-step-btn.active .step-name { color: var(--black); }
+    .step-num {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.15em; color: var(--gold); min-width: 18px;
+    }
+    .step-name {
+      font-family: var(--font-display); font-size: 1.1rem;
+      color: var(--white); letter-spacing: 0.02em;
     }
 
-    @media (max-width: 860px) {
-      .hero-inner, .argument-grid, .kids-intro-inner { grid-template-columns: 1fr; }
-      .hero-stats { display: grid; }
-      .fronts-preview, .quick-grid { grid-template-columns: 1fr; }
+    /* ── STATS STRIP ──────────────────────────────────────── */
+    .stats-strip { background: var(--gold); padding: 3.5rem 0; }
+    .stats-inner {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; border: 2px solid rgba(10,10,8,0.15);
+    }
+    .stat-block {
+      padding: 2rem 1.5rem; text-align: center;
+      border-right: 2px solid rgba(10,10,8,0.12);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-n {
+      font-family: var(--font-display); font-size: 4rem;
+      color: var(--black); line-height: 1; display: block;
+    }
+    .stat-lbl {
+      font-family: var(--font-mono); font-size: 0.57rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(10,10,8,0.55); display: block; margin-top: 0.5rem;
+    }
+
+    /* ── GET INVOLVED ─────────────────────────────────────── */
+    .involved-wrap { background: var(--paper-dk); }
+    .involved-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 0; border: 2px solid var(--black);
+    }
+    .involved-card {
+      padding: 3rem 2.5rem; border-right: 2px solid var(--black);
+      text-decoration: none; color: inherit; display: block;
+      transition: background 0.25s; position: relative;
+      background: var(--white);
+    }
+    .involved-card:last-child { border-right: none; }
+    .involved-card:hover { background: var(--black); }
+    .involved-card:hover h3 { color: var(--gold); }
+    .involved-card:hover p { color: rgba(245,240,232,0.55); }
+    .involved-card:hover .inv-arrow { color: var(--gold); }
+    .inv-num {
+      font-family: var(--font-display); font-size: 5rem;
+      color: rgba(10,10,8,0.06); line-height: 1; margin-bottom: 1.5rem;
+      display: block; transition: color 0.25s;
+    }
+    .involved-card:hover .inv-num { color: rgba(212,160,23,0.08); }
+    .involved-card h3 {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--black); margin-bottom: 0.8rem; line-height: 1;
+      letter-spacing: 0.02em; transition: color 0.25s;
+    }
+    .involved-card p {
+      font-size: 0.92rem; color: var(--gray); line-height: 1.75;
+      transition: color 0.25s;
+    }
+    .inv-arrow {
+      margin-top: 1.5rem; display: block;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gray-lt); transition: color 0.25s;
+    }
+
+    /* ── MISSION TICKER ───────────────────────────────────── */
+    .mission-wrap { background: var(--paper); padding: 5.5rem 0; }
+    .mission-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+    .mission-cards { display: flex; flex-direction: column; gap: 0; }
+    .mission-item {
+      padding: 1.6rem 1.8rem; background: var(--white);
+      border: 1px solid var(--border); border-bottom: none;
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .mission-item:last-child { border-bottom: 1px solid var(--border); }
+    .mission-item:hover { background: var(--gold-dim); }
+    .mission-check {
+      width: 20px; height: 20px; border: 2px solid var(--border-str);
+      flex-shrink: 0; margin-top: 2px; display: flex;
+      align-items: center; justify-content: center; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mission-check.done { background: var(--gold); border-color: var(--gold); }
+    .mission-check.done::after { content: '✓'; font-size: 0.7rem; color: var(--black); font-weight: 700; }
+    .mission-text h4 {
+      font-family: var(--font-display); font-size: 1.15rem;
+      color: var(--black); margin-bottom: 0.3rem; letter-spacing: 0.01em;
+    }
+    .mission-text p { font-size: 0.87rem; color: var(--gray); line-height: 1.65; }
+    .mission-progress {
+      margin-top: 2rem; padding: 1rem 1.5rem;
+      background: var(--black); color: var(--white);
+      font-family: var(--font-mono); font-size: 0.65rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .progress-bar-wrap { width: 120px; height: 4px; background: rgba(245,240,232,0.15); }
+    .progress-bar-fill { height: 100%; background: var(--gold); transition: width 0.4s var(--ease-out); }
+
+    @media (max-width: 900px) {
+      .hero-main, .argument-inner, .fronts-header, .cycle-inner,
+      .mission-inner { grid-template-columns: 1fr; }
+      .fronts-grid, .involved-grid { grid-template-columns: 1fr; }
+      .fronts-grid .front-card { border-right: none; border-bottom: 2px solid var(--black); }
+      .fronts-grid .front-card:last-child { border-bottom: none; }
+      .involved-card { border-right: none; border-bottom: 2px solid var(--black); }
+      .involved-card:last-child { border-bottom: none; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .stat-block:nth-child(2) { border-right: none; }
+      .stat-block:nth-child(3) { border-right: 2px solid rgba(10,10,8,0.12); }
+      .cycle-wheel { width: 260px; height: 260px; }
+      .argument-left, .argument-right { padding: 3rem 2rem; }
+    }
+    @media (max-width: 600px) {
+      .hero-ticker { grid-template-columns: 1fr 1fr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
   <div id="nav-placeholder"></div>
-
   <main id="main">
 
-    <!-- HERO -->
+    <!-- ── HERO ────────────────────────────────────────────── -->
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="container">
-        <div class="hero-inner">
-          <div class="hero-left">
-            <p class="hero-eyebrow">Network Delaware · Civic Education Initiative · 2025</p>
-            <h1 class="hero-title" id="hero-heading">From Civic <em>Learning</em><br>to Civic <em>Power</em></h1>
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <p class="hero-eyebrow">Network Delaware &middot; Civic Education Initiative &middot; 2025</p>
+        <div class="hero-main">
+          <div>
+            <h1 class="hero-title" id="hero-heading">
+              FROM<br>CIVIC<br><span class="gold">LEARN<span class="strike">ING</span></span><br>TO<br>CIVIC<br><span class="gold">POWER</span>
+            </h1>
+          </div>
+          <div class="hero-right">
             <p class="hero-sub">Delaware students know about democracy. Most aren't prepared to practice it. This initiative changes that — for every community, not just the ones already at the table.</p>
             <div class="hero-btns">
               <a href="learn.html" class="btn btn-gold">Start Learning</a>
               <a href="framework.html" class="btn btn-ghost">Explore the Framework</a>
             </div>
-          </div>
-          <div class="hero-right">
-            <div class="hero-stats" aria-label="Key statistics">
-              <div class="stat-cell">
-                <span class="stat-num">&lt;25%</span>
-                <span class="stat-label">8th graders proficient in civics nationally</span>
+            <div class="hero-ticker" aria-label="Key statistics">
+              <div class="ticker-cell">
+                <span class="ticker-num" data-count="25" data-suffix="%">&lt;25%</span>
+                <span class="ticker-label">8th graders proficient in civics nationally</span>
               </div>
-              <div class="stat-cell">
-                <span class="stat-num">19K+</span>
-                <span class="stat-label">Multilingual learners in New Castle County</span>
+              <div class="ticker-cell">
+                <span class="ticker-num" data-count="19000" data-suffix="+">19K+</span>
+                <span class="ticker-label">Multilingual learners in New Castle Co.</span>
               </div>
-              <div class="stat-cell">
-                <span class="stat-num">$1,100</span>
-                <span class="stat-label">Per multilingual learner vs. $6–9K in neighboring states</span>
+              <div class="ticker-cell">
+                <span class="ticker-num" data-count="1100" data-prefix="$">$1,100</span>
+                <span class="ticker-label">Per multilingual learner vs. $6–9K in neighboring states</span>
               </div>
-              <div class="stat-cell">
-                <span class="stat-num">0</span>
-                <span class="stat-label">States with strategic nonviolence in civic statute</span>
+              <div class="ticker-cell">
+                <span class="ticker-num" data-count="0">0</span>
+                <span class="ticker-label">States with strategic nonviolence in civic statute</span>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="hero-diagonal" aria-hidden="true"></div>
     </section>
 
-    <!-- MARQUEE -->
+    <!-- ── MARQUEE ──────────────────────────────────────────── -->
     <div class="marquee-wrap" aria-hidden="true">
       <div class="marquee-track">
         <span>Civic Multipliers</span><span>Power Literacy</span><span>Action Civics</span>
         <span>Community Power</span><span>Strategic Nonviolence</span><span>Political Homes</span>
         <span>Civic Action Cycle</span><span>Equity by Design</span><span>Four Fronts</span>
+        <span>Delaware Leads</span><span>Real Decisions</span><span>Not Symbolic</span>
         <span>Civic Multipliers</span><span>Power Literacy</span><span>Action Civics</span>
         <span>Community Power</span><span>Strategic Nonviolence</span><span>Political Homes</span>
         <span>Civic Action Cycle</span><span>Equity by Design</span><span>Four Fronts</span>
+        <span>Delaware Leads</span><span>Real Decisions</span><span>Not Symbolic</span>
       </div>
     </div>
 
-    <!-- THE ARGUMENT -->
-    <section class="section-pad" aria-labelledby="argument-heading">
-      <div class="container">
-        <div class="argument-grid">
-          <div class="argument-text reveal">
-            <p class="section-label">The Problem</p>
-            <h2 class="section-title" id="argument-heading">A Gap Between Knowing and <em>Doing</em></h2>
-            <p>Delaware's civics standards, last revised in 2018, contain no statutory mandate, no dedicated funding, and no accountability structure. The Participation anchor standard — the only standard asking students to <em>act</em> civically, not just know about government — is highlighted at high school only at grade 9.</p>
-            <div class="pull-quote">
-              <p>"The barrier to youth civic participation is not motivation. It is access, safety, and structured invitation."</p>
+    <!-- ── THE ARGUMENT ─────────────────────────────────────── -->
+    <section class="argument-wrap" aria-labelledby="argument-heading">
+      <div class="argument-inner">
+        <div class="argument-left reveal-left">
+          <p class="section-label">The Problem</p>
+          <h2 class="section-title" id="argument-heading">KNOWING<br>IS NOT<br>DOING</h2>
+          <p>Delaware's civics standards, last revised in 2018, carry no statutory mandate, no dedicated funding, and no accountability structure. The Participation anchor — the only standard asking students to <em style="color:var(--gold-lt);font-style:italic">act</em> civically — is highlighted only at grade 9.</p>
+          <p>CIRCLE's 2025 research confirms: the civic engagement gap is a supply-side failure. Young people want to participate. The system isn't giving them the tools, the practice, or the invitation.</p>
+          <p class="blockquote-pull">"The barrier is not <span>motivation</span>. It is access, safety, and structured invitation."</p>
+          <a href="framework.html" class="btn btn-gold" style="margin-top:2rem">See the Full Framework</a>
+        </div>
+        <div class="argument-right">
+          <div class="data-block reveal">
+            <span class="data-num" data-count="22" data-suffix="%">22%</span>
+            <div class="data-body">
+              <p>of youth who voted in 2024 reported protesting or attending demonstrations — vs. 8% of non-voters. The difference is civic ecosystem access, not individual motivation.</p>
+              <small>CIRCLE, 2025</small>
             </div>
-            <p>CIRCLE's 2025 research confirms the civic engagement gap is a supply-side failure. Young people want to participate. They just aren't being given the tools, the practice, or the invitation.</p>
-
-            <!-- KIDS VERSION -->
-            <div class="callout-kids kids-only" style="margin-top:1.5rem">
-              <span class="callout-icon">💡</span>
-              <div>
-                <h4>Put simply...</h4>
-                <p>Imagine learning how to swim by only reading about it. That's kind of what civics class is like for most students — lots of information, but not much practice. This initiative changes that.</p>
-              </div>
-            </div>
-
-            <a href="framework.html" class="btn btn-outline" style="margin-top:2rem">Explore the Full Framework →</a>
           </div>
-          <div class="data-pills reveal reveal-delay-2">
-            <div class="data-pill">
-              <span class="data-pill-num">22%</span>
-              <div class="data-pill-body">
-                <p>of youth who voted in 2024 reported protesting or attending demonstrations, compared to 8% of non-voters. This reflects access to civic ecosystems, not individual motivation.</p>
-                <small>CIRCLE, 2025</small>
-              </div>
+          <div class="data-block red-accent reveal reveal-delay-1">
+            <span class="data-num red" data-count="61" data-suffix="%">61%</span>
+            <div class="data-body">
+              <p>of young people who didn't vote rarely or never spent in-person time with community members. Community connection predicts civic action across all 17 engagement measures.</p>
+              <small>CIRCLE, 2025</small>
             </div>
-            <div class="data-pill">
-              <span class="data-pill-num">61%</span>
-              <div class="data-pill-body">
-                <p>of young people who didn't vote reported rarely or never spending in-person time with community members. Community connection predicts civic action.</p>
-                <small>CIRCLE, 2025</small>
-              </div>
-            </div>
-            <div class="data-pill">
-              <span class="data-pill-num">27%</span>
-              <div class="data-pill-body">
-                <p>of 2024 youth voters reported being part of a movement or organized group, compared to 13% of non-voters. Political homes matter.</p>
-                <small>CIRCLE, 2025</small>
-              </div>
+          </div>
+          <div class="data-block reveal reveal-delay-2">
+            <span class="data-num" data-count="27" data-suffix="%">27%</span>
+            <div class="data-body">
+              <p>of 2024 youth voters were part of a movement or organized group — vs. 13% of non-voters. Political homes are the mechanism. Delaware lacks the infrastructure to build them.</p>
+              <small>CIRCLE, 2025</small>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="divider"></div>
-
-    <!-- FOUR FRONTS PREVIEW -->
-    <section class="fronts-bg section-pad" aria-labelledby="fronts-heading">
+    <!-- ── FOUR FRONTS ───────────────────────────────────────── -->
+    <section class="fronts-wrap section-pad" aria-labelledby="fronts-heading">
       <div class="container">
-        <p class="section-label reveal">The Strategy</p>
-        <h2 class="section-title reveal" id="fronts-heading">Four Strategic Fronts,<br>Advancing Together</h2>
-        <p class="section-body reveal">The framework advances four integrated fronts simultaneously. Your deliverables map to one or more of these fronts — and every recommendation must advance at least one.</p>
-        <div class="fronts-preview">
-          <a href="framework.html#front1" class="front-preview-card reveal">
-            <div class="front-num">Front 1</div>
-            <h3>Statewide Policy + LEA Implementation</h3>
-            <p>Strengthen Delaware's K–12 civics expectations at the state level while supporting Local Education Agencies in alignment, educator development, and implementation.</p>
-            <p class="front-arrow">Explore →</p>
+        <div class="fronts-header">
+          <div class="reveal">
+            <p class="section-label">The Strategy</p>
+            <h2 class="section-title" id="fronts-heading">FOUR<br>STRATEGIC<br>FRONTS</h2>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <p class="section-body" style="margin-bottom:1.5rem">The framework advances four fronts simultaneously. Every deliverable maps to at least one. Every recommendation must advance at least one. They are not sequential — they operate in parallel.</p>
+            <a href="framework.html" class="btn btn-outline">Full Framework →</a>
+          </div>
+        </div>
+        <div class="fronts-grid">
+          <a href="framework.html#front1" class="front-card reveal" data-num="01">
+            <span class="front-num">// Front 01</span>
+            <h3>STATEWIDE POLICY + LEA IMPLEMENTATION</h3>
+            <p>Strengthen Delaware's K–12 civics expectations at the state level while supporting Local Education Agencies in alignment, educator development, and implementation with equitable accountability.</p>
+            <span class="front-arrow">Explore →</span>
           </a>
-          <a href="framework.html#front2" class="front-preview-card reveal reveal-delay-1">
-            <div class="front-num">Front 2</div>
-            <h3>Community-Rooted Power Building</h3>
-            <p>Establish parent and student leadership labs, youth organizing pathways, and structured feedback mechanisms that give communities real — not symbolic — influence.</p>
-            <p class="front-arrow">Explore →</p>
+          <a href="framework.html#front2" class="front-card reveal reveal-delay-1" data-num="02">
+            <span class="front-num">// Front 02</span>
+            <h3>COMMUNITY-ROOTED POWER BUILDING</h3>
+            <p>Establish parent and student leadership labs, youth organizing pathways, and feedback mechanisms that give communities real — not symbolic — influence over how civic education is designed and delivered.</p>
+            <span class="front-arrow">Explore →</span>
           </a>
-          <a href="framework.html#front3" class="front-preview-card reveal reveal-delay-2">
-            <div class="front-num">Front 3</div>
-            <h3>School-Based Partnerships + Hands-On Practice</h3>
-            <p>Pilot hands-on civic learning through participatory budgeting, community mapping, policy simulations, and direct engagement with real decision-makers.</p>
-            <p class="front-arrow">Explore →</p>
+          <a href="framework.html#front3" class="front-card reveal reveal-delay-2" data-num="03">
+            <span class="front-num">// Front 03</span>
+            <h3>SCHOOL-BASED PARTNERSHIPS + HANDS-ON PRACTICE</h3>
+            <p>Pilot participatory budgeting, community mapping, policy simulations, and direct engagement with real decision-makers. Schools can't do this alone — community partnerships are how it scales.</p>
+            <span class="front-arrow">Explore →</span>
           </a>
-          <a href="framework.html#front4" class="front-preview-card reveal reveal-delay-3">
-            <div class="front-num">Front 4</div>
-            <h3>Strategic Nonviolence + Leadership Development</h3>
-            <p>The differentiating argument. Equipping students to understand power, navigate conflict constructively, and build collective influence. No comparison state has codified this in statute. Delaware can lead.</p>
-            <p class="front-arrow">Explore →</p>
+          <a href="framework.html#front4" class="front-card reveal reveal-delay-3" data-num="04">
+            <span class="front-num">// Front 04</span>
+            <h3>STRATEGIC NONVIOLENCE + LEADERSHIP DEVELOPMENT</h3>
+            <p>The differentiating argument. Equipping students to understand power, navigate conflict constructively, and build collective influence. No comparison state has codified this in statute. Delaware can go first.</p>
+            <span class="front-arrow">Explore →</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- QUICK ACCESS -->
-    <section class="quick-access-bg section-pad" aria-labelledby="quick-heading" id="act">
+    <!-- ── CIVIC ACTION CYCLE ─────────────────────────────────── -->
+    <section class="cycle-wrap" aria-labelledby="cycle-heading">
+      <div class="container">
+        <div class="cycle-inner">
+          <div class="cycle-left">
+            <p class="section-label reveal">The Method</p>
+            <h2 class="section-title reveal" id="cycle-heading">THE CIVIC ACTION CYCLE</h2>
+            <p class="reveal">Civic power is built through a six-stage repeating loop — not a one-time lesson. Every stage feeds the next. The cycle doesn't end at action; it ends at reflection, which launches the next loop.</p>
+            <div class="cycle-steps">
+              <button class="cycle-step-btn active" data-step="0">
+                <span class="step-num">01</span><span class="step-name">LEARN</span>
+              </button>
+              <button class="cycle-step-btn" data-step="1">
+                <span class="step-num">02</span><span class="step-name">ANALYZE</span>
+              </button>
+              <button class="cycle-step-btn" data-step="2">
+                <span class="step-num">03</span><span class="step-name">ORGANIZE</span>
+              </button>
+              <button class="cycle-step-btn" data-step="3">
+                <span class="step-num">04</span><span class="step-name">ACT</span>
+              </button>
+              <button class="cycle-step-btn" data-step="4">
+                <span class="step-num">05</span><span class="step-name">TEACH BACK</span>
+              </button>
+              <button class="cycle-step-btn" data-step="5">
+                <span class="step-num">06</span><span class="step-name">REFLECT + ITERATE</span>
+              </button>
+            </div>
+          </div>
+          <div class="cycle-visual">
+            <div class="cycle-detail" id="cycle-detail">
+              <h4 id="cycle-title">01 — LEARN</h4>
+              <p id="cycle-desc">Connect civic knowledge to real issues affecting your school and community. Don't just read a textbook — talk to people, read actual policy documents, and map who holds power over the problem you care about.</p>
+              <div class="cycle-example" id="cycle-example">
+                <strong style="color:var(--gold-lt)">In practice:</strong> Students research a real New Castle County budget decision — who made it, what process governed it, and who was excluded from the room.
+              </div>
+            </div>
+            <a href="learn.html" class="btn btn-gold" style="margin-top:1.5rem;display:inline-flex">Explore Every Stage →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STATS STRIP ─────────────────────────────────────────── -->
+    <div class="stats-strip" aria-label="Key initiative statistics">
+      <div class="container">
+        <div class="stats-inner">
+          <div class="stat-block reveal">
+            <span class="stat-n" data-count="5">5</span>
+            <span class="stat-lbl">Comparison States Analyzed</span>
+          </div>
+          <div class="stat-block reveal reveal-delay-1">
+            <span class="stat-n" data-count="6">6</span>
+            <span class="stat-lbl">Priority Communities</span>
+          </div>
+          <div class="stat-block reveal reveal-delay-2">
+            <span class="stat-n" data-count="8">8</span>
+            <span class="stat-lbl">Guiding Principles</span>
+          </div>
+          <div class="stat-block reveal reveal-delay-3">
+            <span class="stat-n" data-count="4">4</span>
+            <span class="stat-lbl">Strategic Fronts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GET INVOLVED ────────────────────────────────────────── -->
+    <section class="involved-wrap section-pad" aria-labelledby="involved-heading" id="act">
       <div class="container">
         <p class="section-label reveal">Get Involved</p>
-        <h2 class="section-title reveal" id="quick-heading" style="color:#fff">Where do you want to start?</h2>
-        <div class="quick-grid">
-          <a href="learn.html" class="quick-card reveal">
-            <span class="card-icon">🧠</span>
-            <h3>Learn the Basics</h3>
-            <p>New to civic education? Start here. Simple explanations for all ages — from elementary school to adult learners.</p>
+        <h2 class="section-title reveal" id="involved-heading" style="margin-bottom:2.5rem">WHERE DO YOU<br>WANT TO START?</h2>
+        <div class="involved-grid">
+          <a href="learn.html" class="involved-card reveal">
+            <span class="inv-num">01</span>
+            <h3>LEARN</h3>
+            <p>Start with the Civic Action Cycle. Understand the six stages, the key vocabulary, and what civic power actually means — with real examples and interactive activities.</p>
+            <span class="inv-arrow">Start Learning →</span>
           </a>
-          <a href="resources.html" class="quick-card reveal reveal-delay-1">
-            <span class="card-icon">📂</span>
-            <h3>Access Resources</h3>
-            <p>Partner organizations and educators can access the full research library, workshop guides, toolkits, and policy briefs.</p>
+          <a href="resources.html" class="involved-card reveal reveal-delay-1">
+            <span class="inv-num">02</span>
+            <h3>RESOURCE LIBRARY</h3>
+            <p>Partner organizations and educators can access the full research library, workshop guides, school-community toolkits, and all five policy documents produced by this fellowship.</p>
+            <span class="inv-arrow">Access Resources →</span>
           </a>
-          <a href="framework.html" class="quick-card reveal reveal-delay-2">
-            <span class="card-icon">⚡</span>
-            <h3>Explore the Framework</h3>
-            <p>Deep dive into the Civic Action Cycle, all four fronts, the eight guiding principles, and Delaware's opportunity to lead.</p>
+          <a href="framework.html" class="involved-card reveal reveal-delay-2">
+            <span class="inv-num">03</span>
+            <h3>THE FRAMEWORK</h3>
+            <p>Deep dive into the four fronts, eight guiding principles, six priority communities, and the evidence base that drives every recommendation in this initiative.</p>
+            <span class="inv-arrow">Explore Framework →</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- KIDS SECTION -->
-    <section class="kids-intro-bg section-pad" aria-labelledby="kids-heading" id="young-learners">
+    <!-- ── CIVIC MISSIONS ─────────────────────────────────────── -->
+    <section class="mission-wrap" aria-labelledby="mission-heading">
       <div class="container">
-        <div class="kids-intro-inner">
-          <div class="kids-intro-text reveal">
-            <p class="section-label" style="color:var(--teal)">For Young Learners</p>
-            <h2 class="section-title" id="kids-heading" style="color:var(--teal)">Everyone Belongs<br>in This Conversation</h2>
-            <p>Civic power isn't just for adults. If you're in elementary school, middle school, or high school — this is about your community, your future, and your voice.</p>
-            <p>Select the <strong>Kids</strong> or <strong>Teens</strong> reading level at the top of any page to see explanations designed just for you. And check out our Learn page for interactive activities and mini missions.</p>
-            <a href="learn.html" class="btn btn-primary" style="margin-top:1rem; display:inline-flex; background:var(--teal)">Start Learning →</a>
+        <div class="mission-inner">
+          <div>
+            <p class="section-label reveal">Take Action Now</p>
+            <h2 class="section-title reveal" id="mission-heading">CIVIC<br>MISSIONS</h2>
+            <p class="reveal" style="color:var(--gray);line-height:1.85;margin-bottom:2rem">You don't have to wait for a class or a program. These missions connect you to real civic processes in Delaware right now. Check them off as you complete them.</p>
+            <div class="mission-progress reveal">
+              <span id="mission-count">0 of 5 Complete</span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar-fill" id="mission-bar" style="width:0%"></div>
+              </div>
+            </div>
           </div>
-          <div class="kids-mini-missions reveal reveal-delay-2">
-            <div style="background:#fff; border-radius:8px; padding:2rem; box-shadow:var(--shadow)">
-              <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--teal);margin-bottom:1.2rem">🎯 Try a Mini Mission</h3>
-              <div style="display:flex;flex-direction:column;gap:0.8rem">
-                <div style="padding:0.8rem;background:var(--teal-lt);border-radius:4px;font-size:0.9rem;color:#1a4040"><strong>Find your representatives.</strong> Look up who represents your area in the Delaware General Assembly.</div>
-                <div style="padding:0.8rem;background:var(--teal-lt);border-radius:4px;font-size:0.9rem;color:#1a4040"><strong>Spot a local rule.</strong> Pick one rule at your school. Ask: why does it exist, and who decided?</div>
-                <div style="padding:0.8rem;background:var(--teal-lt);border-radius:4px;font-size:0.9rem;color:#1a4040"><strong>Write a one-sentence bill.</strong> Describe a change that could make your community safer, fairer, or kinder.</div>
+          <div class="mission-cards reveal reveal-delay-1">
+            <div class="mission-item" onclick="toggleMission(this)">
+              <div class="mission-check"></div>
+              <div class="mission-text">
+                <h4>Find Your Representatives</h4>
+                <p>Look up who represents your district in the Delaware General Assembly. What committees are they on? Have they voted on education funding?</p>
+              </div>
+            </div>
+            <div class="mission-item" onclick="toggleMission(this)">
+              <div class="mission-check"></div>
+              <div class="mission-text">
+                <h4>Spot a Local Decision</h4>
+                <p>Identify one recent decision made by your school board, city council, or county government. Who made it? Who was affected? Who wasn't in the room?</p>
+              </div>
+            </div>
+            <div class="mission-item" onclick="toggleMission(this)">
+              <div class="mission-check"></div>
+              <div class="mission-text">
+                <h4>Draw a Power Map</h4>
+                <p>Pick an issue that affects your community. Map who has decision-making authority, who is most impacted, and who could be allies in pushing for change.</p>
+              </div>
+            </div>
+            <div class="mission-item" onclick="toggleMission(this)">
+              <div class="mission-check"></div>
+              <div class="mission-text">
+                <h4>Attend a Public Meeting</h4>
+                <p>Find an upcoming school board, city council, or county meeting in Delaware. Attend — in person or virtually. You don't have to speak. Just witness how decisions are made.</p>
+              </div>
+            </div>
+            <div class="mission-item" onclick="toggleMission(this)">
+              <div class="mission-check"></div>
+              <div class="mission-text">
+                <h4>Teach Someone Else</h4>
+                <p>Explain one thing you learned from this site to someone else — a friend, family member, or classmate. When you teach, you become a civic multiplier.</p>
               </div>
             </div>
           </div>
@@ -486,8 +637,66 @@
     </section>
 
   </main>
-
   <div id="footer-placeholder"></div>
   <script src="scripts/main.js"></script>
+  <script>
+    // Civic Action Cycle
+    const cycleData = [
+      {
+        title: '01 — LEARN',
+        desc: 'Connect civic knowledge to real issues affecting your school and community. Read actual policy documents. Map who holds power over the problem you care about — and how that power was acquired.',
+        example: 'Students research a real New Castle County budget decision — who made it, what process governed it, and who was excluded from the room.'
+      },
+      {
+        title: '02 — ANALYZE',
+        desc: 'Map stakeholders and identify root causes vs. surface symptoms. Ask: whose voices are missing from the current process? What would have to change for those voices to matter?',
+        example: 'Students build a power map showing who controls the school district budget, identifying allies, obstacles, and leverage points.'
+      },
+      {
+        title: '03 — ORGANIZE',
+        desc: 'Build the coalition. Distribute roles based on skills, not seniority. Agree on a shared strategy — not just a shared goal. Collective strategy is different from individual plans added together.',
+        example: 'Students divide into teams: research, communications, coalition-building, and logistics — each with a defined deliverable before the action date.'
+      },
+      {
+        title: '04 — ACT',
+        desc: 'Engage a real decision-making space. Testimony. Participatory budgeting. A formal proposal to a school board. The measure is institutional accountability — not whether it got a newsletter mention.',
+        example: 'Student cohort presents a community-sourced budget proposal to the school board and receives a written response within 30 days.'
+      },
+      {
+        title: '05 — TEACH BACK',
+        desc: 'Share what you learned. Not as a summary — as a facilitated experience that builds the next person\'s capacity to do what you just did. This is how you become a civic multiplier.',
+        example: 'Students run a 30-minute workshop for a younger cohort, walking them through the power map they built and what changed because of it.'
+      },
+      {
+        title: '06 — REFLECT + ITERATE',
+        desc: 'Be honest. What did the action actually accomplish? What would you change? Reflection is not celebration — it\'s structural analysis that makes the next cycle more effective.',
+        example: 'The group identifies which of their three asks the board agreed to, and why — then plans the next campaign accordingly.'
+      }
+    ];
+
+    document.querySelectorAll('.cycle-step-btn').forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cycle-step-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const d = cycleData[i];
+        document.getElementById('cycle-title').textContent = d.title;
+        document.getElementById('cycle-desc').textContent = d.desc;
+        document.getElementById('cycle-example').innerHTML = `<strong style="color:var(--gold-lt)">In practice:</strong> ${d.example}`;
+      });
+    });
+
+    // Mission tracker
+    function toggleMission(el) {
+      const check = el.querySelector('.mission-check');
+      check.classList.toggle('done');
+      updateMissions();
+    }
+    function updateMissions() {
+      const all = document.querySelectorAll('.mission-check');
+      const done = document.querySelectorAll('.mission-check.done').length;
+      document.getElementById('mission-count').textContent = `${done} of ${all.length} Complete`;
+      document.getElementById('mission-bar').style.width = `${(done / all.length) * 100}%`;
+    }
+  </script>
 </body>
 </html>
