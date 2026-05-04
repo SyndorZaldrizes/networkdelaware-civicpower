@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="From Civic Learning to Civic Power is a statewide K–12 civic education initiative by Network Delaware, building equitable civic capacity across all communities.">
+  <title>From Civic Learning to Civic Power | Network Delaware</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    /* ── PAGE-SPECIFIC ────────────────────────────────── */
+
+    /* HERO */
+    .hero {
+      background: var(--blue);
+      padding: 5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 47px, rgba(201,145,58,0.06) 48px),
+        repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(201,145,58,0.06) 48px);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 0.1s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: #fff;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 0.25s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-lt); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.85;
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 0.4s forwards;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.55s forwards;
+    }
+
+    /* HERO STATS */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(201,145,58,0.18);
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.8s forwards;
+    }
+    .stat-cell {
+      background: rgba(14,32,64,0.85);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap {
+      background: var(--gold);
+      padding: 0.7rem 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 28s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-track span {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding: 0 2.5rem;
+    }
+    .marquee-track span::before { content: '◆ '; opacity: 0.35; }
+
+    /* THE ARGUMENT */
+    .argument-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .argument-text p {
+      font-size: 1.05rem;
+      color: #3a3530;
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 0 1.2rem 1.8rem;
+      margin: 2rem 0;
+      background: var(--gold-pale);
+    }
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: 1.35rem !important;
+      font-style: italic;
+      color: var(--blue) !important;
+      margin: 0 !important;
+      line-height: 1.5;
+    }
+    .data-pills {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .data-pill {
+      background: var(--blue);
+      padding: 1.6rem 1.8rem;
+      border-left: 3px solid var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .data-pill-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      line-height: 1;
+      min-width: 90px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .data-pill-body { flex: 1; }
+    .data-pill-body p { font-size: 0.88rem; color: rgba(255,255,255,0.62); line-height: 1.65; }
+    .data-pill-body small {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    /* FOUR FRONTS PREVIEW */
+    .fronts-bg { background: var(--cream); }
+    .fronts-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+    .front-preview-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: var(--radius);
+      transition: all 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .front-preview-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+      border-color: var(--gold);
+    }
+    .front-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .front-preview-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .front-preview-card p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    .front-arrow {
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* QUICK ACCESS */
+    .quick-access-bg { background: var(--blue); }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(201,145,58,0.18);
+      margin-top: 3rem;
+    }
+    .quick-card {
+      background: var(--blue);
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: background 0.2s;
+    }
+    .quick-card:hover { background: rgba(28,61,114,0.8); }
+    .quick-card .card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .quick-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      margin-bottom: 0.5rem;
+    }
+    .quick-card p { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+    /* KIDS SECTION */
+    .kids-intro-bg { background: var(--teal-lt); }
+    .kids-intro-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .kids-intro-text p { font-size: 1.05rem; color: #1a4040; line-height: 1.85; margin-bottom: 1.2rem; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 860px) {
+      .hero-inner, .argument-grid, .kids-intro-inner { grid-template-columns: 1fr; }
+      .hero-stats { display: grid; }
+      .fronts-preview, .quick-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero-inner">
+          <div class="hero-left">
+            <p class="hero-eyebrow">Network Delaware · Civic Education Initiative · 2025</p>
+            <h1 class="hero-title" id="hero-heading">From Civic <em>Learning</em><br>to Civic <em>Power</em></h1>
+            <p class="hero-sub">Delaware students know about democracy. Most aren't prepared to practice it. This initiative changes that — for every community, not just the ones already at the table.</p>
+            <div class="hero-btns">
+              <a href="learn.html" class="btn btn-gold">Start Learning</a>
+              <a href="framework.html" class="btn btn-ghost">Explore the Framework</a>
+            </div>
+          </div>
+          <div class="hero-right">
+            <div class="hero-stats" aria-label="Key statistics">
+              <div class="stat-cell">
+                <span class="stat-num">&lt;25%</span>
+                <span class="stat-label">8th graders proficient in civics nationally</span>
+              </div>
+              <div class="stat-cell">
+                <span class="stat-num">19K+</span>
+                <span class="stat-label">Multilingual learners in New Castle County</span>
+              </div>
+              <div class="stat-cell">
+                <span class="stat-num">$1,100</span>
+                <span class="stat-label">Per multilingual learner vs. $6–9K in neighboring states</span>
+              </div>
+              <div class="stat-cell">
+                <span class="stat-num">0</span>
+                <span class="stat-label">States with strategic nonviolence in civic statute</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Civic Multipliers</span><span>Power Literacy</span><span>Action Civics</span>
+        <span>Community Power</span><span>Strategic Nonviolence</span><span>Political Homes</span>
+        <span>Civic Action Cycle</span><span>Equity by Design</span><span>Four Fronts</span>
+        <span>Civic Multipliers</span><span>Power Literacy</span><span>Action Civics</span>
+        <span>Community Power</span><span>Strategic Nonviolence</span><span>Political Homes</span>
+        <span>Civic Action Cycle</span><span>Equity by Design</span><span>Four Fronts</span>
+      </div>
+    </div>
+
+    <!-- THE ARGUMENT -->
+    <section class="section-pad" aria-labelledby="argument-heading">
+      <div class="container">
+        <div class="argument-grid">
+          <div class="argument-text reveal">
+            <p class="section-label">The Problem</p>
+            <h2 class="section-title" id="argument-heading">A Gap Between Knowing and <em>Doing</em></h2>
+            <p>Delaware's civics standards, last revised in 2018, contain no statutory mandate, no dedicated funding, and no accountability structure. The Participation anchor standard — the only standard asking students to <em>act</em> civically, not just know about government — is highlighted at high school only at grade 9.</p>
+            <div class="pull-quote">
+              <p>"The barrier to youth civic participation is not motivation. It is access, safety, and structured invitation."</p>
+            </div>
+            <p>CIRCLE's 2025 research confirms the civic engagement gap is a supply-side failure. Young people want to participate. They just aren't being given the tools, the practice, or the invitation.</p>
+
+            <!-- KIDS VERSION -->
+            <div class="callout-kids kids-only" style="margin-top:1.5rem">
+              <span class="callout-icon">💡</span>
+              <div>
+                <h4>Put simply...</h4>
+                <p>Imagine learning how to swim by only reading about it. That's kind of what civics class is like for most students — lots of information, but not much practice. This initiative changes that.</p>
+              </div>
+            </div>
+
+            <a href="framework.html" class="btn btn-outline" style="margin-top:2rem">Explore the Full Framework →</a>
+          </div>
+          <div class="data-pills reveal reveal-delay-2">
+            <div class="data-pill">
+              <span class="data-pill-num">22%</span>
+              <div class="data-pill-body">
+                <p>of youth who voted in 2024 reported protesting or attending demonstrations, compared to 8% of non-voters. This reflects access to civic ecosystems, not individual motivation.</p>
+                <small>CIRCLE, 2025</small>
+              </div>
+            </div>
+            <div class="data-pill">
+              <span class="data-pill-num">61%</span>
+              <div class="data-pill-body">
+                <p>of young people who didn't vote reported rarely or never spending in-person time with community members. Community connection predicts civic action.</p>
+                <small>CIRCLE, 2025</small>
+              </div>
+            </div>
+            <div class="data-pill">
+              <span class="data-pill-num">27%</span>
+              <div class="data-pill-body">
+                <p>of 2024 youth voters reported being part of a movement or organized group, compared to 13% of non-voters. Political homes matter.</p>
+                <small>CIRCLE, 2025</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FOUR FRONTS PREVIEW -->
+    <section class="fronts-bg section-pad" aria-labelledby="fronts-heading">
+      <div class="container">
+        <p class="section-label reveal">The Strategy</p>
+        <h2 class="section-title reveal" id="fronts-heading">Four Strategic Fronts,<br>Advancing Together</h2>
+        <p class="section-body reveal">The framework advances four integrated fronts simultaneously. Your deliverables map to one or more of these fronts — and every recommendation must advance at least one.</p>
+        <div class="fronts-preview">
+          <a href="framework.html#front1" class="front-preview-card reveal">
+            <div class="front-num">Front 1</div>
+            <h3>Statewide Policy + LEA Implementation</h3>
+            <p>Strengthen Delaware's K–12 civics expectations at the state level while supporting Local Education Agencies in alignment, educator development, and implementation.</p>
+            <p class="front-arrow">Explore →</p>
+          </a>
+          <a href="framework.html#front2" class="front-preview-card reveal reveal-delay-1">
+            <div class="front-num">Front 2</div>
+            <h3>Community-Rooted Power Building</h3>
+            <p>Establish parent and student leadership labs, youth organizing pathways, and structured feedback mechanisms that give communities real — not symbolic — influence.</p>
+            <p class="front-arrow">Explore →</p>
+          </a>
+          <a href="framework.html#front3" class="front-preview-card reveal reveal-delay-2">
+            <div class="front-num">Front 3</div>
+            <h3>School-Based Partnerships + Hands-On Practice</h3>
+            <p>Pilot hands-on civic learning through participatory budgeting, community mapping, policy simulations, and direct engagement with real decision-makers.</p>
+            <p class="front-arrow">Explore →</p>
+          </a>
+          <a href="framework.html#front4" class="front-preview-card reveal reveal-delay-3">
+            <div class="front-num">Front 4</div>
+            <h3>Strategic Nonviolence + Leadership Development</h3>
+            <p>The differentiating argument. Equipping students to understand power, navigate conflict constructively, and build collective influence. No comparison state has codified this in statute. Delaware can lead.</p>
+            <p class="front-arrow">Explore →</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK ACCESS -->
+    <section class="quick-access-bg section-pad" aria-labelledby="quick-heading" id="act">
+      <div class="container">
+        <p class="section-label reveal">Get Involved</p>
+        <h2 class="section-title reveal" id="quick-heading" style="color:#fff">Where do you want to start?</h2>
+        <div class="quick-grid">
+          <a href="learn.html" class="quick-card reveal">
+            <span class="card-icon">🧠</span>
+            <h3>Learn the Basics</h3>
+            <p>New to civic education? Start here. Simple explanations for all ages — from elementary school to adult learners.</p>
+          </a>
+          <a href="resources.html" class="quick-card reveal reveal-delay-1">
+            <span class="card-icon">📂</span>
+            <h3>Access Resources</h3>
+            <p>Partner organizations and educators can access the full research library, workshop guides, toolkits, and policy briefs.</p>
+          </a>
+          <a href="framework.html" class="quick-card reveal reveal-delay-2">
+            <span class="card-icon">⚡</span>
+            <h3>Explore the Framework</h3>
+            <p>Deep dive into the Civic Action Cycle, all four fronts, the eight guiding principles, and Delaware's opportunity to lead.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- KIDS SECTION -->
+    <section class="kids-intro-bg section-pad" aria-labelledby="kids-heading" id="young-learners">
+      <div class="container">
+        <div class="kids-intro-inner">
+          <div class="kids-intro-text reveal">
+            <p class="section-label" style="color:var(--teal)">For Young Learners</p>
+            <h2 class="section-title" id="kids-heading" style="color:var(--teal)">Everyone Belongs<br>in This Conversation</h2>
+            <p>Civic power isn't just for adults. If you're in elementary school, middle school, or high school — this is about your community, your future, and your voice.</p>
+            <p>Select the <strong>Kids</strong> or <strong>Teens</strong> reading level at the top of any page to see explanations designed just for you. And check out our Learn page for interactive activities and mini missions.</p>
+            <a href="learn.html" class="btn btn-primary" style="margin-top:1rem; display:inline-flex; background:var(--teal)">Start Learning →</a>
+          </div>
+          <div class="kids-mini-missions reveal reveal-delay-2">
+            <div style="background:#fff; border-radius:8px; padding:2rem; box-shadow:var(--shadow)">
+              <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--teal);margin-bottom:1.2rem">🎯 Try a Mini Mission</h3>
+              <div style="display:flex;flex-direction:column;gap:0.8rem">
+                <div style="padding:0.8rem;background:var(--teal-lt);border-radius:4px;font-size:0.9rem;color:#1a4040"><strong>Find your representatives.</strong> Look up who represents your area in the Delaware General Assembly.</div>
+                <div style="padding:0.8rem;background:var(--teal-lt);border-radius:4px;font-size:0.9rem;color:#1a4040"><strong>Spot a local rule.</strong> Pick one rule at your school. Ask: why does it exist, and who decided?</div>
+                <div style="padding:0.8rem;background:var(--teal-lt);border-radius:4px;font-size:0.9rem;color:#1a4040"><strong>Write a one-sentence bill.</strong> Describe a change that could make your community safer, fairer, or kinder.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="footer-placeholder"></div>
+  <script src="scripts/main.js"></script>
+</body>
+</html>
