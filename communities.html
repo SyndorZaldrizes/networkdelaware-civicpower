@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The six priority communities at the center of From Civic Learning to Civic Power: who they are, why they were identified, and how the initiative is designed to serve them.">
+  <title>Priority Communities | From Civic Learning to Civic Power</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .page-hero { background: var(--blue); padding: 4.5rem 0 3.5rem; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,145,58,0.04) 40px, rgba(201,145,58,0.04) 41px); }
+    .page-hero-inner { position: relative; z-index: 2; }
+    .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #fff; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .page-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 580px; line-height: 1.8; }
+    .communities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 2rem; }
+    .community-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; border-left: 3px solid var(--gold); }
+    .community-card h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--blue); margin-bottom: 0.6rem; }
+    .community-card p { font-size: 0.9rem; color: #555; line-height: 1.7; }
+    .why-note { margin-top: 1rem; font-size: 0.82rem; color: var(--gold); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main id="main">
+
+  <header class="page-hero">
+    <div class="container page-hero-inner">
+      <p class="section-label" style="color:var(--gold-lt)">Priority Communities</p>
+      <h1>Who This<br>Is Built For</h1>
+      <p>Six communities were identified as priority focus areas based on structural gaps in civic access, representation, and educational investment. The initiative is designed around their specific conditions &mdash; not as a generic statewide rollout.</p>
+    </div>
+  </header>
+
+  <section class="section-pad" aria-label="Priority Communities">
+    <div class="container">
+      <p class="section-label">The Six Communities</p>
+      <h2 class="section-title">Priority Focus Areas</h2>
+      <p style="font-size:1rem;color:#444;line-height:1.8;max-width:680px;margin-bottom:0.5rem">These communities were selected because existing civic education systems have consistently underserved them &mdash; not because of any deficit in the communities themselves.</p>
+
+      <div class="communities-grid">
+
+        <div class="community-card reveal">
+          <h3>Multilingual Learners</h3>
+          <p>New Castle County has over 19,000 multilingual learners. Delaware spends roughly $1,100 per multilingual learner &mdash; compared to $6&ndash;9K in neighboring states. Language access in civic education is not an accommodation. It is a baseline requirement.</p>
+          <p class="why-note">Why: Resource gap + civic access barrier</p>
+        </div>
+
+        <div class="community-card reveal">
+          <h3>Students with Disabilities</h3>
+          <p>Civic education programs rarely include explicit accessibility design. IEP accommodations address academic content, not civic participation. This initiative requires accessibility standards to be built in at the design stage, not retrofitted.</p>
+          <p class="why-note">Why: Structural exclusion from civic practice</p>
+        </div>
+
+        <div class="community-card reveal">
+          <h3>Rural Communities</h3>
+          <p>Rural Delaware students face transportation barriers to civic events, fewer local government touchpoints, and limited access to organizing infrastructure. Geographic isolation shapes civic access in ways that urban-designed programs don't account for.</p>
+          <p class="why-note">Why: Geographic and infrastructure barriers</p>
+        </div>
+
+        <div class="community-card reveal">
+          <h3>Incarcerated and System-Involved Youth</h3>
+          <p>Young people who have been involved in the juvenile justice system are among those with the greatest stake in civic outcomes &mdash; and among those least likely to receive structured civic education. This initiative specifically addresses re-entry and in-facility contexts.</p>
+          <p class="why-note">Why: Highest-stakes exclusion from civic systems</p>
+        </div>
+
+        <div class="community-card reveal">
+          <h3>Tribal and Indigenous Communities</h3>
+          <p>The Nanticoke Lenni-Lenape and other Indigenous communities in Delaware have distinct civic relationships with the state that standard civics curricula don't reflect. Sovereign nation relationships, treaty history, and land governance require specific curricular attention.</p>
+          <p class="why-note">Why: Distinct civic relationship with state government</p>
+        </div>
+
+        <div class="community-card reveal">
+          <h3>Immigrant Communities</h3>
+          <p>Immigrant families &mdash; including mixed-status households &mdash; face real safety concerns around civic participation. Programs that don't address these barriers by design will not reach this community. Civic safety is not a peripheral concern; it is a design requirement.</p>
+          <p class="why-note">Why: Safety barriers + underrepresentation</p>
+        </div>
+
+      </div>
+
+      <div style="background:var(--cream);border-left:3px solid var(--gold);padding:1.5rem 2rem;border-radius:var(--radius);margin-top:3rem" class="reveal">
+        <h3 style="font-family:var(--font-display);font-size:1.05rem;font-weight:700;color:var(--blue);margin-bottom:0.5rem">A Note on How These Communities Were Identified</h3>
+        <p style="font-size:0.9rem;color:#555;line-height:1.75">Community identification was driven by three criteria: measurable gaps in civic access or educational investment, structural barriers that existing programs have not addressed, and communities with specific conditions that require tailored design &mdash; not just inclusion in a generic program.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="scripts/main.js"></script>
+
+</body>
+</html>
