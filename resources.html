@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Research briefs, toolkits, workshop guides, and policy documents from the From Civic Learning to Civic Power fellowship.">
+  <title>Resources | From Civic Learning to Civic Power</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .page-hero {
+      background: var(--blue);
+      padding: 4.5rem 0 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg, transparent, transparent 40px,
+        rgba(201,145,58,0.04) 40px, rgba(201,145,58,0.04) 41px
+      );
+    }
+    .page-hero-inner { position: relative; z-index: 2; }
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.6);
+      max-width: 580px;
+      line-height: 1.8;
+    }
+
+    /* FILTER BAR */
+    .filter-bar {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      position: sticky;
+      top: 62px;
+      z-index: 100;
+    }
+    .filter-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .filter-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-right: 0.4rem;
+    }
+    .filter-btn {
+      padding: 0.3rem 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-dk);
+      color: var(--ink);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.18s;
+      background: transparent;
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active { background: var(--gold); border-color: var(--gold); color: var(--blue); }
+
+    /* RESOURCES GRID */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2.5rem;
+    }
+
+    .resource-card[data-category] { transition: opacity 0.3s, transform 0.3s; }
+    .resource-card.hidden { display: none; }
+
+    /* CATEGORY HEADINGS */
+    .phase-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .phase-heading {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+    .phase-desc {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 2rem;
+    }
+
+    /* RESOURCE CARD */
+    .resource-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.6rem;
+      border-top: 3px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+    }
+    .resource-tag {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+    }
+    .resource-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+      line-height: 1.35;
+    }
+    .resource-card p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .resource-link {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .resource-link:hover { border-bottom-color: var(--gold); }
+
+    /* UPLOAD CALLOUT */
+    .upload-callout {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 1.5rem 2rem;
+      margin-top: 3rem;
+    }
+    .upload-callout h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.4rem;
+    }
+    .upload-callout p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.65;
+    }
+    .upload-callout code {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      background: rgba(201,145,58,0.12);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+    }
+
+    /* SEARCH */
+    .search-wrap {
+      margin-left: auto;
+    }
+    .search-input {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid var(--border-dk);
+      border-radius: 100px;
+      background: #fff;
+      color: var(--ink);
+      width: 200px;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { outline: none; border-color: var(--gold); }
+
+    @media (max-width: 600px) {
+      .resources-grid { grid-template-columns: 1fr; }
+      .search-wrap { margin-left: 0; width: 100%; }
+      .search-input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <header class="page-hero">
+    <div class="container page-hero-inner">
+      <p class="section-label" style="color:var(--gold-lt)">Research Library &amp; Partner Resources</p>
+      <h1>Documents &amp;<br>Research Tools</h1>
+      <p>All research briefs, toolkits, workshop guides, and policy documents from the From Civic Learning to Civic Power fellowship. Use the filters to find what you need.</p>
+    </div>
+  </header>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar" id="toolkits">
+    <div class="container filter-inner">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="policy">Policy</button>
+      <button class="filter-btn" data-filter="research">Research</button>
+      <button class="filter-btn" data-filter="toolkit">Toolkits</button>
+      <button class="filter-btn" data-filter="workshop">Workshops</button>
+      <button class="filter-btn" data-filter="funding">Funding</button>
+      <button class="filter-btn" data-filter="dsl">DSL</button>
+      <div class="search-wrap">
+        <input type="search" class="search-input" placeholder="Search resources..." id="resource-search" aria-label="Search resources">
+      </div>
+    </div>
+  </div>
+
+  <!-- RESOURCES -->
+  <section class="section-pad" aria-label="Resources">
+    <div class="container">
+
+      <!-- PHASE 1 -->
+      <div class="phase-block reveal">
+        <p class="phase-label">Phase 1 &mdash; Delaware Foundation</p>
+        <h2 class="phase-heading">Landscape Reviews &amp; Comparative Research</h2>
+        <p class="phase-desc">Landscape reviews and comparative research establishing the evidence base for civic education reform in Delaware.</p>
+        <div class="resources-grid" id="workshops">
+
+          <div class="resource-card" data-category="research">
+            <p class="resource-tag">Research &middot; Phase 1</p>
+            <h3>Delaware Civic Education Landscape Review</h3>
+            <p>A comprehensive review of Delaware's K&ndash;12 civics standards, DDOE guidance, assessment mechanisms, and structural gaps measured against C3 Framework and CIRCLE benchmarks. Covers all six priority communities.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+          <div class="resource-card" data-category="research">
+            <p class="resource-tag">Research &middot; Phase 1</p>
+            <h3>Comparative State Analysis</h3>
+            <p>Profiles of Massachusetts, Illinois, Rhode Island, California, and New York &mdash; five of the strongest civic education models in the country &mdash; with a cross-state synthesis and specific lessons for Delaware.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-block reveal" style="margin-top:3.5rem">
+        <p class="phase-label">Phase 2 &mdash; Research and Tools</p>
+        <h2 class="phase-heading">Best Practices Memos, Toolkits &amp; Briefs</h2>
+        <p class="phase-desc">Best practices memos, implementation toolkits, and research briefs developed through Phase 2 of the fellowship.</p>
+        <div class="resources-grid">
+
+          <div class="resource-card" data-category="research">
+            <p class="resource-tag">Research &middot; Phase 2</p>
+            <h3>Youth Civic Engagement Best Practices Memo</h3>
+            <p>Evidence synthesis organized by all four strategic fronts. Draws on CIRCLE 2025 data, the I-ACTED RCT, and Generation Citizen efficacy research. Includes six actionable recommendations and a full priority community analysis table.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+          <div class="resource-card" data-category="research">
+            <p class="resource-tag">Research &middot; Phase 2</p>
+            <h3>Strategic Nonviolence in Civic Education</h3>
+            <p>Research brief on Kingian Nonviolence, restorative practices, and the evidence base for Delaware's differentiating argument. Includes the priority community case, curriculum design requirements, and Network Delaware's institutional role.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+          <div class="resource-card" data-category="toolkit">
+            <p class="resource-tag">Toolkit &middot; Phase 2</p>
+            <h3>School and Community Partnership Toolkit</h3>
+            <p>A practical toolkit for schools and community organizations. Includes an internal readiness assessment, partner screening matrix, outreach email templates, a full MOU template, four hands-on civic practice protocols, and equity and safety design standards.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+          <div class="resource-card" data-category="workshop">
+            <p class="resource-tag">Workshop &middot; Phase 2</p>
+            <h3>Workshop Implementation Framework</h3>
+            <p>Complete design document for the Delaware-Ready Civic Power Workshop. Integrates the Anoka Action Civics model, Justice University's organizing curriculum, and Kingian Nonviolence training into a six-session arc with a three-tier leadership pipeline.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+          <div class="resource-card" data-category="research">
+            <p class="resource-tag">Research &middot; Phase 2</p>
+            <h3>Master Annotated Citation Library</h3>
+            <p>49 unique sources across all fellowship deliverables, alphabetically organized in MLA 9th edition format with cross-references to which deliverables cite each source. Includes thematic sections and annotation workflow.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-block reveal" style="margin-top:3.5rem">
+        <p class="phase-label">Phase 3 &mdash; Policy and Funding</p>
+        <h2 class="phase-heading">Policy Brief &amp; Grant Narrative Language</h2>
+        <p class="phase-desc">Policy documents and grant narrative language produced in Phase 3 of the fellowship for legislators, funders, and institutional partners.</p>
+        <div class="resources-grid">
+
+          <div class="resource-card" data-category="policy">
+            <p class="resource-tag">Policy &middot; Phase 3</p>
+            <h3>Delaware K&ndash;12 Civic Education Policy Brief</h3>
+            <p>Five evidence-grounded recommendations with an implementation roadmap, addressed to DDOE, the Delaware General Assembly, and the Delaware Civics Education Coalition. Includes key research findings, risk analysis, and an implementation timeline.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+          <div class="resource-card" data-category="funding">
+            <p class="resource-tag">Funding &middot; Phase 3</p>
+            <h3>Grant Narrative Language</h3>
+            <p>Nine modular grant narrative sections: need statement, project description, theory of change, equity design, program model, evaluation, capacity, and budget framing. Includes a funder alignment table for six identified funders: Kellogg, Carnegie, Democracy Fund, iF Foundation, Sparkplug, and Trust for Civic Life.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- DSL -->
+      <div class="phase-block reveal" style="margin-top:3.5rem">
+        <p class="phase-label">Delaware Student Legislature (DSL)</p>
+        <h2 class="phase-heading">Student-Led Civic Practice</h2>
+        <p class="phase-desc">A voluntary side initiative proposing a student-run legislative body for Delaware, adapted from the Maryland Student Legislature model with equity-first design.</p>
+        <div class="resources-grid">
+
+          <div class="resource-card" data-category="dsl">
+            <p class="resource-tag">DSL &middot; Founding Document</p>
+            <h3>Delaware Student Legislature Founding Proposal</h3>
+            <p>Complete founding proposal including governing structure, legislative process, session format, delegation model, equity architecture, budget framework, and an implementation timeline targeting an Inaugural Annual Session in April 2026.</p>
+            <a href="#" class="resource-link">View Document &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- UPLOAD CALLOUT -->
+      <div class="upload-callout reveal">
+        <h4>Adding More Documents?</h4>
+        <p>Workshop outlines, updated grant narratives, event recaps, and partner materials can be added by uploading files to the <code>resources/</code> folder in the GitHub repository and updating the links above.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="scripts/main.js"></script>
+
+<script>
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.resource-card').forEach(card => {
+        card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
+      });
+    });
+  });
+
+  // Search
+  document.getElementById('resource-search').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    document.querySelectorAll('.resource-card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.classList.toggle('hidden', query.length > 1 && !text.includes(query));
+    });
+  });
+</script>
+
+</body>
+</html>
