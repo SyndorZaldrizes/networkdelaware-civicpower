@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The From Civic Learning to Civic Power pilot program — a structured six-session action civics program for Delaware schools and community organizations. Partner with us.">
+  <title>The Pilot Program | From Civic Learning to Civic Power</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Syne+Mono:wght@400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ──────────────────────────────────────────── */
+    :root {
+      --ink:         #0a0a0a;
+      --paper:       #f4f1eb;
+      --paper-dk:    #ece8df;
+      --white:       #f4f1eb;
+      --accent:      #2d5a3d;
+      --accent-lt:   #3d7a54;
+      --accent-dim:  rgba(45,90,61,0.12);
+      --accent-pale: rgba(45,90,61,0.06);
+      --muted:       #6b6860;
+      --border:      rgba(45,90,61,0.22);
+      --border-str:  rgba(45,90,61,0.5);
+      --card-bg:     #ffffff;
+      --dark:        #0f1a14;
+      --dark-mid:    #162010;
+      --shadow:      0 4px 28px rgba(10,10,10,0.10);
+      --shadow-lg:   0 12px 48px rgba(10,10,10,0.18);
+      --radius:      2px;
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+      --font-body:    'Syne', system-ui, sans-serif;
+      --font-serif:   'Libre Baskerville', Georgia, serif;
+      --font-mono:    'Syne Mono', 'Courier New', monospace;
+      --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ── RESET ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* ── SKIP LINK ────────────────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -100%; left: 1rem;
+      background: var(--dark); color: var(--accent-lt);
+      padding: 0.5rem 1rem; font-size: 0.85rem; z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    /* ── NAV ──────────────────────────────────────────────── */
+    #site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+      background: var(--dark);
+      border-bottom: 2px solid var(--accent);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 58px;
+    }
+    .nav-brand { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-brand-top {
+      font-family: var(--font-mono); font-size: 0.53rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-lt);
+    }
+    .nav-brand-main {
+      font-family: var(--font-display); font-size: 1.3rem;
+      color: var(--white); letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 0; list-style: none; }
+    .nav-links a {
+      display: block; padding: 0.4rem 0.85rem;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(244,241,235,0.5); transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--accent-lt); }
+    .nav-links a[aria-current="page"] {
+      color: var(--accent-lt); font-weight: 500;
+    }
+    .nav-cta {
+      background: var(--accent) !important; color: var(--white) !important;
+      margin-left: 0.5rem; padding: 0.4rem 1.1rem !important;
+    }
+    .nav-cta:hover { background: var(--accent-lt) !important; }
+    .nav-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      padding: 6px; background: none; border: none;
+    }
+    .nav-toggle span {
+      width: 22px; height: 2px; background: var(--white);
+      border-radius: 2px; transition: all 0.3s; display: block;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* ── LAYOUT ───────────────────────────────────────────── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+    .section-pad { padding: 5.5rem 0; }
+    .section-pad-sm { padding: 3.5rem 0; }
+    body { padding-top: 58px; }
+
+    .section-label {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--accent); display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+    .section-label::before { content: '//'; opacity: 0.5; }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.95; color: var(--ink);
+      margin-bottom: 1.4rem; letter-spacing: 0.02em;
+    }
+    .section-title.light { color: var(--white); }
+    .section-title em { color: var(--accent-lt); font-style: normal; }
+
+    .divider { height: 1px; background: var(--border); }
+
+    /* ── SCROLL REVEAL ────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ── BUTTONS ──────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 2rem; font-family: var(--font-mono);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; border: 2px solid transparent;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .btn-accent { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .btn-accent:hover { background: var(--accent-lt); border-color: var(--accent-lt); }
+    .btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--white); }
+    .btn-ghost { background: transparent; color: var(--white); border-color: rgba(244,241,235,0.35); }
+    .btn-ghost:hover { border-color: var(--accent-lt); color: var(--accent-lt); }
+    .btn-outline-accent { background: transparent; color: var(--accent); border-color: var(--accent); }
+    .btn-outline-accent:hover { background: var(--accent); color: var(--white); }
+
+    /* ===================================================
+       HERO
+    =================================================== */
+    .hero {
+      background: var(--dark); min-height: 88vh;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(45,90,61,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45,90,61,0.07) 1px, transparent 1px);
+      background-size: 55px 55px;
+    }
+    .hero-diagonal {
+      position: absolute; bottom: -1px; left: 0; right: 0; height: 100px;
+      background: var(--paper); clip-path: polygon(0 100%, 100% 100%, 100% 20%);
+    }
+    .hero-content { position: relative; z-index: 2; padding: 5rem 0 4rem; }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-lt);
+      margin-bottom: 1.8rem; display: flex; align-items: center; gap: 1rem;
+      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.1s forwards;
+    }
+    .hero-eyebrow::before { content: ''; width: 36px; height: 2px; background: var(--accent-lt); }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(4.5rem, 11vw, 10rem);
+      line-height: 0.88; color: var(--white);
+      letter-spacing: 0.02em; margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.8s var(--ease-out) 0.25s forwards;
+    }
+    .hero-title .accent { color: var(--accent-lt); }
+    .hero-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: end; }
+    .hero-sub {
+      font-family: var(--font-serif); font-size: 1.1rem; font-style: italic;
+      color: rgba(244,241,235,0.68); line-height: 1.85;
+      border-left: 3px solid var(--accent-lt); padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.45s forwards;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.55s forwards;
+    }
+    .meta-tag {
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 0.35rem 0.9rem; border: 1px solid var(--border-str);
+      color: var(--accent-lt); background: rgba(45,90,61,0.1);
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.7s var(--ease-out) 0.65s forwards;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+
+    /* ===================================================
+       PROBLEM DATA STRIP
+    =================================================== */
+    .data-strip { background: var(--dark-mid); padding: 3.5rem 0; border-top: 1px solid rgba(45,90,61,0.25); border-bottom: 1px solid rgba(45,90,61,0.25); }
+    .data-strip-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 0; border: 1px solid rgba(45,90,61,0.3);
+    }
+    .data-cell {
+      padding: 2rem 1.5rem; text-align: center;
+      border-right: 1px solid rgba(45,90,61,0.25);
+    }
+    .data-cell:last-child { border-right: none; }
+    .data-num {
+      font-family: var(--font-display); font-size: 3.5rem;
+      color: var(--accent-lt); display: block; line-height: 1;
+    }
+    .data-desc {
+      font-family: var(--font-mono); font-size: 0.57rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(244,241,235,0.5); display: block; margin-top: 0.6rem; line-height: 1.6;
+    }
+    .data-source {
+      font-family: var(--font-mono); font-size: 0.5rem;
+      letter-spacing: 0.08em; color: rgba(244,241,235,0.25);
+      display: block; margin-top: 0.4rem;
+    }
+
+    /* ===================================================
+       WHAT IT IS
+    =================================================== */
+    .what-wrap { background: var(--paper); }
+    .what-inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 6rem; align-items: start; }
+    .what-sticky { position: sticky; top: 90px; }
+    .what-sticky h2 {
+      font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem);
+      color: var(--ink); line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 2rem;
+    }
+    .blockquote {
+      border-left: 4px solid var(--accent);
+      padding: 1.4rem 1.8rem;
+      background: var(--accent-pale); margin-top: 1.5rem;
+    }
+    .blockquote p {
+      font-family: var(--font-serif); font-size: 1.1rem; font-style: italic;
+      color: var(--ink); line-height: 1.75; margin-bottom: 0.6rem;
+    }
+    .blockquote cite {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+      font-style: normal;
+    }
+    .what-text p {
+      font-family: var(--font-serif); font-size: 1rem;
+      color: #3a3630; line-height: 1.9; margin-bottom: 1.5rem;
+    }
+    .what-text p:last-child { margin-bottom: 0; }
+    .what-text strong { color: var(--ink); font-weight: 700; }
+
+    /* ===================================================
+       SESSION ARC
+    =================================================== */
+    .sessions-wrap { background: var(--paper-dk); }
+    .sessions-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+    .session-card {
+      background: var(--card-bg); padding: 2.2rem;
+      transition: background 0.25s; position: relative; overflow: hidden;
+    }
+    .session-card::after {
+      content: attr(data-num);
+      font-family: var(--font-display); font-size: 7rem;
+      color: rgba(10,10,10,0.04); position: absolute;
+      bottom: -0.5rem; right: 0.8rem; line-height: 1;
+      pointer-events: none; transition: color 0.25s;
+    }
+    .session-card:hover { background: var(--dark); }
+    .session-card:hover .session-phase { color: var(--accent-lt); }
+    .session-card:hover .session-title { color: var(--white); }
+    .session-card:hover .session-desc { color: rgba(244,241,235,0.58); }
+    .session-card:hover .session-front { color: rgba(244,241,235,0.35); border-color: rgba(244,241,235,0.15); }
+    .session-card:hover::after { color: rgba(45,90,61,0.08); }
+    .session-num {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.4rem; display: block;
+      transition: color 0.25s;
+    }
+    .session-phase {
+      font-family: var(--font-display); font-size: 0.95rem;
+      color: var(--accent); letter-spacing: 0.08em;
+      display: block; margin-bottom: 0.8rem; transition: color 0.25s;
+    }
+    .session-title {
+      font-family: var(--font-display); font-size: 1.6rem;
+      color: var(--ink); line-height: 1.05; margin-bottom: 0.9rem;
+      letter-spacing: 0.02em; position: relative; z-index: 1;
+      transition: color 0.25s;
+    }
+    .session-desc {
+      font-size: 0.9rem; color: var(--muted); line-height: 1.75;
+      position: relative; z-index: 1; margin-bottom: 1.2rem;
+      transition: color 0.25s;
+    }
+    .session-front {
+      font-family: var(--font-mono); font-size: 0.52rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.25rem 0.7rem; border: 1px solid var(--border);
+      color: var(--muted); display: inline-block;
+      position: relative; z-index: 1; transition: all 0.25s;
+    }
+
+    /* ===================================================
+       LEADERSHIP PIPELINE
+    =================================================== */
+    .pipeline-wrap { background: var(--dark); padding: 5.5rem 0; }
+    .pipeline-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(45,90,61,0.25); margin-top: 3rem; }
+    .pipeline-card { background: var(--dark); padding: 2.8rem 2.2rem; }
+    .pipeline-tier {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent-lt); display: block; margin-bottom: 1rem;
+    }
+    .pipeline-num {
+      font-family: var(--font-display); font-size: 5rem;
+      color: rgba(45,90,61,0.18); line-height: 1; margin-bottom: 1rem; display: block;
+    }
+    .pipeline-card h3 {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--white); margin-bottom: 0.8rem; line-height: 1; letter-spacing: 0.02em;
+    }
+    .pipeline-card p { font-size: 0.92rem; color: rgba(244,241,235,0.55); line-height: 1.8; }
+    .pipeline-card .pipeline-note {
+      margin-top: 1.2rem; padding: 0.9rem 1.1rem;
+      background: rgba(45,90,61,0.12); border-left: 3px solid var(--accent);
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent-lt); line-height: 1.6;
+    }
+
+    /* ===================================================
+       EVIDENCE BASE (ACCORDION)
+    =================================================== */
+    .evidence-wrap { background: var(--paper); }
+    .accordion { margin-top: 3rem; border: 1px solid var(--border); }
+    .accordion-item { border-bottom: 1px solid var(--border); }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-trigger {
+      width: 100%; padding: 1.6rem 2rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+      background: transparent; cursor: pointer; text-align: left;
+      transition: background 0.2s;
+    }
+    .accordion-trigger:hover { background: var(--accent-pale); }
+    .accordion-trigger[aria-expanded="true"] { background: var(--accent-pale); }
+    .accordion-left { display: flex; align-items: baseline; gap: 1.5rem; flex: 1; }
+    .acc-num {
+      font-family: var(--font-display); font-size: 2rem;
+      color: rgba(45,90,61,0.2); line-height: 1; flex-shrink: 0; min-width: 44px;
+      transition: color 0.2s;
+    }
+    .accordion-trigger[aria-expanded="true"] .acc-num { color: var(--accent); }
+    .acc-title { font-family: var(--font-body); font-size: 1rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+    .acc-arrow {
+      width: 24px; height: 24px; flex-shrink: 0;
+      border: 1px solid var(--border-str); display: flex; align-items: center; justify-content: center;
+      transition: all 0.25s; color: var(--accent);
+      font-size: 0.8rem;
+    }
+    .accordion-trigger[aria-expanded="true"] .acc-arrow { background: var(--accent); color: var(--white); transform: rotate(180deg); }
+    .accordion-panel { display: none; padding: 0 2rem 1.8rem 6rem; }
+    .accordion-panel.open { display: block; animation: fadeDown 0.3s var(--ease-out); }
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:none; } }
+    .accordion-panel p { font-family: var(--font-serif); font-size: 0.97rem; color: #3a3630; line-height: 1.85; margin-bottom: 1rem; }
+    .accordion-panel p:last-child { margin-bottom: 0; }
+    .acc-citation {
+      font-family: var(--font-mono); font-size: 0.57rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); border-left: 2px solid var(--accent);
+      padding-left: 0.8rem; margin-top: 0.8rem; display: block;
+    }
+
+    /* ===================================================
+       PRIORITY COMMUNITIES
+    =================================================== */
+    .communities-wrap { background: var(--paper-dk); }
+    .communities-intro { max-width: 680px; margin-bottom: 3rem; }
+    .communities-intro p { font-family: var(--font-serif); font-size: 1rem; color: #3a3630; line-height: 1.9; }
+    .communities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); }
+    .community-card { background: var(--card-bg); padding: 2rem; transition: background 0.2s; }
+    .community-card:hover { background: var(--dark); }
+    .community-card:hover .comm-name { color: var(--white); }
+    .community-card:hover .comm-body { color: rgba(244,241,235,0.58); }
+    .community-card:hover .comm-partner { color: rgba(244,241,235,0.35); border-color: rgba(244,241,235,0.12); }
+    .community-card:hover .comm-icon { color: var(--accent-lt); }
+    .comm-icon { font-size: 1.8rem; margin-bottom: 1rem; display: block; transition: color 0.2s; }
+    .comm-name {
+      font-family: var(--font-display); font-size: 1.4rem;
+      color: var(--ink); margin-bottom: 0.8rem; line-height: 1.05;
+      letter-spacing: 0.02em; transition: color 0.2s;
+    }
+    .comm-body { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; transition: color 0.2s; }
+    .comm-partner {
+      font-family: var(--font-mono); font-size: 0.52rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); border-top: 1px solid var(--border);
+      padding-top: 0.8rem; display: block; line-height: 1.7;
+      transition: all 0.2s;
+    }
+
+    /* ===================================================
+       ROLLOUT TIMELINE
+    =================================================== */
+    .timeline-wrap { background: var(--dark); padding: 5.5rem 0; }
+    .timeline { margin-top: 3rem; }
+    .timeline-item {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 3rem; padding: 3rem 0; border-bottom: 1px solid rgba(45,90,61,0.2);
+    }
+    .timeline-item:first-child { border-top: 1px solid rgba(45,90,61,0.2); }
+    .timeline-left { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.25rem; }
+    .tl-phase {
+      font-family: var(--font-display); font-size: 3.5rem;
+      color: rgba(45,90,61,0.25); line-height: 1;
+    }
+    .tl-label {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-lt);
+    }
+    .tl-period {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(244,241,235,0.3);
+    }
+    .timeline-right h3 {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--white); margin-bottom: 0.8rem; letter-spacing: 0.02em;
+    }
+    .timeline-right p { font-size: 0.95rem; color: rgba(244,241,235,0.6); line-height: 1.85; margin-bottom: 1rem; }
+    .tl-goals {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
+    }
+    .tl-goal {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.3rem 0.8rem; border: 1px solid rgba(45,90,61,0.4);
+      color: rgba(244,241,235,0.45);
+    }
+
+    /* ===================================================
+       GET INVOLVED
+    =================================================== */
+    .involved-wrap { background: var(--accent); padding: 5.5rem 0; }
+    .involved-wrap .section-label { color: rgba(244,241,235,0.6); }
+    .involved-wrap .section-label::before { opacity: 0.4; color: rgba(244,241,235,0.6); }
+    .involved-wrap .section-title { color: var(--white); }
+    .involved-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(244,241,235,0.2); margin-top: 3rem; }
+    .involved-card {
+      background: rgba(45,90,61,0.4); padding: 3rem 2.5rem;
+      transition: background 0.25s; text-decoration: none; color: inherit;
+    }
+    .involved-card:hover { background: rgba(45,90,61,0.65); }
+    .inv-tag {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(244,241,235,0.55); display: block; margin-bottom: 1.5rem;
+    }
+    .involved-card h3 {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--white); margin-bottom: 0.8rem; line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .involved-card p { font-size: 0.92rem; color: rgba(244,241,235,0.7); line-height: 1.8; }
+    .inv-cta {
+      display: inline-block; margin-top: 1.5rem;
+      font-family: var(--font-mono); font-size: 0.6rem;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(244,241,235,0.9);
+      border-bottom: 1px solid rgba(244,241,235,0.4); padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .involved-card:hover .inv-cta { border-color: rgba(244,241,235,0.9); }
+
+    /* ===================================================
+       ONE-PAGER DOWNLOAD
+    =================================================== */
+    .download-wrap { background: var(--paper-dk); padding: 4rem 0; }
+    .download-block {
+      border: 2px solid var(--accent); background: var(--card-bg);
+      padding: 3rem; display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: center;
+    }
+    .download-label {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); display: block; margin-bottom: 0.8rem;
+    }
+    .download-block h3 {
+      font-family: var(--font-display); font-size: 2rem;
+      color: var(--ink); margin-bottom: 0.8rem; letter-spacing: 0.02em;
+    }
+    .download-block p { font-family: var(--font-serif); font-size: 0.97rem; color: #3a3630; line-height: 1.8; }
+    .download-side { flex-shrink: 0; text-align: center; }
+    .download-icon { font-size: 3rem; display: block; margin-bottom: 1rem; opacity: 0.6; }
+
+    /* ===================================================
+       CONTACT FORM
+    =================================================== */
+    .contact-wrap { background: var(--dark); padding: 5.5rem 0; }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; }
+    .contact-sidebar { padding-top: 0.5rem; }
+    .contact-sidebar h3 {
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: var(--white); line-height: 1; letter-spacing: 0.02em; margin-bottom: 1rem;
+    }
+    .contact-sidebar .framing {
+      font-family: var(--font-serif); font-size: 1.05rem; font-style: italic;
+      color: rgba(244,241,235,0.65); line-height: 1.8;
+      border-left: 3px solid var(--accent); padding-left: 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .contact-meta { display: flex; flex-direction: column; gap: 0.6rem; }
+    .contact-meta-row {
+      display: flex; gap: 0.6rem; align-items: baseline;
+    }
+    .contact-meta-label {
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-lt);
+      min-width: 100px; flex-shrink: 0;
+    }
+    .contact-meta-val { font-size: 0.9rem; color: rgba(244,241,235,0.6); }
+    .contact-meta-val a { color: var(--accent-lt); text-decoration: underline; text-decoration-color: rgba(45,90,61,0.4); }
+    .contact-meta-val a:hover { text-decoration-color: var(--accent-lt); }
+
+    /* FORM */
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-label {
+      font-family: var(--font-mono); font-size: 0.57rem;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-lt);
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 0.85rem 1rem;
+      background: rgba(244,241,235,0.05); border: 1px solid rgba(45,90,61,0.3);
+      color: var(--white); font-family: var(--font-body); font-size: 0.95rem;
+      outline: none; transition: border-color 0.2s; border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(244,241,235,0.3); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--accent-lt); background: rgba(244,241,235,0.07);
+    }
+    .form-select { cursor: pointer; }
+    .form-select option { background: var(--dark); color: var(--white); }
+    .form-textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
+    .form-submit {
+      width: 100%; padding: 1.1rem; background: var(--accent); color: var(--white);
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .form-submit:hover { background: var(--accent-lt); }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-success {
+      display: none; padding: 2rem; background: rgba(45,90,61,0.15);
+      border: 1px solid var(--accent); text-align: center;
+    }
+    .form-success h4 {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: var(--accent-lt); margin-bottom: 0.6rem; letter-spacing: 0.02em;
+    }
+    .form-success p { font-size: 0.92rem; color: rgba(244,241,235,0.65); line-height: 1.75; }
+
+    /* ===================================================
+       FOOTER
+    =================================================== */
+    #site-footer {
+      background: var(--dark); color: rgba(244,241,235,0.5);
+      padding: 3.5rem 0 2rem; border-top: 2px solid var(--accent);
+    }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 2.5rem; }
+    .footer-brand h3 {
+      font-family: var(--font-display); font-size: 1.8rem;
+      color: var(--white); margin-bottom: 0.7rem; line-height: 1;
+    }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.8; max-width: 300px; }
+    .footer-col h4 {
+      font-family: var(--font-mono); font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-lt);
+      margin-bottom: 1.1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .footer-col a { font-size: 0.9rem; color: rgba(244,241,235,0.45); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--accent-lt); }
+    .footer-bottom {
+      border-top: 1px solid rgba(244,241,235,0.1); padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-mono); font-size: 0.55rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(244,241,235,0.18); flex-wrap: wrap; gap: 0.5rem;
+    }
+
+    /* ===================================================
+       RESPONSIVE
+    =================================================== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; flex-direction: column; }
+      .nav-links.open {
+        display: flex; position: absolute;
+        top: 58px; left: 0; right: 0;
+        background: var(--dark); border-bottom: 2px solid var(--accent);
+        padding: 1rem 2rem; gap: 0.3rem;
+      }
+      .nav-toggle { display: flex; }
+      .hero-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-title { font-size: clamp(3.5rem, 12vw, 7rem); }
+      .data-strip-grid { grid-template-columns: 1fr 1fr; }
+      .data-cell:nth-child(2) { border-right: none; }
+      .data-cell:nth-child(3) { border-right: 1px solid rgba(45,90,61,0.25); }
+      .what-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .what-sticky { position: static; }
+      .sessions-grid { grid-template-columns: 1fr 1fr; }
+      .pipeline-grid { grid-template-columns: 1fr; }
+      .communities-grid { grid-template-columns: 1fr 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 1rem; }
+      .involved-grid { grid-template-columns: 1fr; }
+      .download-block { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 0 1.2rem; }
+      .section-pad { padding: 4rem 0; }
+      .sessions-grid { grid-template-columns: 1fr; }
+      .communities-grid { grid-template-columns: 1fr; }
+      .data-strip-grid { grid-template-columns: 1fr; }
+      .data-cell { border-right: none !important; border-bottom: 1px solid rgba(45,90,61,0.25); }
+      .data-cell:last-child { border-bottom: none; }
+      .accordion-panel { padding-left: 2rem; }
+      .form-group.two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- NAV -->
+  <nav id="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand" aria-label="From Civic Learning to Civic Power home">
+        <span class="nav-brand-top">Network Delaware</span>
+        <span class="nav-brand-main">Civic Power</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-menu" class="nav-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="framework.html">Framework</a></li>
+        <li><a href="communities.html">Communities</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="pilot.html" aria-current="page">Pilot Program</a></li>
+        <li><a href="#contact" class="nav-cta">Partner With Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- ====================================================
+         HERO
+    ===================================================== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <p class="hero-eyebrow">Network Delaware &middot; Pilot Program Prospectus &middot; 2025</p>
+        <div class="hero-layout">
+          <div>
+            <h1 class="hero-title" id="hero-heading">
+              THE<br>PILOT<br><span class="accent">PROGRAM</span>
+            </h1>
+          </div>
+          <div>
+            <p class="hero-sub">A structured six-session program bringing action civics, strategic nonviolence, and community-rooted power building to Delaware schools and community organizations. Built to be self-sustaining. Designed for the students most often left out.</p>
+            <div class="hero-meta" aria-label="Program key facts">
+              <span class="meta-tag">6 Sessions / 6-8 Weeks</span>
+              <span class="meta-tag">Middle + High School</span>
+              <span class="meta-tag">3-5 Pilot Sites Year 1</span>
+              <span class="meta-tag">All Three Delaware Counties</span>
+            </div>
+            <div class="hero-btns">
+              <a href="#contact" class="btn btn-accent">Partner With Us</a>
+              <a href="resources.html" class="btn btn-ghost">View Full Research Base</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-diagonal" aria-hidden="true"></div>
+    </section>
+
+    <!-- ====================================================
+         PROBLEM DATA STRIP
+    ===================================================== -->
+    <section class="data-strip" aria-label="Key statistics">
+      <div class="container">
+        <div class="data-strip-grid">
+          <div class="data-cell reveal">
+            <span class="data-num">&lt;25%</span>
+            <span class="data-desc">8th graders nationally proficient in civics</span>
+            <span class="data-source">Fordham Institute, 2021</span>
+          </div>
+          <div class="data-cell reveal reveal-delay-1">
+            <span class="data-num">0</span>
+            <span class="data-desc">Comparison states with strategic nonviolence in civic statute</span>
+            <span class="data-source">Network Delaware Comparative Analysis, 2025</span>
+          </div>
+          <div class="data-cell reveal reveal-delay-2">
+            <span class="data-num">$1,100</span>
+            <span class="data-desc">Per multilingual learner in Delaware, vs. $6-9K in neighboring states</span>
+            <span class="data-source">WHYY, 2025</span>
+          </div>
+          <div class="data-cell reveal reveal-delay-3">
+            <span class="data-num">2x+</span>
+            <span class="data-desc">More youth would engage civically if given structured, safe opportunities</span>
+            <span class="data-source">CIRCLE, 2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         WHAT IT IS
+    ===================================================== -->
+    <section class="what-wrap section-pad" aria-labelledby="what-heading">
+      <div class="container">
+        <div class="what-inner">
+          <div class="what-sticky reveal">
+            <p class="section-label">The Program</p>
+            <h2 class="what-sticky h2" style="font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);color:var(--ink);line-height:0.95;letter-spacing:0.02em;margin-bottom:2rem">NOT A<br>LESSON.<br>A SYSTEM.</h2>
+            <div class="blockquote">
+              <p>"The barrier to youth civic participation is not motivation. It is access, safety, and structured invitation."</p>
+              <cite>CIRCLE, 2025</cite>
+            </div>
+          </div>
+          <div class="what-text reveal reveal-delay-1">
+            <p>This program synthesizes three high-impact models that address complementary gaps no single model covers on its own. The <strong>Student Voices / Anoka Action Civics</strong> model provides the institutional access structure: the mechanism for students to engage real civic authorities with real proposals. <strong>Justice University</strong>, developed by the Gathering for Justice, provides the organizing architecture: collective strategy, campaign design, and the train-the-trainer pipeline that creates civic multipliers rather than just participants. <strong>Kingian Nonviolence</strong> training provides the conflict infrastructure: tools for navigating institutional resistance, managing power dynamics, and sustaining disciplined collective action over time.</p>
+            <p>Each session in the six-session arc maps to a stage of the Civic Action Cycle: Learn, Analyze, Organize, Act, Teach Back, and Reflect. The cycle does not end at action. It ends at reflection, which feeds the next loop. That structure is what separates programs that build durable civic capacity from programs that produce a single presentation and stop.</p>
+            <p>The leadership pipeline is the feature that makes this self-sustaining. Every participant who completes the arc is a potential co-facilitator in the next cohort. Every co-facilitator who completes the practicum becomes a lead facilitator capable of running the program independently. Over time, the program's cost of delivery decreases as internal capacity grows. That is not just an efficiency argument. It is the mechanism by which civic power actually multiplies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ====================================================
+         SIX-SESSION ARC
+    ===================================================== -->
+    <section class="sessions-wrap section-pad" aria-labelledby="sessions-heading">
+      <div class="container">
+        <p class="section-label reveal">The Structure</p>
+        <h2 class="section-title reveal" id="sessions-heading">SIX-SESSION ARC</h2>
+        <p class="reveal" style="color:var(--muted);max-width:600px;line-height:1.85;margin-bottom:0">Each session builds on the previous one. The arc runs 6 to 8 weeks. A 90-minute standalone session is also available as an entry point for organizations exploring participation before committing to the full program.</p>
+        <div class="sessions-grid" role="list">
+
+          <div class="session-card reveal" data-num="01" role="listitem">
+            <span class="session-num">Session 01</span>
+            <span class="session-phase">LEARN</span>
+            <h3 class="session-title">Grounding Civic Knowledge in Reality</h3>
+            <p class="session-desc">Participants identify a real issue in their school or community and begin connecting it to actual policy documents and public records. Community listening assignments start between sessions. Power mapping is introduced as a tool, not a concept. The goal is to close the distance between civics-as-abstraction and civics-as-something-that-shapes-your-life.</p>
+            <span class="session-front">Front 1 + Front 2</span>
+          </div>
+
+          <div class="session-card reveal reveal-delay-1" data-num="02" role="listitem">
+            <span class="session-num">Session 02</span>
+            <span class="session-phase">ANALYZE</span>
+            <h3 class="session-title">Power Mapping with a Community Partner</h3>
+            <p class="session-desc">A real community partner joins the session to give direct feedback on participants' analysis. Students build a full stakeholder map: who holds decision-making authority, who is most affected, who are potential allies, and where leverage exists. The community partner provides firsthand context that no textbook can replicate.</p>
+            <span class="session-front">Front 2 + Front 3</span>
+          </div>
+
+          <div class="session-card reveal reveal-delay-2" data-num="03" role="listitem">
+            <span class="session-num">Session 03</span>
+            <span class="session-phase">ORGANIZE</span>
+            <h3 class="session-title">Nonviolence as Organizing Strategy</h3>
+            <p class="session-desc">The Six Steps of Kingian Nonviolence are introduced as an organizing framework, not a history lesson. Participants apply them to their specific issue. The session includes structured role-play where one group plays an institutional representative who resists the participants' ask. Practicing de-escalation and strategic response before the real action is what separates programs that prepare students from programs that expose them.</p>
+            <span class="session-front">Front 4</span>
+          </div>
+
+          <div class="session-card reveal" data-num="04" role="listitem">
+            <span class="session-num">Session 04</span>
+            <span class="session-phase">ORGANIZE + ACT</span>
+            <h3 class="session-title">Strategy and Campaign Design</h3>
+            <p class="session-desc">Participants develop a full campaign strategy: issue statement, theory of change, specific ask, target institution, stakeholder map, action timeline, and contingency plan. The concept of civic leverage is introduced: the difference between an ask a decision-maker can safely ignore and one tied to institutional accountability, public visibility, or political cost. Groups present strategies to peers for structured feedback.</p>
+            <span class="session-front">Front 1 + Front 3</span>
+          </div>
+
+          <div class="session-card reveal reveal-delay-1" data-num="05" role="listitem">
+            <span class="session-num">Session 05</span>
+            <span class="session-phase">ACT</span>
+            <h3 class="session-title">Real Civic Action</h3>
+            <p class="session-desc">Participants carry out the action they designed. Depending on available institutional relationships, this means presenting to a school board committee, delivering a community survey to a council member, organizing a community listening session, or submitting a formal policy recommendation. Facilitators are present but do not intervene. The institution responds. That response, whatever it is, becomes material for the next session.</p>
+            <span class="session-front">Front 3</span>
+          </div>
+
+          <div class="session-card reveal reveal-delay-2" data-num="06" role="listitem">
+            <span class="session-num">Session 06</span>
+            <span class="session-phase">TEACH BACK + REFLECT</span>
+            <h3 class="session-title">Multiplying Civic Capacity</h3>
+            <p class="session-desc">The session opens with a 30-minute teach-back workshop designed and facilitated by participants for a new audience: younger students, family members, or community members who were not part of the original cohort. The second half is an honest full-arc debrief: what the action accomplished, what it did not, what would change next time. Participants who want to step into the co-facilitator role in the next cohort make that commitment here.</p>
+            <span class="session-front">Front 2 + Front 4</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         LEADERSHIP PIPELINE
+    ===================================================== -->
+    <section class="pipeline-wrap" aria-labelledby="pipeline-heading">
+      <div class="container">
+        <p class="section-label reveal" style="color:var(--accent-lt)">The Infrastructure</p>
+        <h2 class="section-title light reveal" id="pipeline-heading">THREE-TIER<br>LEADERSHIP<br>PIPELINE</h2>
+        <p class="reveal" style="color:rgba(244,241,235,0.55);max-width:600px;line-height:1.85;margin-top:0.5rem">The pipeline is what separates a program from an infrastructure. Each tier reduces the program's dependence on external staffing and expands its geographic reach. A program that can only run when an outside facilitator is available is a program with a ceiling. This one is designed without one.</p>
+        <div class="pipeline-grid">
+          <div class="pipeline-card reveal">
+            <span class="pipeline-num">01</span>
+            <span class="pipeline-tier">// Tier One</span>
+            <h3>PARTICIPANT</h3>
+            <p>Complete the six-session arc. Leave with a power map, a civic action on record, a teach-back delivered, and a structured debrief. Every participant who goes through this cycle is a civic multiplier: someone with firsthand experience organizing collective action and the vocabulary to explain it to others.</p>
+            <div class="pipeline-note">Entry point for all participants</div>
+          </div>
+          <div class="pipeline-card reveal reveal-delay-1">
+            <span class="pipeline-num">02</span>
+            <span class="pipeline-tier">// Tier Two</span>
+            <h3>OBSERVER-ANALYST</h3>
+            <p>Return to a subsequent cohort as a co-facilitator. Take structured notes on facilitation decisions, group dynamics, and strategic choices. Debrief with the lead facilitator after each session. Run specific segments under supervision. As the number of Tier Two participants grows, the program's reliance on external facilitation decreases.</p>
+            <div class="pipeline-note">Reduces per-cohort external cost</div>
+          </div>
+          <div class="pipeline-card reveal reveal-delay-2">
+            <span class="pipeline-num">03</span>
+            <span class="pipeline-tier">// Tier Three</span>
+            <h3>LEAD FACILITATOR</h3>
+            <p>Complete a 20-to-30-hour practicum aligned with the Kingian Nonviolence training-of-trainers framework. Qualify to run new cohorts independently. Each Tier Three facilitator is a statewide scalability node: someone who can start a cohort in their school or community organization without waiting for Network Delaware to send staff.</p>
+            <div class="pipeline-note">30-hour practicum + Kingian certification track</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         EVIDENCE BASE (ACCORDION)
+    ===================================================== -->
+    <section class="evidence-wrap section-pad" aria-labelledby="evidence-heading">
+      <div class="container">
+        <p class="section-label reveal">The Research</p>
+        <h2 class="section-title reveal" id="evidence-heading">EVIDENCE<br>BASE</h2>
+        <p class="reveal" style="color:var(--muted);max-width:640px;line-height:1.85">Every design decision in this program traces back to a specific empirical finding. The five findings below are the most directly relevant to the program's structure and priority communities. The full research base is available in the <a href="resources.html" style="color:var(--accent);text-decoration:underline">Resource Library</a>.</p>
+        <div class="accordion reveal" role="list" id="evidence-accordion">
+
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-1" id="acc-btn-1">
+              <div class="accordion-left">
+                <span class="acc-num">01</span>
+                <span class="acc-title">Action civics with direct decision-maker contact produces the strongest civic efficacy gains, with the largest effects for Black and Latino youth.</span>
+              </div>
+              <span class="acc-arrow" aria-hidden="true">&#9660;</span>
+            </button>
+            <div class="accordion-panel" id="acc-panel-1" role="region" aria-labelledby="acc-btn-1">
+              <p>Research using structural equation modeling with 903 urban middle and high school students found that the relationship between exposure to democratic practices and civic self-efficacy was significantly stronger for Black and Latino youth than for white students. The mechanism is direct decision-maker contact: safety-themed projects with decision-maker engagement produced the most robust gains in future civic commitment.</p>
+              <p>The I-ACTED cluster randomized controlled trial (BMC Public Health, 2025) confirms that action civics produces positive wellbeing outcomes through civic connection and empowerment. These effects are not uniformly distributed. Under-resourced schools remain systematically underserved. Session 05 of this program is designed specifically around that finding: not simulated decision-making, but actual institutional contact with a required response.</p>
+              <span class="acc-citation">Cohen et al., PMC, 2017 / I-ACTED RCT, BMC Public Health, 2025</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-2" id="acc-btn-2">
+              <div class="accordion-left">
+                <span class="acc-num">02</span>
+                <span class="acc-title">Kingian Nonviolence training improves social, cultural, and emotional outcomes in school settings.</span>
+              </div>
+              <span class="acc-arrow" aria-hidden="true">&#9660;</span>
+            </button>
+            <div class="accordion-panel" id="acc-panel-2" role="region" aria-labelledby="acc-btn-2">
+              <p>A mixed-methods quasi-experimental study of the Kingian Nonviolence Conflict Reconciliation Training Program with high school students found that the program was associated with improved social and cultural learning outcomes and reduced rates of violence among participants. The study introduced the concept of cultural and emotional learning as a distinct outcome domain, using a pretest/posttest design with four one-month follow-up focus groups.</p>
+              <p>For students from the priority communities this program serves, those findings are not incidental. Strategic nonviolence education is not remedial programming. It is a proactive investment in the forms of civic engagement these students already believe in, built around the documented methodology of movements they have direct historical and personal stakes in.</p>
+              <span class="acc-citation">Cyril, University of Rhode Island, 2020</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-3" id="acc-btn-3">
+              <div class="accordion-left">
+                <span class="acc-num">03</span>
+                <span class="acc-title">Youth with political homes participate at dramatically higher rates across every form of civic engagement measured.</span>
+              </div>
+              <span class="acc-arrow" aria-hidden="true">&#9660;</span>
+            </button>
+            <div class="accordion-panel" id="acc-panel-3" role="region" aria-labelledby="acc-btn-3">
+              <p>CIRCLE defines a political home as an organization or space that provides a sense of belonging, opportunities to develop voice, opportunities to learn, opportunities to take action, and relationships with adults who support civic participation. Youth with political homes are dramatically more engaged across all 17 civic engagement measures CIRCLE tracks. Among 2024 youth voters, 27 percent reported being part of a movement or organized group, compared to 13 percent of non-voters.</p>
+              <p>This is the finding that motivates the community partnership model in Session 02 and the teach-back structure in Session 06. The program is not designed to be the political home. It is designed to build the conditions for political homes to form around the participants and their issues after the program ends.</p>
+              <span class="acc-citation">CIRCLE, Growing Voters Framework, 2023 / CIRCLE Post-Election Data, 2026</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-4" id="acc-btn-4">
+              <div class="accordion-left">
+                <span class="acc-num">04</span>
+                <span class="acc-title">Statutory mandates alone are insufficient. Equity requires funded infrastructure and community accountability in the same legislative vehicle.</span>
+              </div>
+              <span class="acc-arrow" aria-hidden="true">&#9660;</span>
+            </button>
+            <div class="accordion-panel" id="acc-panel-4" role="region" aria-labelledby="acc-btn-4">
+              <p>CIRCLE's multi-year evaluation of Illinois HB 4025, the most comprehensive statutory civics mandate in the comparison field, found that implementation quality was significantly higher in schools with peer mentor support and significantly lower in under-resourced schools serving predominantly Black and Brown students, even with the mandate in place. The statute created a floor, not an equitable starting point.</p>
+              <p>This finding directly informs the pilot program's design priorities: geographic distribution across all three Delaware counties, deliberate site selection that includes at least one school or organization serving a high proportion of students from the six priority communities, and equity disaggregation requirements built into the evaluation framework from day one rather than added after the fact.</p>
+              <span class="acc-citation">CIRCLE, HB 4025 Evaluation / Illinois Civics Hub Research Practice Partnership</span>
+            </div>
+          </div>
+
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-trigger" aria-expanded="false" aria-controls="acc-panel-5" id="acc-btn-5">
+              <div class="accordion-left">
+                <span class="acc-num">05</span>
+                <span class="acc-title">No comparison state has codified strategic nonviolence in statute. Delaware has a genuine and specific opportunity to lead.</span>
+              </div>
+              <span class="acc-arrow" aria-hidden="true">&#9660;</span>
+            </button>
+            <div class="accordion-panel" id="acc-panel-5" role="region" aria-labelledby="acc-btn-5">
+              <p>The comparative analysis conducted for this initiative reviewed six jurisdictions: Massachusetts, Illinois, Rhode Island, California, New York, and Puerto Rico. None has codified strategic nonviolence and leadership development in statute or integrated it into a formal civic education framework. The closest institutional reference point is Nonviolent Schools RI, which implements the Kingian curriculum as a school climate intervention. It exists alongside civic education policy, not within it.</p>
+              <p>Governor Matt Meyer's March 2026 Civic Learning Week proclamation and the Delaware Civics Education Coalition's active organizing capacity represent a policy window. This pilot is designed to generate the documented implementation evidence that makes the legislative case. The program's evaluation framework is built to produce exactly that kind of evidence, not just attendance data.</p>
+              <span class="acc-citation">Network Delaware Comparative State Analysis, 2025</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         PRIORITY COMMUNITIES
+    ===================================================== -->
+    <section class="communities-wrap section-pad" aria-labelledby="communities-heading">
+      <div class="container">
+        <p class="section-label reveal">Who This Serves</p>
+        <h2 class="section-title reveal" id="communities-heading">PRIORITY<br>COMMUNITIES</h2>
+        <div class="communities-intro reveal">
+          <p>These six communities were identified based on documented, measurable gaps in civic access, not assumptions about capability or interest. Every design decision in the program, from the no-disclosure participation pathways to the multilingual materials requirement, addresses a specific structural barrier that generic civic education programs have consistently failed to design around. Inclusion is infrastructure here, not accommodation.</p>
+        </div>
+        <div class="communities-grid">
+
+          <div class="community-card reveal">
+            <span class="comm-icon" aria-hidden="true">🛡</span>
+            <h3 class="comm-name">Immigrant + Mixed-Status Families</h3>
+            <p class="comm-body">Being visible in a public civic context carries real risk for mixed-status families that has nothing to do with motivation or knowledge. Every activity in the program offers a pathway that does not require public identification. Anonymous proposal submission, voting options, and written alternatives are built into the design, not offered as exceptions.</p>
+            <span class="comm-partner">Partners: La Esperanza, Latin American Community Center (LACC)</span>
+          </div>
+
+          <div class="community-card reveal reveal-delay-1">
+            <span class="comm-icon" aria-hidden="true">✊</span>
+            <h3 class="comm-name">Black and Brown Youth</h3>
+            <p class="comm-body">Civic education that teaches democratic ideals without addressing the structural conditions participants already navigate does not serve these students. Issue selection is student-controlled. The Kingian Nonviolence curriculum grounds civic action in a tradition of Black-led organizing, not as a historical add-on but as the analytical and strategic foundation of the program. Structural inequity is named, not avoided.</p>
+            <span class="comm-partner">Design principle: Student-controlled issue selection, Kingian grounding</span>
+          </div>
+
+          <div class="community-card reveal reveal-delay-2">
+            <span class="comm-icon" aria-hidden="true">🌎</span>
+            <h3 class="comm-name">Hispanic + Latino Communities</h3>
+            <p class="comm-body">Delaware's Hispanic and Latino population is not a single community. It includes Afro-Latino, Indigenous, multi-generational, recent immigrant, and U.S.-born residents across New Castle and Sussex counties. Treating them as a unified bloc is a design failure. Materials are available in Spanish. Facilitation can be bilingual. Community organizations with existing trust relationships lead outreach, not the program.</p>
+            <span class="comm-partner">Design principle: Internal diversity respected, Spanish materials standard</span>
+          </div>
+
+          <div class="community-card reveal">
+            <span class="comm-icon" aria-hidden="true">♿</span>
+            <h3 class="comm-name">Disabled Students + Families</h3>
+            <p class="comm-body">Universal Design for Learning is applied as a design standard from the start, not retrofitted. Every session offers multiple participation modes. Disability justice is a civic history case study in the curriculum, not a sensitivity note. Disabled students are co-designers of activities within their cohort, not recipients of a program designed around able-bodied assumptions.</p>
+            <span class="comm-partner">Design principle: UDL as infrastructure, disability justice as civic content</span>
+          </div>
+
+          <div class="community-card reveal reveal-delay-1">
+            <span class="comm-icon" aria-hidden="true">🏳️‍🌈</span>
+            <h3 class="comm-name">LGBTQIA+ Youth</h3>
+            <p class="comm-body">Safety has to be a design prerequisite, not a program consideration. Group norms in Session 01 explicitly name respect for identity. No self-identification is required for any participation pathway. The community partner for Session 02 includes at least one affirming organization. Research from the Trevor Project documents that civic engagement correlates with better mental health outcomes for LGBTQIA+ youth when participation is structurally safe, not just nominally welcoming.</p>
+            <span class="comm-partner">Partners: Equality Delaware, United Way of Delaware PRIDE Council, I Am Me Inc.</span>
+          </div>
+
+          <div class="community-card reveal reveal-delay-2">
+            <span class="comm-icon" aria-hidden="true">🗣</span>
+            <h3 class="comm-name">Multilingual Families</h3>
+            <p class="comm-body">Language access is civic infrastructure. Not an accommodation offered if requested, but a baseline design requirement applied to every session from the beginning. All written materials are available in English and Spanish at minimum. Professional interpretation is provided at all family-facing events. New Castle County's approximately 19,000 multilingual learners receive $1,100 per learner from the state. That gap is the context for this requirement.</p>
+            <span class="comm-partner">Design principle: English + Spanish minimum, interpretation standard</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         ROLLOUT TIMELINE
+    ===================================================== -->
+    <section class="timeline-wrap" aria-labelledby="timeline-heading">
+      <div class="container">
+        <p class="section-label reveal" style="color:var(--accent-lt)">The Plan</p>
+        <h2 class="section-title light reveal" id="timeline-heading">THREE-PHASE<br>ROLLOUT</h2>
+        <div class="timeline">
+
+          <div class="timeline-item reveal">
+            <div class="timeline-left">
+              <span class="tl-phase">01</span>
+              <span class="tl-label">Pilot</span>
+              <span class="tl-period">Year 1</span>
+            </div>
+            <div class="timeline-right">
+              <h3>DOCUMENTATION BEFORE SCALE</h3>
+              <p>Pilot 3 to 5 sites across all three Delaware counties. At least one site must serve a majority of students from the six priority communities. At least one must be rural. The goal of Year 1 is not to reach as many students as possible. It is to document what works, what requires adaptation, and what the Delaware context specifically requires. That documentation becomes the curriculum refinement and the evidence base for Phase 2 expansion.</p>
+              <div class="tl-goals">
+                <span class="tl-goal">3-5 Sites</span>
+                <span class="tl-goal">One Per County</span>
+                <span class="tl-goal">Evaluation Built In</span>
+                <span class="tl-goal">Equity Disaggregation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-left">
+              <span class="tl-phase">02</span>
+              <span class="tl-label">Expansion</span>
+              <span class="tl-period">Years 2-3</span>
+            </div>
+            <div class="timeline-right">
+              <h3>TRAINED FACILITATORS, EXPANDED SITES</h3>
+              <p>Use pilot documentation to refine the curriculum. Train a cohort of 15 to 20 lead facilitators from both school and community settings. Expand to 10 to 15 implementation sites. Establish a statewide facilitator learning community: a regular gathering for lead facilitators to share practice, identify emerging leaders for Tier Three, and troubleshoot implementation challenges across different institutional contexts.</p>
+              <div class="tl-goals">
+                <span class="tl-goal">15-20 Lead Facilitators</span>
+                <span class="tl-goal">10-15 Sites</span>
+                <span class="tl-goal">Facilitator Learning Community</span>
+                <span class="tl-goal">Curriculum Refinement</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="timeline-left">
+              <span class="tl-phase">03</span>
+              <span class="tl-label">Infrastructure</span>
+              <span class="tl-period">Years 3-5</span>
+            </div>
+            <div class="timeline-right">
+              <h3>SELF-SUSTAINING INFRASTRUCTURE</h3>
+              <p>Full pipeline activation: Tier Three facilitators leading new cohorts, the learning community operating as peer support and quality assurance, LEA partnerships integrating the six-session arc into district capstone requirements. At this phase the program should be self-sustaining: new lead facilitators developing faster than existing ones cycle out, institutional partnerships maintained through documented protocols rather than individual relationships. That is what infrastructure looks like.</p>
+              <div class="tl-goals">
+                <span class="tl-goal">Pipeline Self-Sustaining</span>
+                <span class="tl-goal">LEA Capstone Integration</span>
+                <span class="tl-goal">Policy Evidence Generated</span>
+                <span class="tl-goal">Statewide Reach</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         GET INVOLVED
+    ===================================================== -->
+    <section class="involved-wrap" aria-labelledby="involved-heading" id="get-involved">
+      <div class="container">
+        <p class="section-label reveal">Get Involved</p>
+        <h2 class="section-title reveal" id="involved-heading">THREE WAYS<br>TO PARTNER</h2>
+        <div class="involved-grid">
+          <div class="involved-card reveal">
+            <span class="inv-tag">// For Schools + LEAs</span>
+            <h3>PILOT PARTNER SCHOOL</h3>
+            <p>Commit to hosting one cohort in Year 1. Network Delaware provides the facilitator, all curriculum materials in English and Spanish, and institutional partnership coordination. The time commitment is six sessions over 6 to 8 weeks. We handle the logistics. You provide the students, a designated staff liaison, and a willingness to connect the cohort's action to a real school-level or district-level decision-making process.</p>
+            <span class="inv-cta">Contact us to discuss your site</span>
+          </div>
+          <div class="involved-card reveal reveal-delay-1">
+            <span class="inv-tag">// For Community Organizations</span>
+            <h3>COMMUNITY PARTNER</h3>
+            <p>Serve as the Session 02 community partner, connecting students to the real institutional landscape around their issue. Provide trusted intermediary access to families who may not engage with school-led programs. Receive trained civic educators from the program's leadership pipeline who can run activities within your organization. Community partners are co-designers here, not guests.</p>
+            <span class="inv-cta">Contact us to discuss your organization's role</span>
+          </div>
+          <div class="involved-card reveal reveal-delay-2">
+            <span class="inv-tag">// For Funders + Institutions</span>
+            <h3>INVEST IN THE INFRASTRUCTURE</h3>
+            <p>Year 1 funding covers facilitator training, curriculum development, materials translation, site coordination, and the evaluation framework that generates the evidence base for Phase 2. Year 2 and 3 funding builds the facilitator cohort and the learning community. By Year 5 this program does not need external facilitation to run. That is what you are investing in: not a program that needs perpetual support, but one that builds the capacity to sustain itself.</p>
+            <span class="inv-cta">Contact us to discuss funding partnership</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         DOWNLOADABLE ONE-PAGER
+    ===================================================== -->
+    <section class="download-wrap" aria-labelledby="download-heading">
+      <div class="container">
+        <div class="download-block reveal">
+          <div>
+            <span class="download-label">// Downloadable Resource</span>
+            <h3 id="download-heading">Download the Initiative Overview</h3>
+            <p>A one-page summary of the From Civic Learning to Civic Power initiative, the pilot program structure, and how to get involved. Ready to share with school leadership, board members, or funding partners. Designed for a five-minute read that answers the three questions decision-makers actually ask: what is this, why does it matter, and what would partnership look like.</p>
+            <a href="docs/initiative-overview.pdf" class="btn btn-accent" style="margin-top:1.8rem" target="_blank" rel="noopener">Download the One-Pager (PDF)</a>
+          </div>
+          <div class="download-side" aria-hidden="true">
+            <span class="download-icon">📄</span>
+            <div style="font-family:var(--font-mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)">PDF &middot; 1 Page<br>Initiative Overview</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         CONTACT FORM
+    ===================================================== -->
+    <section class="contact-wrap" aria-labelledby="contact-heading" id="contact">
+      <div class="container">
+        <div class="contact-inner">
+          <div class="contact-sidebar reveal">
+            <p class="section-label" style="color:var(--accent-lt)">Get In Touch</p>
+            <h2 class="contact-sidebar h3" style="font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);color:var(--white);line-height:0.95;letter-spacing:0.02em;margin-bottom:1.5rem" id="contact-heading">WE START<br>WITH<br>LISTENING.</h2>
+            <p class="framing">We start with listening, not pitching. Tell us where you are, what you are trying to do, and what your constraints look like. We will respond within two business days.</p>
+            <div class="contact-meta">
+              <div class="contact-meta-row">
+                <span class="contact-meta-label">Initiative</span>
+                <span class="contact-meta-val">From Civic Learning to Civic Power</span>
+              </div>
+              <div class="contact-meta-row">
+                <span class="contact-meta-label">Organization</span>
+                <span class="contact-meta-val">Network Delaware</span>
+              </div>
+              <div class="contact-meta-row">
+                <span class="contact-meta-label">Research Lead</span>
+                <span class="contact-meta-val">Nathan Sanchez, Civic Education Fellow</span>
+              </div>
+              <div class="contact-meta-row">
+                <span class="contact-meta-label">Resources</span>
+                <span class="contact-meta-val"><a href="resources.html">Full Research Library</a></span>
+              </div>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <form class="contact-form" id="contact-form" novalidate>
+              <div class="form-group two-col">
+                <div>
+                  <label class="form-label" for="f-name">Name</label>
+                  <input class="form-input" type="text" id="f-name" name="name" placeholder="Your name" required autocomplete="name">
+                </div>
+                <div>
+                  <label class="form-label" for="f-org">Organization</label>
+                  <input class="form-input" type="text" id="f-org" name="org" placeholder="School, org, or institution" autocomplete="organization">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-email">Email</label>
+                <input class="form-input" type="email" id="f-email" name="email" placeholder="your@email.com" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-role">Your Role</label>
+                <select class="form-select" id="f-role" name="role" required>
+                  <option value="" disabled selected>Select your role</option>
+                  <option value="school-lea">School / LEA Administrator</option>
+                  <option value="community-org">Community Organization Leader</option>
+                  <option value="funder">Funder or Institutional Partner</option>
+                  <option value="educator">Educator or Facilitator</option>
+                  <option value="researcher">Researcher or Policy Analyst</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-message">Message</label>
+                <textarea class="form-textarea" id="f-message" name="message" placeholder="Tell us about your organization, what you are trying to do, and what you want to know about the pilot program." required></textarea>
+              </div>
+              <button type="submit" class="form-submit" id="form-submit">Send Message</button>
+            </form>
+            <div class="form-success" id="form-success" role="alert" aria-live="polite">
+              <h4>Message Received</h4>
+              <p>Thank you for reaching out. We will respond within two business days. In the meantime, the full research base is available at the <a href="resources.html" style="color:var(--accent-lt);text-decoration:underline">Resource Library</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>FROM CIVIC<br>LEARNING TO<br>CIVIC POWER</h3>
+          <p>A statewide civic education initiative building the infrastructure that makes equitable civic engagement the default condition in Delaware, not the exception.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="learn.html">Start Learning</a></li>
+            <li><a href="framework.html">The Framework</a></li>
+            <li><a href="communities.html">Priority Communities</a></li>
+            <li><a href="pilot.html">Pilot Program</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="resources.html">Research Library</a></li>
+            <li><a href="resources.html#toolkits">Toolkits</a></li>
+            <li><a href="resources.html#workshops">Workshop Guides</a></li>
+            <li><a href="about.html">About the Fellowship</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Network Delaware &middot; From Civic Learning to Civic Power</span>
+        <span>Research Fellowship &middot; Nathan Sanchez</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── NAV TOGGLE ─────────────────────────────────────── */
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      menu.classList.toggle('open', !open);
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('#site-nav')) {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      }
+    });
+
+    /* ── SCROLL REVEAL ──────────────────────────────────── */
+    const revealEls = document.querySelectorAll('.reveal');
+    if (revealEls.length) {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
+      revealEls.forEach(el => io.observe(el));
+    }
+
+    /* ── ACCORDION ──────────────────────────────────────── */
+    document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        const panelId = trigger.getAttribute('aria-controls');
+        const panel = document.getElementById(panelId);
+
+        // Close all others
+        document.querySelectorAll('.accordion-trigger').forEach(t => {
+          if (t !== trigger) {
+            t.setAttribute('aria-expanded', 'false');
+            const p = document.getElementById(t.getAttribute('aria-controls'));
+            if (p) p.classList.remove('open');
+          }
+        });
+
+        trigger.setAttribute('aria-expanded', String(!expanded));
+        if (panel) panel.classList.toggle('open', !expanded);
+      });
+    });
+
+    /* ── CONTACT FORM ───────────────────────────────────── */
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const role = document.getElementById('f-role').value;
+      const message = document.getElementById('f-message').value.trim();
+
+      if (!name || !email || !role || !message) {
+        // Basic validation
+        const firstEmpty = [
+          { id: 'f-name', val: name },
+          { id: 'f-email', val: email },
+          { id: 'f-role', val: role },
+          { id: 'f-message', val: message }
+        ].find(f => !f.val);
+        if (firstEmpty) document.getElementById(firstEmpty.id).focus();
+        return;
+      }
+
+      // Simulate submission
+      const btn = document.getElementById('form-submit');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      }, 800);
+    });
+
+    /* ── SMOOTH SCROLL ──────────────────────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>
