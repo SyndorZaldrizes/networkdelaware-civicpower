@@ -1,12 +1,11 @@
 /* ============================================================
    FROM CIVIC LEARNING TO CIVIC POWER — Network Delaware
-   Revamped JavaScript — No reading level system
+   main.js — Revised 2025
    ============================================================ */
 
 (function () {
   'use strict';
 
-  /* ── NAV HTML ───────────────────────────────────────────── */
   const NAV_HTML = `
     <a href="#main" class="skip-link">Skip to main content</a>
     <nav id="site-nav" role="navigation" aria-label="Main navigation">
@@ -24,21 +23,22 @@
           <li><a href="framework.html">Framework</a></li>
           <li><a href="communities.html">Communities</a></li>
           <li><a href="resources.html">Resources</a></li>
+          <li><a href="pilot.html">Pilot Program</a></li>
+          <li><a href="presentation.html">Presentation</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="index.html#act" class="nav-cta">Take Action</a></li>
+          <li><a href="pilot.html#contact" class="nav-cta">Partner With Us</a></li>
         </ul>
       </div>
     </nav>
   `;
 
-  /* ── FOOTER HTML ─────────────────────────────────────────── */
   const FOOTER_HTML = `
     <footer id="site-footer" role="contentinfo">
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
             <h3>FROM CIVIC<br>LEARNING TO<br>CIVIC POWER</h3>
-            <p>A statewide civic education initiative building the infrastructure that makes equitable civic engagement the default condition in Delaware — not the exception.</p>
+            <p>A statewide civic education initiative building the infrastructure that makes equitable civic engagement the default condition in Delaware, not the exception.</p>
           </div>
           <div class="footer-col">
             <h4>Explore</h4>
@@ -47,6 +47,8 @@
               <li><a href="learn.html">Start Learning</a></li>
               <li><a href="framework.html">The Framework</a></li>
               <li><a href="communities.html">Priority Communities</a></li>
+              <li><a href="pilot.html">Pilot Program</a></li>
+              <li><a href="presentation.html">The Presentation</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -54,14 +56,15 @@
             <ul>
               <li><a href="resources.html">Research Library</a></li>
               <li><a href="resources.html#toolkits">Toolkits</a></li>
-              <li><a href="resources.html#workshops">Workshop Guides</a></li>
+              <li><a href="resources.html#workshops-section">Workshop Guides</a></li>
               <li><a href="about.html">About the Fellowship</a></li>
+              <li><a href="pilot.html#contact">Contact</a></li>
             </ul>
           </div>
         </div>
         <div class="footer-bottom">
-          <span>© 2025 Network Delaware · From Civic Learning to Civic Power</span>
-          <span>Research Fellowship · Nathan Sanchez</span>
+          <span>&copy; 2025 Network Delaware &middot; From Civic Learning to Civic Power</span>
+          <span>Research Fellowship &middot; Nathan Sanchez</span>
         </div>
       </div>
     </footer>
@@ -136,7 +139,6 @@
     });
   }
 
-  /* ── COUNTER ANIMATION ───────────────────────────────────── */
   function initCounters() {
     const counters = document.querySelectorAll('[data-count]');
     if (!counters.length) return;
@@ -164,7 +166,6 @@
     counters.forEach(el => io.observe(el));
   }
 
-  /* ── TABS ─────────────────────────────────────────────────── */
   function initTabs() {
     document.querySelectorAll('[role="tablist"]').forEach(tablist => {
       const tabs = tablist.querySelectorAll('[role="tab"]');

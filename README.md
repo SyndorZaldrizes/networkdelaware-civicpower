@@ -1,8 +1,8 @@
-# From Civic Learning to Civic Power — Internal Site README
+# From Civic Learning to Civic Power - Internal Site README
 
-**Network Delaware · Civic Education Initiative · 2025**
+**Network Delaware · Civic Education Initiative · 2026**
 **Research Fellow:** Nathan Sanchez
-**Status:** Active development — Phase 2 complete, Phase 3 in progress
+**Status:** Active development 
 
 ---
 
@@ -25,16 +25,15 @@
 
 ## 1. Project Overview
 
-This site is the public-facing home for the **From Civic Learning to Civic Power** fellowship — a statewide K–12 civic education initiative by Network Delaware. It serves four audiences simultaneously:
+This site is the public-facing home for the Network Delaware **Civic Power** fellowship — a statewide K–12 civic education initiative by Network Delaware. It serves four audiences simultaneously:
 
 | Audience | Primary Goal | Key Pages |
-|---|---|---|
 | Youth / Students | Learn civic concepts, complete missions | `learn.html`, `index.html` |
 | Educators & School Admins | Access toolkits, workshop guides | `resources.html` |
 | Community Organizations | Access partnership tools, understand priority communities | `resources.html`, `communities.html` |
 | Funders & Policy Audience | Understand framework, access policy docs | `framework.html`, `resources.html` |
 
-The site is static HTML — no backend, no CMS, no build step. Everything runs directly in the browser. Deployment is via GitHub Pages.
+The site is static HTML - no backend, no CMS, no build step. Everything runs directly in the browser. Deployment is via GitHub Pages.
 
 ---
 
