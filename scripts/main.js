@@ -1,6 +1,6 @@
 /* ============================================================
    FROM CIVIC LEARNING TO CIVIC POWER — Network Delaware
-   main.js — Revised 2025
+   main.js — Revised 2026
    ============================================================ */
 
 (function () {
@@ -64,7 +64,7 @@
         </div>
         <div class="footer-bottom">
           <span>&copy; 2025 Network Delaware &middot; From Civic Learning to Civic Power</span>
-          <span>Research Fellowship &middot; Nathan Sanchez</span>
+          <span>Research Fellowship &middot; Nathan Sanchez &amp; Constanza Perez</span>
         </div>
       </div>
     </footer>
