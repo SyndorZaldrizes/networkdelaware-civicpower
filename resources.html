@@ -7,30 +7,7 @@
   <title>Resources | From Civic Learning to Civic Power</title>
   <link rel="stylesheet" href="styles/main.css">
   <style>
-    .page-hero {
-      background: var(--black); padding: 5rem 0 4rem;
-      position: relative; overflow: hidden;
-    }
-    .hero-grid {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(63,160,23,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(63,160,23,0.05) 1px, transparent 1px);
-      background-size: 50px 50px;
-    }
-    .hero-inner { position: relative; z-index: 2; }
-    .page-hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 9vw, 7.5rem);
-      color: var(--white); line-height: 0.9;
-      letter-spacing: 0.02em; margin-bottom: 1.5rem;
-    }
-    .page-hero h1 em { color: var(--gold); font-style: normal; }
-    .page-hero p {
-      font-size: 1.05rem; color: rgba(245,240,232,0.6);
-      max-width: 560px; line-height: 1.85;
-      border-left: 3px solid var(--gold); padding-left: 1.5rem;
-    }
+    
 
     /* FILTER BAR */
     .filter-wrap { background: var(--paper-dk); padding: 2rem 0; border-bottom: 2px solid var(--border); }
@@ -136,7 +113,7 @@ rgba(31,107,74,0.08)    .tag-toolkit { color: var(--gold); border-color: var(--g
     .citation-cell ul { list-style: none; padding: 0; }
     .citation-cell li {
       font-size: 0.88rem; color: rgba(245,240,232,0.5); line-height: 1.7;
-      padding: 0.4rem 0; border-bottom: 1px solid rgba(63,160,23,0.1);
+      padding: 0.4rem 0; border-bottom: 1px solid rgba(63,129,90,0.1);
     }
     .citation-cell li:last-child { border-bottom: none; }
     .citation-cell li::before { content: '// '; color: var(--gold); opacity: 0.6; }
@@ -175,6 +152,34 @@ rgba(31,107,74,0.08)    .tag-toolkit { color: var(--gold); border-color: var(--g
     </section>
 
     <!-- FILTER BAR -->
+
+    <!-- ── INITIATIVE PRESENTATION ────────────────────────── -->
+    <section style="background:var(--black);padding:4rem 0;" aria-labelledby="pres-heading">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:4rem;align-items:center;">
+          <div>
+            <p class="section-label" style="color:var(--gold)">View the Full Initiative Presentation</p>
+            <h2 class="section-title reveal" id="pres-heading" style="color:var(--white);font-size:clamp(2rem,5vw,3.5rem)">FROM CIVIC<br>LEARNING TO<br>CIVIC POWER</h2>
+            <p class="reveal" style="color:rgba(244,245,244,0.62);line-height:1.85;margin-bottom:2rem;max-width:500px">The complete slide presentation for this initiative: the case for Delaware, the four strategic fronts, the Civic Action Cycle, the pilot program structure, and the comparative state analysis. Designed for school leadership, policy audiences, and funding partners.</p>
+            <div style="display:flex;gap:1rem;flex-wrap:wrap;" class="reveal">
+              <a href="presentation.html" class="btn btn-gold" target="_blank" rel="noopener">View Presentation &rarr;</a>
+              <a href="docs/initiative-overview.pdf" class="btn btn-ghost" target="_blank" rel="noopener">One-Pager (PDF)</a>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-1" style="border:2px solid rgba(63,129,90,0.4);padding:2.5rem;">
+            <p style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem">// What It Covers</p>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.9rem;">
+              <li style="font-size:0.9rem;color:rgba(244,245,244,0.65);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span>The Delaware civic education gap</li>
+              <li style="font-size:0.9rem;color:rgba(244,245,244,0.65);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span>Four Strategic Fronts + Eight Guiding Principles</li>
+              <li style="font-size:0.9rem;color:rgba(244,245,244,0.65);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span>Six-stage Civic Action Cycle</li>
+              <li style="font-size:0.9rem;color:rgba(244,245,244,0.65);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span>Comparative analysis across six jurisdictions</li>
+              <li style="font-size:0.9rem;color:rgba(244,245,244,0.65);padding-left:1.2rem;position:relative"><span style="position:absolute;left:0;color:var(--gold)">&#9656;</span>Pilot program structure + partnership model</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div class="filter-wrap" id="toolkits">
       <div class="container">
         <div class="filter-inner">

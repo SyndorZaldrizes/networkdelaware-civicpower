@@ -277,6 +277,48 @@ body::after {
   to { transform: translateX(-50%); }
 }
 
+
+/* ── PAGE HERO (shared across inner pages) ───────────────── */
+.page-hero {
+  background: var(--black);
+  padding: 5rem 0 4rem;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(63,129,90,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(63,129,90,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.hero-inner { position: relative; z-index: 2; }
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 8rem);
+  color: var(--white); line-height: 0.9;
+  letter-spacing: 0.02em; margin-bottom: 1.5rem;
+}
+.page-hero h1 em { color: var(--gold); font-style: normal; }
+.page-hero p {
+  font-size: 1.05rem; color: rgba(245,240,232,0.6);
+  max-width: 540px; line-height: 1.85;
+  border-left: 3px solid var(--gold); padding-left: 1.5rem;
+}
+
+/* ── SECTION PADDING UTILITIES ───────────────────────────── */
+.section-pad    { padding: 5.5rem 0; }
+.section-pad-sm { padding: 3.5rem 0; }
+.divider        { height: 2px; background: var(--border); }
+.divider-gold   { height: 2px; background: var(--gold); }
+
+/* ── BUTTON ALIASES ──────────────────────────────────────── */
+.btn-gold   { background: var(--gold); color: var(--white); border-color: var(--gold); }
+.btn-gold:hover { background: var(--gold-lt); border-color: var(--gold-lt); }
+.btn-ghost  { background: transparent; color: var(--white); border-color: rgba(245,240,232,0.3); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-black  { background: var(--black); color: var(--gold); border-color: var(--black); }
+.btn-black:hover { background: var(--ink); }
+
 /* ── FOOTER ─────────────────────────────────────────────── */
 #site-footer {
   background: var(--black);

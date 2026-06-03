@@ -19,8 +19,8 @@
     .hero-grid-bg {
       position: absolute; inset: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(212,160,23,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(212,160,23,0.06) 1px, transparent 1px);
+        linear-gradient(rgba(63,129,90,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(63,129,90,0.06) 1px, transparent 1px);
       background-size: 60px 60px;
     }
     .hero-diagonal {
@@ -71,7 +71,7 @@
     }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
     .hero-ticker {
-      background: rgba(212,160,23,0.08); border: 1px solid var(--border);
+      background: rgba(63,129,90,0.08); border: 1px solid var(--border);
       padding: 1rem 1.5rem; margin-top: 2.5rem;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 1px; background: var(--border);
@@ -165,7 +165,7 @@
     .front-card:hover h3 { color: var(--white); }
     .front-card:hover p { color: rgba(245,240,232,0.55); }
     .front-card:hover .front-arrow { color: var(--gold); }
-    .front-card:hover::before { color: rgba(212,160,23,0.08); }
+    .front-card:hover::before { color: rgba(63,129,90,0.08); }
     .front-num {
       font-family: var(--font-mono); font-size: 0.58rem;
       letter-spacing: 0.2em; text-transform: uppercase;
@@ -338,44 +338,23 @@
       </div>
     </section>
 
-    <!-- ── CIVIC ACTION CYCLE ─────────────────────────────────── -->
-    <section class="cycle-wrap" aria-labelledby="cycle-heading">
+    <!-- ── CIVIC ACTION CYCLE (preview) ─────────────────── -->
+    <section style="background:var(--black);padding:5rem 0;" aria-labelledby="cycle-preview-heading">
       <div class="container">
-        <div class="cycle-inner">
-          <div class="cycle-left">
-            <p class="section-label reveal">The Method</p>
-            <h2 class="section-title reveal" id="cycle-heading">THE CIVIC ACTION CYCLE</h2>
-            <p class="reveal">Civic power is built through a six-stage repeating loop, not a one-time lesson. Every stage feeds the next. The cycle doesn't end at action; it ends at reflection, which launches the next loop.</p>
-            <div class="cycle-steps">
-              <button class="cycle-step-btn active" data-step="0">
-                <span class="step-num">01</span><span class="step-name">LEARN</span>
-              </button>
-              <button class="cycle-step-btn" data-step="1">
-                <span class="step-num">02</span><span class="step-name">ANALYZE</span>
-              </button>
-              <button class="cycle-step-btn" data-step="2">
-                <span class="step-num">03</span><span class="step-name">ORGANIZE</span>
-              </button>
-              <button class="cycle-step-btn" data-step="3">
-                <span class="step-num">04</span><span class="step-name">ACT</span>
-              </button>
-              <button class="cycle-step-btn" data-step="4">
-                <span class="step-num">05</span><span class="step-name">TEACH BACK</span>
-              </button>
-              <button class="cycle-step-btn" data-step="5">
-                <span class="step-num">06</span><span class="step-name">REFLECT + ITERATE</span>
-              </button>
-            </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;">
+          <div>
+            <p class="section-label reveal" style="color:var(--gold)">The Method</p>
+            <h2 class="section-title reveal" id="cycle-preview-heading" style="color:var(--white)">THE CIVIC<br>ACTION CYCLE</h2>
+            <p class="reveal" style="color:rgba(244,245,244,0.62);line-height:1.85;margin-bottom:2rem">Civic power is built through six repeating stages: Learn, Analyze, Organize, Act, Teach Back, and Reflect. The cycle never ends at action. It ends at reflection, which launches the next loop and the next cohort of civic multipliers.</p>
+            <a href="framework.html#cycle-sum-heading" class="btn btn-gold reveal">Explore the Full Cycle &rarr;</a>
           </div>
-          <div class="cycle-visual">
-            <div class="cycle-detail" id="cycle-detail">
-              <h4 id="cycle-title">01 — LEARN</h4>
-              <p id="cycle-desc">Connect civic knowledge to real issues affecting your school and community. Don't just read a textbook! Talk to people, read actual policy documents, and map who holds power over the problem you care about.</p>
-              <div class="cycle-example" id="cycle-example">
-                <strong style="color:var(--gold-lt)">In practice:</strong> Students research a real New Castle County budget decision as to who made it, what process governed it, and who was excluded from the room.
-              </div>
-            </div>
-            <a href="learn.html" class="btn btn-gold" style="margin-top:1.5rem;display:inline-flex">Explore Every Stage →</a>
+          <div class="reveal reveal-delay-1" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(63,129,90,0.26);">
+            <div style="background:var(--ink);padding:1.5rem;"><span style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem">01</span><span style="font-family:var(--font-display);font-size:1.3rem;color:var(--white)">LEARN</span></div>
+            <div style="background:var(--ink);padding:1.5rem;"><span style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem">02</span><span style="font-family:var(--font-display);font-size:1.3rem;color:var(--white)">ANALYZE</span></div>
+            <div style="background:var(--ink);padding:1.5rem;"><span style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem">03</span><span style="font-family:var(--font-display);font-size:1.3rem;color:var(--white)">ORGANIZE</span></div>
+            <div style="background:var(--ink);padding:1.5rem;"><span style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem">04</span><span style="font-family:var(--font-display);font-size:1.3rem;color:var(--white)">ACT</span></div>
+            <div style="background:var(--ink);padding:1.5rem;"><span style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem">05</span><span style="font-family:var(--font-display);font-size:1.3rem;color:var(--white)">TEACH BACK</span></div>
+            <div style="background:var(--ink);padding:1.5rem;"><span style="font-family:var(--font-mono);font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem">06</span><span style="font-family:var(--font-display);font-size:1.3rem;color:var(--white)">REFLECT</span></div>
           </div>
         </div>
       </div>
@@ -423,11 +402,11 @@
             <p>Partner organizations and educators can access the full research library, workshop guides, school-community toolkits, and all five policy documents produced by this fellowship.</p>
             <span class="inv-arrow">Access Resources →</span>
           </a>
-          <a href="framework.html" class="involved-card reveal reveal-delay-2">
+          <a href="program.html" class="involved-card reveal reveal-delay-2">
             <span class="inv-num">03</span>
-            <h3>THE FRAMEWORK</h3>
-            <p>Deep dive into the four fronts, eight guiding principles, six priority communities, and the evidence base that drives every recommendation in this initiative.</p>
-            <span class="inv-arrow">Explore Framework →</span>
+            <h3>THE PROGRAM</h3>
+            <p>Explore the six-session arc, three-tier leadership pipeline, and the evidence base behind every design decision. See what a school or community partnership looks like in Year 1.</p>
+            <span class="inv-arrow">See the Program &rarr;</span>
           </a>
         </div>
       </div>

@@ -1,8 +1,7 @@
 /* ============================================================
    FROM CIVIC LEARNING TO CIVIC POWER — Network Delaware
    main.js — Revised 2026
-   ============================================================ */
-
+============================================================ */
 (function () {
   'use strict';
 
@@ -18,15 +17,13 @@
           <span></span><span></span><span></span>
         </button>
         <ul id="nav-menu" class="nav-links" role="list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="learn.html">Learn</a></li>
-          <li><a href="framework.html">Framework</a></li>
-          <li><a href="communities.html">Communities</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="pilot.html">Pilot Program</a></li>
-          <li><a href="presentation.html">Presentation</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="pilot.html#contact" class="nav-cta">Partner With Us</a></li>
+          ><a href="index.html">Home</a></li>
+          ><a href="framework.html">Framework</a></li>
+          ><a href="communities.html">Communities</a></li>
+          ><a href="program.html">The Program</a></li>
+          ><a href="resources.html">Resources</a></li>
+          ><a href="about.html">About</a></li>
+          ><a href="program.html#contact" class="nav-cta">Partner With Us</a></li>
         </ul>
       </div>
     </nav>
@@ -43,28 +40,26 @@
           <div class="footer-col">
             <h4>Explore</h4>
             <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="learn.html">Start Learning</a></li>
-              <li><a href="framework.html">The Framework</a></li>
-              <li><a href="communities.html">Priority Communities</a></li>
-              <li><a href="pilot.html">Pilot Program</a></li>
-              <li><a href="presentation.html">The Presentation</a></li>
+              ><a href="index.html">Home</a></li>
+              ><a href="framework.html">The Framework</a></li>
+              ><a href="communities.html">Communities</a></li>
+              ><a href="program.html">The Program</a></li>
+              ><a href="resources.html">Resources</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
             <ul>
-              <li><a href="resources.html">Research Library</a></li>
-              <li><a href="resources.html#toolkits">Toolkits</a></li>
-              <li><a href="resources.html#workshops-section">Workshop Guides</a></li>
-              <li><a href="about.html">About the Fellowship</a></li>
-              <li><a href="pilot.html#contact">Contact</a></li>
+              ><a href="resources.html">Research Library</a></li>
+              ><a href="resources.html#toolkits">Resources &amp; Deliverables</a></li>
+              ><a href="about.html">About the Fellowship</a></li>
+              ><a href="program.html#contact">Contact</a></li>
             </ul>
           </div>
         </div>
         <div class="footer-bottom">
-          <span>&copy; 2025 Network Delaware &middot; From Civic Learning to Civic Power</span>
-          <span>Research Fellowship &middot; Nathan Sanchez &amp; Constanza Perez</span>
+          <span>&copy; 2026 Network Delaware &middot; From Civic Learning to Civic Power</span>
+          <span>Research Fellows &middot; Nathan Sanchez &amp; Constanza Perez</span>
         </div>
       </div>
     </footer>
@@ -107,15 +102,31 @@
     });
   }
 
+  function initAccordion() {
+    document.querySelectorAll('.accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.accordion-item');
+        const panel = item.querySelector('.accordion-panel');
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+          i.querySelector('.accordion-panel').hidden = true;
+        });
+        if (!open) {
+          btn.setAttribute('aria-expanded', 'true');
+          panel.hidden = false;
+        }
+      });
+    });
+    document.querySelectorAll('.accordion-panel').forEach(p => { p.hidden = true; });
+  }
+
   function initReveal() {
     const els = document.querySelectorAll('.reveal, .reveal-left');
     if (!els.length) return;
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
     els.forEach(el => io.observe(el));
@@ -191,6 +202,7 @@
     injectFooter();
     setActiveNavLink();
     initHamburger();
+    initAccordion();
     initReveal();
     initMarquee();
     initSmoothScroll();
@@ -203,5 +215,4 @@
   } else {
     init();
   }
-
 })();
