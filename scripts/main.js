@@ -17,13 +17,13 @@
           <span></span><span></span><span></span>
         </button>
         <ul id="nav-menu" class="nav-links" role="list">
-          ><a href="index.html">Home</a></li>
-          ><a href="framework.html">Framework</a></li>
-          ><a href="communities.html">Communities</a></li>
-          ><a href="program.html">The Program</a></li>
-          ><a href="resources.html">Resources</a></li>
-          ><a href="about.html">About</a></li>
-          ><a href="program.html#contact" class="nav-cta">Partner With Us</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="framework.html">Framework</a></li>
+          <li><a href="communities.html">Communities</a></li>
+          <li><a href="program.html">The Program</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="program.html#contact" class="nav-cta">Partner With Us</a></li>
         </ul>
       </div>
     </nav>
@@ -40,20 +40,20 @@
           <div class="footer-col">
             <h4>Explore</h4>
             <ul>
-              ><a href="index.html">Home</a></li>
-              ><a href="framework.html">The Framework</a></li>
-              ><a href="communities.html">Communities</a></li>
-              ><a href="program.html">The Program</a></li>
-              ><a href="resources.html">Resources</a></li>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="framework.html">The Framework</a></li>
+              <li><a href="communities.html">Communities</a></li>
+              <li><a href="program.html">The Program</a></li>
+              <li><a href="resources.html">Resources</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
             <ul>
-              ><a href="resources.html">Research Library</a></li>
-              ><a href="resources.html#toolkits">Resources &amp; Deliverables</a></li>
-              ><a href="about.html">About the Fellowship</a></li>
-              ><a href="program.html#contact">Contact</a></li>
+              <li><a href="resources.html">Research Library</a></li>
+              <li><a href="resources.html#toolkits">Resources &amp; Deliverables</a></li>
+              <li><a href="about.html">About the Fellowship</a></li>
+              <li><a href="program.html#contact">Contact</a></li>
             </ul>
           </div>
         </div>
