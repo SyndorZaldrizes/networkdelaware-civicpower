@@ -1,8 +1,9 @@
-# From Civic Learning to Civic Power - Internal Site README
+# From Civic Learning to Civic Power — Internal Site README
 
-**Network Delaware · Civic Education Initiative · 2026**
-**Research Fellow:** Nathan Sanchez
-**Status:** Active development 
+**Network Delaware · Civic Education Initiative · 2026**  
+**Research Fellows:** Nathan Sanchez & Constanza Perez  
+**Status:** Active — fellowship research complete; implementation and funding phase in progress  
+**Live site:** https://syndorzaldrizes.github.io/networkdelaware-civicpower/
 
 ---
 
@@ -25,52 +26,59 @@
 
 ## 1. Project Overview
 
-This site is the public-facing home for the Network Delaware **Civic Power** fellowship — a statewide K–12 civic education initiative by Network Delaware. It serves four audiences simultaneously:
+This site is the public-facing home for the Network Delaware **Civic Power** fellowship — a statewide K–12 civic education initiative. It serves four audiences simultaneously:
 
 | Audience | Primary Goal | Key Pages |
-| Youth / Students | Learn civic concepts, complete missions | `learn.html`, `index.html` |
+|---|---|---|
+| Youth / Students | Understand the framework and civic action cycle | `index.html`, `framework.html` |
 | Educators & School Admins | Access toolkits, workshop guides | `resources.html` |
 | Community Organizations | Access partnership tools, understand priority communities | `resources.html`, `communities.html` |
-| Funders & Policy Audience | Understand framework, access policy docs | `framework.html`, `resources.html` |
+| Funders & Policy Audience | Understand framework, access policy docs | `framework.html`, `resources.html`, `presentation.html` |
 
-The site is static HTML - no backend, no CMS, no build step. Everything runs directly in the browser. Deployment is via GitHub Pages.
+The site is static HTML — no backend, no CMS, no build step. Everything runs directly in the browser. Deployment is via GitHub Pages from the `main` branch.
 
 ---
 
 ## 2. Site Architecture
 
 ```
-index.html          ← Homepage (hero, stats, cycle explorer, mission tracker)
-learn.html          ← Civic Action Cycle explorer + vocabulary + power map builder
-framework.html      ← Four Fronts, Eight Principles, Non-Negotiables, Cycle overview
-communities.html    ← Six priority communities with barriers + framework responses
-resources.html      ← All fellowship deliverables, filter system, citation library, partners
-about.html          ← Fellowship structure, phases, team, institutional partners
+index.html            ← Homepage (hero, stats, cycle explorer, get involved)
+framework.html        ← Four Fronts, Eight Principles, Non-Negotiables, Cycle overview
+communities.html      ← Six priority communities with barriers + framework responses
+program.html          ← Six-session arc, leadership pipeline, evidence base, contact
+resources.html        ← All fellowship deliverables, filter system, citation library
+about.html            ← Fellowship structure, phases, team, institutional partners
+presentation.html     ← Summary presentation (replaces standalone slide deck)
+initiative-overview.html ← Print-to-PDF one-pager for distribution
 
-styles/main.css     ← Universal stylesheet (all design tokens, layout, components)
-scripts/main.js     ← Universal JavaScript (nav injection, footer injection, reveal, counters, tabs)
+styles/main.css       ← Universal stylesheet (all design tokens, layout, components)
+scripts/main.js       ← Universal JS (nav injection, footer injection, reveal, counters, tabs)
 
-docs/               ← PDF deliverables folder (you create this — see Section 6)
+docs/                 ← PDF deliverables folder (see Section 6)
 ```
+
+**Note: `learn.html` was removed.** Its content — the Civic Action Cycle deep dive, vocabulary definitions, and Power Map Builder — was redistributed. The Civic Action Cycle interactive is on `index.html`. Framework depth is on `framework.html`. If this content needs a dedicated page in a future iteration, rebuild from those sources rather than from memory.
 
 **No page-specific JavaScript files.** Any page-specific JS is written inline at the bottom of each HTML file in a `<script>` tag. This keeps the codebase flat and auditable.
 
-**No external JavaScript dependencies.** The site uses zero npm packages, no React, no bundler. Pure HTML/CSS/JS.
+**No external JavaScript dependencies.** Zero npm packages, no React, no bundler. Pure HTML/CSS/JS.
 
 ---
 
 ## 3. File Structure
 
-After full setup (including the `docs/` folder you create), the repo should look like this:
+Current repo structure:
 
 ```
 networkdelaware-civicpower/
 ├── index.html
-├── learn.html
 ├── framework.html
 ├── communities.html
+├── program.html
 ├── resources.html
 ├── about.html
+├── presentation.html
+├── initiative-overview.html
 ├── README.md
 ├── styles/
 │   └── main.css
@@ -78,16 +86,26 @@ networkdelaware-civicpower/
 │   └── main.js
 └── docs/
     ├── policy-brief.pdf
+    ├── policy-brief-perez.pdf
     ├── standards-review.pdf
+    ├── standards-review-perez.pdf
     ├── comparative-analysis.pdf
+    ├── comparative-analysis-perez.pdf
     ├── strategic-nonviolence.pdf
+    ├── strategic-nonviolence-perez.pdf
     ├── youth-civic-engagement.pdf
     ├── partnership-toolkit.pdf
+    ├── partnership-toolkit-perez.pdf
     ├── workshop-framework.pdf
-    └── citation-library.pdf
+    ├── workshop-framework-perez.pdf
+    ├── grant_narrative_writing.pdf
+    ├── grant-narrative-perez.pdf
+    ├── annotated_bibliography.pdf
+    ├── citation-library-perez.pdf
+    └── initiative-overview.pdf
 ```
 
-The `docs/` folder does **not** exist yet in the repo. You create it and upload PDFs to it. The site's Download buttons on `resources.html` are already pointing to these exact paths — once the files exist, the buttons work automatically.
+All 18 PDFs listed above are present in `docs/` and verified against `resources.html` download links.
 
 ---
 
@@ -95,51 +113,33 @@ The `docs/` folder does **not** exist yet in the repo. You create it and upload 
 
 ### `index.html` — Homepage
 
-**Purpose:** Entry point. Establishes the initiative's argument, surfaces key statistics, previews the Four Fronts, and gives visitors two interactive entry points (Civic Action Cycle and Mission Tracker).
+**Purpose:** Entry point. Establishes the initiative's argument, surfaces key statistics, previews the Four Fronts, and gives visitors entry points into the framework and communities.
 
 **Key sections:**
-- **Hero** — Initiative title, sub-statement, hero buttons (Start Learning / Explore the Framework), stat ticker (4 statistics with animated counters)
+- **Hero** — Initiative title, sub-statement, two CTA buttons (Explore the Framework → `framework.html`, See the Communities → `communities.html`), stat ticker (4 statistics with animated counters)
 - **Marquee** — Gold scrolling text strip with key framework terms (decorative, aria-hidden)
-- **The Argument** — Two-column layout: left side is the problem statement, right side is three data blocks with CIRCLE statistics
-- **Four Fronts** — 2×2 hover-invert card grid, each links to `framework.html#front1` etc.
-- **Civic Action Cycle** — Click through all six stages, detail panel updates on the right
-- **Stats Strip** — Four animated counters (5 states, 6 communities, 8 principles, 4 fronts)
-- **Get Involved** — Three hover-invert cards linking to Learn, Resources, Framework
-- **Civic Missions** — Checkable mission list with live progress bar
+- **The Argument** — Two-column layout: problem statement left, three CIRCLE data blocks right
+- **Four Fronts** — 2×2 hover-invert card grid, each links to `framework.html#front1` through `#front4`
+- **Civic Action Cycle** — Click through all six stages; detail panel updates on the right
+- **Stats Strip** — Four animated counters (states analyzed, priority communities, guiding principles, strategic fronts)
+- **Get Involved** — Three cards linking to Framework, Resources, and Program
 
 **Page-specific JS (inline at bottom):**
-- `cycleData` array — the content for each of the six cycle stages
+- `cycleData` array — content for each of the six cycle stages
 - Stage button click handler — updates `#cycle-title`, `#cycle-desc`, `#cycle-example`
-- `toggleMission()` / `updateMissions()` — checkbox logic and progress bar update
 
 ---
 
-### `learn.html` — Learn
+### `framework.html` — The Framework
 
-**Purpose:** The educational core. Walks any visitor through the Civic Action Cycle in depth, defines the key vocabulary of the framework, and provides an interactive Power Map Builder tool.
-
-**Key sections:**
-- **Hero** — Teal-accented page header
-- **Civic Action Cycle Explorer** — Left nav (6 stage buttons), right panel (badge, title, body, in-practice box, research question). All six panels are pre-written; clicking a stage button shows the corresponding panel
-- **Vocabulary** — 9-card grid on black background covering: Civic Multiplier, Power Map, Action Civics, Power Literacy, Political Home, Strategic Nonviolence, Civic Efficacy, Supply-Side Gap, Deliberation
-- **Power Map Builder** — Form with 5 fields (issue, decision makers, affected, allies, leverage). On submit, generates a formatted output block below the form
-
-**Page-specific JS (inline at bottom):**
-- Cycle nav button click handler — toggles `.active` on `.cycle-nav-btn` and `.cycle-panel` elements
-- `buildMap()` — reads the five form fields, populates `#out-*` elements, makes `#pm-output` visible
-
----
-
-### `framework.html` — Framework
-
-**Purpose:** The policy-facing deep dive. Written for educators, administrators, and funders who need to understand the structural logic of the initiative before reading the policy brief.
+**Purpose:** Policy-facing deep dive. Written for educators, administrators, and funders who need the structural logic before reading the policy brief.
 
 **Key sections:**
 - **Hero** — Dark background with grid pattern
 - **Four Non-Negotiables Strip** — Red background, 4-cell grid with the filter questions
-- **Four Fronts** — Full detail on all four fronts in a horizontal left-column (number/tag) + right-column (body + deliverables list) layout. Each front block links to `#front1`, `#front2`, etc. via anchor IDs on the section
-- **Eight Guiding Principles** — 4×2 grid on black background, each card has number, name, and description
-- **Civic Action Cycle Summary** — 6-column timeline (hover inverts each stage), links to `learn.html` for full detail
+- **Four Fronts** — Full detail on all four fronts; each section has anchor IDs `#front1` through `#front4`
+- **Eight Guiding Principles** — 4×2 grid on black background
+- **Civic Action Cycle Summary** — 6-column timeline (hover inverts each stage)
 
 **No page-specific JS.** All interactivity is CSS hover only.
 
@@ -147,180 +147,215 @@ The `docs/` folder does **not** exist yet in the repo. You create it and upload 
 
 ### `communities.html` — Priority Communities
 
-**Purpose:** Establishes who the initiative is built for and why each community was identified. Written to be read by community organization staff, advocates, and funders — not just policy researchers.
+**Purpose:** Establishes who the initiative is built for and why. Written for community organization staff, advocates, and funders.
 
 **Key sections:**
 - **Hero** — Dark background
-- **Design Callout Strip** — Gold background with the core design principle statement
-- **Six Community Blocks** — Each block: left column (black, icon + community name + why tag), right column (white, barriers paragraph + framework response box). Communities: Multilingual Families, Immigrant & Mixed-Status Families, Black and Brown Youth, Disabled Students, LGBTQIA+ Youth, Hispanic and Latino Communities
-- **Structural Note** — Black background, 2×2 grid explaining the three criteria used to identify communities and the asset-based framing
+- **Design Callout Strip** — Gold background with core design principle statement
+- **Six Community Blocks** — Each: left column (black, community name + why tag), right column (barriers + framework response). Communities: Multilingual Families, Immigrant & Mixed-Status Families, Black and Brown Youth, Disabled Students, LGBTQIA+ Youth, Hispanic and Latino Communities
 
-**No page-specific JS.**
+**Note:** The expanded 14-community analysis exists as a fellowship document (`docs/`) but the page currently reflects the original six. Update when the pilot accountability structure is finalized.
+
+---
+
+### `program.html` — The Program
+
+**Purpose:** Operational detail for school and community partners evaluating a Year 1 pilot. Most text-dense page on the site.
+
+**Key sections:**
+- **Hero** — Program overview
+- **Six-Session Arc** — Accordion showing each session's activities and between-session work
+- **Three-Tier Leadership Pipeline** — How participants progress from cohort members to co-facilitators
+- **Evidence Base** — Five key research findings driving program design; links to `resources.html`
+- **Contact / Partner With Us** — Form section (`id="contact"`) — this is the nav CTA destination
+
+**Page-specific JS (inline at bottom):**
+- Accordion logic (duplicates and extends the `initAccordion()` in `main.js` for program-specific panels)
 
 ---
 
 ### `resources.html` — Resource Library
 
-**Purpose:** The document hub. All fellowship deliverables are listed here with metadata and Download PDF buttons. Also contains the citation library summary and partner organization links.
+**Purpose:** Central access point for all fellowship deliverables, PDFs, partner links, and the citation library.
 
 **Key sections:**
-- **Hero** — Dark background
-- **Filter Bar** — Buttons: All / Policy / Research / Toolkit / Workshop / Analysis. Filters `doc-card` elements by `data-type` attribute
-- **Documents** — Organized into four subsections by type. Each `doc-card` has: type tag, front tag, title, description, author/date metadata, and Download PDF button pointing to `docs/[filename].pdf`
-- **Citation Library** — Black background, 2×2 grid with 5 sources per thematic category. Links to `docs/citation-library.pdf`
-- **Partner Organizations** — 3×2 grid with six key Delaware and national partner organizations, each with a live external link
+- **Hero** — Library overview
+- **Presentation Block** — Links to `presentation.html`. Button is styled disabled until the file is live; once `presentation.html` exists, remove the `pointer-events:none` and `opacity:0.5` inline styles and the `aria-disabled` attribute
+- **Document Cards** — Filterable by type (All, Policy, Research, Toolkit, Framework); each card has Sanchez PDF and Perez PDF buttons. One Perez PDF (Youth Civic Engagement Best Practices Memo) is still pending — button reads "Coming Soon"
+- **Partner Organizations** — External links to CIRCLE, DCCE, La Esperanza, Equality Delaware, Generation Citizen
+- **Citation Library** — Full annotated bibliography access; both Sanchez and Perez versions linked
 
-**Page-specific JS (inline at bottom):**
-- `filterDocs(type, btn)` — toggles `.active` on filter buttons, shows/hides `.doc-card` elements and their parent `.docs-section` containers
-
-**Pending documents** (marked "Coming Soon" on the page):
-- Grant Narrative Language — Phase 3, not yet complete
+**Page-specific JS (inline):**
+- `filterDocs(type, btn)` — shows/hides `.doc-card` elements by `data-type`; also hides parent `.docs-section` when all cards within are hidden
 
 ---
 
-### `about.html` — About
+### `about.html` — About the Fellowship
 
-**Purpose:** Explains the fellowship structure, the research methodology, and who built the initiative. Entry point for anyone who wants context before reading the deliverables.
+**Purpose:** Explains the fellowship structure, Network Delaware's role, and the research team.
 
 **Key sections:**
-- **Hero** — Dark background
-- **Mission Statement Strip** — Gold background, large display type with the core argument
-- **What This Is** — Two-column: left is narrative prose, right is three sidebar blocks (the gap, what's different, measure of success)
-- **Fellowship Phases** — Timeline layout: three phases with tag (phase name + weeks + theme), title, description, and deliverable tags
-- **The Team** — 2-cell grid: Nathan Sanchez (white) and Network Delaware (black)
-- **Institutional Partners** — Listed inline at the bottom of the people section
+- **Hero** — Fellowship context
+- **Fellowship Phases** — Three-phase arc (Research → Analysis → Implementation)
+- **Team** — Nathan Sanchez and Constanza Perez bios and roles
+- **Institutional Partners** — Organizations cited throughout the research
 
-**No page-specific JS.**
+---
+
+### `presentation.html` — Summary Presentation
+
+**Purpose:** Replaces a standalone PowerPoint deck. Serves as the summary document for school leadership, policy audiences, and funding partners. This page is the destination for the "View Presentation" button on `resources.html`.
+
+**Status:** File must exist in the repo root for the `resources.html` button to work. Once live, update `resources.html` to remove the disabled state from the button (remove `pointer-events:none`, `opacity:0.5`, and `aria-disabled="true"`).
+
+---
+
+### `initiative-overview.html` — One-Pager
+
+**Purpose:** Print-to-PDF one-pager for distribution at meetings, to funders, and to legislators. A companion editable `.docx` version exists separately. This page is not in the main nav.
 
 ---
 
 ## 5. How to Add / Update Content
 
-### Editing text on any page
+### Updating text on any page
 
-Open the relevant `.html` file and find the section. All copy is inline in the HTML — there is no CMS or templating layer. Search for a distinctive phrase from the text you want to change and edit directly.
+Open the relevant `.html` file. Text is in standard HTML — paragraphs in `<p>`, headings in `<h2>`/`<h3>`, lists in `<ul>/<li>`. No templating language.
 
-### Adding a new document to Resources
+### Adding a new section to an existing page
 
-1. Add your PDF to `docs/` (see Section 6 for naming)
-2. Open `resources.html`
-3. Copy an existing `<div class="doc-card">` block
-4. Update: `data-type` attribute, type tag class (`tag-policy`, `tag-research`, etc.), front tag, title, description, metadata line, and the `href` on the Download button
-5. Place it inside the correct `<div class="docs-section" data-section="[type]">` wrapper
+Copy the nearest similar section block as a starting pattern. Every content section follows the same wrapper:
 
-If you're adding a new document type that doesn't fit an existing section, add a new `<div class="docs-section">` block following the same pattern, and add a new filter button to the filter bar.
+```html
+<section class="[color-class] section-pad" aria-labelledby="[unique-id]">
+  <div class="container">
+    <!-- content here -->
+  </div>
+</section>
+```
 
-### Adding a new nav link
+Background color classes: `class="section-pad"` (paper/light), add `style="background:var(--black);color:var(--white)"` for dark sections, `style="background:var(--gold)"` for gold accent sections.
 
-Nav and footer are injected by `scripts/main.js`. Find the `NAV_HTML` and `FOOTER_HTML` constants in `main.js` and edit the link lists there. Changes apply to all pages automatically.
+### Updating statistics or data points
 
-### Updating statistics
+All animated counters use `data-count` attributes:
 
-Statistics appear in two places:
-- **Hero ticker** on `index.html` — find the `.ticker-cell` blocks and update the displayed text and the `data-count` attribute (used by the counter animation)
-- **Stats Strip** on `index.html` — find the `.stat-n` spans with `data-count` attributes
+```html
+<span data-count="27" data-suffix="%">27%</span>
+```
 
-The `data-count` attribute drives the animated counter. Set it to the numeric value you want the counter to land on. The `data-suffix` and `data-prefix` attributes add non-numeric characters (e.g., `data-suffix="%"`, `data-prefix="$"`).
+Change the `data-count` value and the fallback text content. The counter animates to whatever `data-count` is set to.
 
 ---
 
 ## 6. Uploading Deliverable PDFs
 
-### Step-by-step
+The `docs/` folder is already created and populated with 18 PDFs. All download buttons on `resources.html` point to paths inside `docs/`. To add a new PDF:
 
-1. **Export each deliverable from Google Docs:** File → Download → PDF Document (.pdf)
-2. **Rename each file exactly as listed below** — the site's Download buttons already point to these exact filenames
-3. **Create a `docs/` folder** at the root of the repo on GitHub (drag-and-drop upload works, or use the GitHub web UI's "Add file" button)
-4. **Upload each PDF** into `docs/`
+1. Name it using the existing convention: `kebab-case.pdf` (e.g., `new-document.pdf`)
+2. Drop it in `docs/`
+3. Add or update the corresponding card in `resources.html`
+4. Commit and push — GitHub Pages serves it automatically
 
-### Required filenames
-
-| Document | Filename | Status |
-|---|---|---|
-| Delaware K–12 Civic Education Policy Brief | `policy-brief.pdf` | ✅ Ready to upload |
-| Delaware Civic Education Standards Review | `standards-review.pdf` | ✅ Ready to upload |
-| Comparative State Analysis | `comparative-analysis.pdf` | ✅ Ready to upload |
-| Strategic Nonviolence in Civic Education | `strategic-nonviolence.pdf` | ✅ Ready to upload |
-| Youth Civic Engagement Best Practices Memo | `youth-civic-engagement.pdf` | ✅ Ready to upload |
-| School and Community Partnership Toolkit | `partnership-toolkit.pdf` | ✅ Ready to upload |
-| Workshop Implementation Framework | `workshop-framework.pdf` | ✅ Ready to upload |
-| Citation Library | `citation-library.pdf` | ✅ Ready to upload |
-| Grant Narrative Language | `grant-narrative.pdf` | ⏳ Phase 3 — not yet complete |
-
-### Why PDFs over Google Docs links
-
-Google Docs links depend on permission settings that can change, accounts that can be deactivated, and sharing configurations that expire. PDFs in the repo are permanent, work offline, and will be accessible years from now regardless of what happens to any Google account. They are also downloadable for offline reference by educators and partners who may not have reliable internet access at community meetings.
-
-### After uploading
-
-No code changes are needed. The `href` attributes on all Download buttons already point to the correct `docs/[filename].pdf` paths. Once the files exist in the repo, the buttons work.
-
-If GitHub Pages caching causes a delay, hard refresh (`Ctrl+Shift+R` / `Cmd+Shift+R`) on the resources page to confirm.
+**Do not rename existing PDFs** without updating every reference in `resources.html` and any other pages that link to them.
 
 ---
 
 ## 7. Navigation & Footer (Shared Components)
 
-Both the navigation bar and the footer are **injected by JavaScript** — they are not written into individual HTML files. This means you edit them in one place and changes propagate to all pages automatically.
+Both the `<nav>` and `<footer>` are injected by `scripts/main.js` at page load. They are not written into individual HTML files.
 
-**Location:** `scripts/main.js` — the `NAV_HTML` and `FOOTER_HTML` template literal constants near the top of the file.
+### How injection works
 
-### Navigation structure
+Every HTML page has two placeholder divs:
+
+```html
+<div id="nav-placeholder"></div>
+<!-- ... page content ... -->
+<div id="footer-placeholder"></div>
+```
+
+`main.js` replaces `#nav-placeholder` with the full `NAV_HTML` string and `#footer-placeholder` with `FOOTER_HTML`. Active nav link detection (`aria-current="page"`) runs immediately after injection by comparing `window.location.pathname` to each link's `href`.
+
+### Current navigation structure
 
 ```
-[Network Delaware wordmark] → [Home] [Learn] [Framework] [Communities] [Resources] [About] [Take Action →]
+Home (index.html)
+Framework (framework.html)
+Communities (communities.html)
+The Program (program.html)
+Resources (resources.html)
+About (about.html)
+Partner With Us → program.html#contact  [CTA button, gold]
 ```
 
-- **Take Action** is styled as a CTA button (gold background) and links to `index.html#act`
-- Active page detection is automatic — `main.js` reads `window.location.pathname` and sets `aria-current="page"` on the matching nav link, which applies the gold color style
-- Mobile hamburger menu is handled by `initHamburger()` in `main.js` — no changes needed
+`learn.html` is not in the nav and does not exist in the repo.
 
-### Footer structure
+### To add a new nav item
 
-Three columns: brand statement (left), Explore links (center), Resources links (right). Bottom bar: copyright + fellow credit.
+Edit the `NAV_HTML` string in `scripts/main.js`:
+
+```javascript
+<li><a href="new-page.html">New Page</a></li>
+```
+
+Add it before the `Partner With Us` `<li>`. One edit in `main.js` updates nav on all pages simultaneously.
+
+### Footer links
+
+Footer has two columns: **Explore** (Home, Framework, Communities, Program, Resources) and **Resources** (Research Library, Resources & Deliverables, About, Contact). Edit the `FOOTER_HTML` string in `main.js` to update both columns site-wide.
 
 ---
 
 ## 8. Styling System
 
-All styles live in `styles/main.css`. The file is organized into clearly labeled sections.
-
-### Design tokens (CSS custom properties)
+### Design tokens (`:root` in `main.css`)
 
 ```css
---black:      #0a0a08    /* Primary background for hero / dark sections */
---white:      #f5f0e8    /* Warm off-white — not pure white */
---gold:       #d4a017    /* Primary accent — buttons, labels, borders */
---gold-lt:    #f0c040    /* Lighter gold for dark backgrounds */
---gold-dim:   rgba(212,160,23,0.15)   /* Gold tint for hover states */
---red:        #c0392b    /* Accent for data points, Non-Negotiables strip */
---paper:      #f5f0e8    /* Page background */
---paper-dk:   #ede7d8    /* Slightly darker paper — alternating sections */
---border:     rgba(212,160,23,0.3)    /* Standard border */
---border-str: rgba(212,160,23,0.65)   /* Stronger border */
+--black:      #0f1c14    /* Primary dark background */
+--ink:        #16241c    /* Secondary dark — hover states */
+--gray:       #3f4d46    /* Body text on light backgrounds */
+--gray-lt:    #5a665f    /* Secondary body text */
+--gold:       #3f815a    /* Primary accent — buttons, labels, borders */
+--gold-lt:    #5aa17a    /* Hover state for gold elements */
+--red:        #21695a    /* Data accent, Non-Negotiables strip */
+--paper:      #f4f5f4    /* Page background */
+--white:      #f4f5f4    /* Text on dark backgrounds */
 
---font-display: 'Bebas Neue'           /* All-caps display type — headings, stats */
---font-body:    'Syne'                 /* Body copy, UI labels */
---font-serif:   'Libre Baskerville'    /* Pull quotes, hero sub-text */
---font-mono:    'Syne Mono'            /* Labels, tags, metadata, section markers */
+--font-display: 'Bebas Neue'         /* All-caps display type */
+--font-body:    'Syne'               /* Body copy, UI labels */
+--font-serif:   'Libre Baskerville'  /* Pull quotes, hero sub-text */
+--font-mono:    'Syne Mono'          /* Labels, tags, section markers */
 ```
 
-**Do not hardcode colors in page-specific styles.** Always use the token variables. This ensures any future color change can be made in one place.
+**Always use token variables. Never hardcode hex or rgba values in page-specific styles.** This ensures any future color change propagates from one place.
+
+### Button classes
+
+| Class | Use |
+|---|---|
+| `.btn-gold` | Primary CTA — dark backgrounds |
+| `.btn-ghost` | Secondary CTA — dark backgrounds |
+| `.btn-black` | CTA on light backgrounds |
+| `.btn-outline` | Tertiary / neutral |
+| `.btn-red` | Data accent contexts |
+
+All buttons require the base `.btn` class plus one modifier: `<a href="..." class="btn btn-gold">Label</a>`
 
 ### Section pattern
 
-Most content sections alternate between `var(--paper)`, `var(--paper-dk)`, `var(--black)`, and `var(--gold)` backgrounds to create visual rhythm without needing dividers. The pattern across the homepage is: black (hero) → gold (marquee) → paper (argument right col) → paper (fronts) → black (cycle) → gold (stats) → paper-dk (involved) → paper (missions).
+Content sections alternate backgrounds for visual rhythm: black (hero) → gold (marquee) → paper (argument) → paper (fronts) → black (cycle) → gold (stats) → paper-dk (get involved).
 
 ### Responsive breakpoints
 
-- `max-width: 900px` — collapses multi-column grids to single column, shows hamburger menu
+- `max-width: 900px` — collapses multi-column grids, shows hamburger menu
 - `max-width: 600px` — reduces padding, collapses remaining two-column layouts
 
-These are defined at the bottom of `main.css` in the `/* ── RESPONSIVE ──` section, and also in `<style>` blocks within individual pages for page-specific layout adjustments.
+Defined at the bottom of `main.css` in the `/* ── RESPONSIVE */` block, and in `<style>` blocks within individual pages for page-specific adjustments.
 
 ### Adding page-specific styles
 
-Put them in a `<style>` block in the `<head>` of the relevant page. Do not add page-specific styles to `main.css`. The pattern throughout the codebase is: `main.css` handles universal components (nav, footer, buttons, cards, utilities), page `<style>` blocks handle layout and unique components for that page.
+Put them in a `<style>` block in the `<head>` of the relevant page. Do not add page-specific styles to `main.css`. Rule: `main.css` handles universal components (nav, footer, buttons, cards, utilities); page `<style>` blocks handle layout and unique components for that page only.
 
 ---
 
@@ -328,7 +363,7 @@ Put them in a `<style>` block in the `<head>` of the relevant page. Do not add p
 
 ### Scroll Reveal (`.reveal` / `.reveal-left`)
 
-Add class `reveal` to any element to make it fade + slide up on scroll into view. Add `reveal-left` for a horizontal slide. Stagger multiple elements with `reveal-delay-1` through `reveal-delay-4` (adds 100ms–400ms delay). Handled by `initReveal()` in `main.js` using `IntersectionObserver`.
+Add class `reveal` to any element to fade + slide up on scroll. Use `reveal-left` for horizontal slide. Stagger with `reveal-delay-1` through `reveal-delay-4` (100ms–400ms delay increments). Handled by `initReveal()` via `IntersectionObserver`.
 
 ```html
 <div class="reveal">Fades in on scroll</div>
@@ -337,79 +372,73 @@ Add class `reveal` to any element to make it fade + slide up on scroll into view
 
 ### Animated Counters (`data-count`)
 
-Any element with `data-count` will animate from 0 to the target value when scrolled into view. Supports `data-prefix` and `data-suffix` for currency symbols, percent signs, etc. Handled by `initCounters()` in `main.js`.
+Any element with `data-count` animates from 0 to target when scrolled into view. Supports `data-prefix` and `data-suffix`. The text content is the no-JS fallback.
 
 ```html
 <span data-count="27" data-suffix="%">27%</span>
 <span data-count="1100" data-prefix="$">$1,100</span>
 ```
 
-The element's text content is used as a fallback before JavaScript runs (for users with JS disabled or on slow connections).
-
 ### Civic Action Cycle (index.html)
 
-Six `<button class="cycle-step-btn">` elements, each with a `data-step` attribute (0–5). Click handler reads `cycleData[i]` and updates three elements: `#cycle-title`, `#cycle-desc`, `#cycle-example`. The `cycleData` array is defined inline in `index.html`.
+Six `<button class="cycle-step-btn">` elements with `data-step` attributes (0–5). Click handler reads `cycleData[i]` and updates `#cycle-title`, `#cycle-desc`, `#cycle-example`. The `cycleData` array is defined inline in `index.html`.
 
-### Civic Action Cycle Explorer (learn.html)
+### Accordion (program.html)
 
-Six `.cycle-nav-btn` buttons, each with a `data-panel` attribute (0–5). Six `.cycle-panel` divs with ids `panel-0` through `panel-5`. Click handler toggles `.active` class. Content is fully pre-written in the HTML — no data array needed.
-
-### Power Map Builder (learn.html)
-
-Form with five `<textarea>`/`<input>` fields. `buildMap()` reads the values, populates five `#out-*` elements, and makes `#pm-output` visible. No data is saved anywhere — the map only exists in the browser session. Future enhancement: add a "Print / Save as PDF" button using `window.print()`.
-
-### Mission Tracker (index.html)
-
-Each `.mission-item` div has an `onclick="toggleMission(this)"` handler. Clicking toggles `.done` on the `.mission-check` div inside it. `updateMissions()` counts done items, updates `#mission-count` text, and sets `#mission-bar` width. No persistence — state resets on page reload. Future enhancement: `localStorage` to persist between sessions.
+`.accordion-trigger` buttons toggle `.accordion-panel` visibility using `aria-expanded` and the `hidden` attribute. Handled by `initAccordion()` in `main.js`. Only one panel open at a time.
 
 ### Document Filter (resources.html)
 
-`filterDocs(type, btn)` hides/shows `.doc-card` elements by their `data-type` attribute. Also hides parent `.docs-section` containers when all their cards are hidden to prevent orphaned section headers. When type is `'all'`, everything is shown.
+`filterDocs(type, btn)` shows/hides `.doc-card` elements by their `data-type` attribute. Also hides parent `.docs-section` containers when all child cards are hidden. Type `'all'` shows everything.
+
+### Tabs (`role="tablist"`)
+
+Any element with `role="tablist"` containing `role="tab"` children is wired by `initTabs()`. Tabs toggle `aria-selected` and show/hide their associated `role="tabpanel"` via the `hidden` attribute.
+
+### Hamburger Menu
+
+`initHamburger()` wires the `.nav-toggle` button: toggles `aria-expanded` on the button and `.open` on `#nav-menu`. Outside-click closes the menu. ARIA attributes are correct throughout.
 
 ---
 
 ## 10. Fellowship Deliverables Status
 
-| Deliverable | Phase | Status | PDF Ready |
+| Deliverable | Authors | PDF in docs/ | Perez Version |
 |---|---|---|---|
-| Delaware Civic Education Standards Review | 1 | ✅ Complete | Yes |
-| Comparative State Analysis | 1 | ✅ Complete | Yes |
-| Youth Civic Engagement Best Practices Memo | 2 | ✅ Complete | Yes |
-| Strategic Nonviolence Research Brief | 2 | ✅ Complete | Yes |
-| School and Community Partnership Toolkit | 2 | ✅ Complete | Yes |
-| Workshop Implementation Framework | 2 | ✅ Complete | Yes |
-| Citation Library | 2 | ✅ Complete | Yes |
-| K–12 Civic Education Policy Brief | 3 | ✅ Complete | Yes |
-| Grant Narrative Language | 3 | ⏳ In Progress | No |
-| Summary Presentation Deck | 3 | ⏳ In Progress | No |
+| Delaware Civic Education Standards Review | Sanchez, Perez | ✅ `standards-review.pdf` | ✅ `standards-review-perez.pdf` |
+| Comparative State Analysis | Sanchez, Perez | ✅ `comparative-analysis.pdf` | ✅ `comparative-analysis-perez.pdf` |
+| Youth Civic Engagement Best Practices Memo | Sanchez | ✅ `youth-civic-engagement.pdf` | ⏳ Coming Soon |
+| Strategic Nonviolence Research Brief | Sanchez, Perez | ✅ `strategic-nonviolence.pdf` | ✅ `strategic-nonviolence-perez.pdf` |
+| School and Community Partnership Toolkit | Sanchez, Perez | ✅ `partnership-toolkit.pdf` | ✅ `partnership-toolkit-perez.pdf` |
+| Workshop Implementation Framework | Sanchez, Perez | ✅ `workshop-framework.pdf` | ✅ `workshop-framework-perez.pdf` |
+| K–12 Civic Education Policy Brief | Sanchez, Perez | ✅ `policy-brief.pdf` | ✅ `policy-brief-perez.pdf` |
+| Grant Narrative | Sanchez, Perez | ✅ `grant_narrative_writing.pdf` | ✅ `grant-narrative-perez.pdf` |
+| Annotated Bibliography / Citation Library | Sanchez, Perez | ✅ `annotated_bibliography.pdf` | ✅ `citation-library-perez.pdf` |
+| Initiative Overview (one-pager) | Sanchez | ✅ `initiative-overview.pdf` | — |
 
-The Grant Narrative card on `resources.html` is already marked "Coming Soon." When it's ready: export as PDF, name it `grant-narrative.pdf`, drop it in `docs/`, then update the card in `resources.html` to replace the pending state with a live Download button.
+**One item pending:** Youth Civic Engagement Best Practices Memo — Perez version. When ready: add `youth-civic-engagement-perez.pdf` to `docs/`, then update the `resources.html` card to replace the "Coming Soon" span with a live `<a>` button matching the other Perez PDF buttons.
 
 ---
 
 ## 11. Deployment (GitHub Pages)
 
-The site is hosted on GitHub Pages from the main branch. No build step. GitHub Pages serves the files exactly as they are in the repo.
-
-### Setup (if not already configured)
-
-1. Go to the repo on GitHub
-2. Settings → Pages → Source: Deploy from a branch → Branch: `main` → Folder: `/ (root)`
-3. Save. The site will be live at `https://[username].github.io/networkdelaware-civicpower/` within a few minutes
+The site deploys automatically from the `main` branch. No build step. GitHub Pages serves files as-is from the repo root.
 
 ### Pushing updates
 
-Standard Git workflow. There is no CI/CD pipeline — every push to `main` deploys automatically via GitHub Pages.
-
 ```bash
 git add .
-git commit -m "Add policy brief PDF + update resources page"
+git commit -m "describe what changed"
 git push origin main
 ```
 
-### For a better workflow: Claude Code
+Changes are live within 1–3 minutes. The repo has 29+ deployments as of June 2026.
 
-Instead of pasting code back and forth, install Claude Code to work directly inside the repo:
+### If GitHub Pages stops working
+
+Go to repo Settings → Pages → confirm Source is set to "Deploy from a branch" → Branch: `main` → Folder: `/ (root)`.
+
+### For iterative editing: Claude Code
 
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -417,7 +446,7 @@ cd networkdelaware-civicpower
 claude
 ```
 
-Claude Code reads the actual files in the repo, makes targeted edits, and you push from the same terminal. Significantly faster for iterative changes.
+Claude Code reads actual repo files and makes targeted edits directly. Faster than copy-paste for iterative changes.
 
 ---
 
@@ -425,26 +454,25 @@ Claude Code reads the actual files in the repo, makes targeted edits, and you pu
 
 ### Current limitations
 
-- **Mission Tracker does not persist** — state resets on page reload. Can be fixed with `localStorage` (~10 lines of JS in the existing handler)
-- **Power Map Builder does not save** — output only exists in the browser session. A print/export button would be useful
-- **No search** — the resources page uses a type filter but has no full-text search across documents
-- **No analytics** — no visitor tracking is currently implemented
+- **No analytics** — no visitor tracking implemented
+- **No search** — `resources.html` has a type filter but no full-text search across documents
+- **Mission Tracker does not persist** — state resets on page reload (fixable with ~10 lines of localStorage JS)
 
-### Planned pages (not yet built)
+### Pending content
 
-- **Youth Civic Engagement page** — a standalone page for youth-specific content and activities, mentioned as a future addition. Will build when content direction is confirmed
-- **Delaware Student Legislature page** — the voluntary side initiative developed through the fellowship. Noted in `about.html` but no dedicated page yet
+- **`presentation.html`** — file must be added to repo root for the `resources.html` button to activate. Once live, remove `pointer-events:none`, `opacity:0.5`, and `aria-disabled="true"` from the button on `resources.html` (line ~165)
+- **Youth Civic Engagement Perez PDF** — one remaining Perez co-author deliverable; "Coming Soon" badge is live on `resources.html`
+- **Communities page** — currently reflects the original six priority communities. The expanded 14-community analysis (fellowship document) is available in `docs/` but not yet reflected on the page
 
-### Content that needs updating when Phase 3 completes
+### Future pages under consideration
 
-- `resources.html` — Grant Narrative card: replace "Coming Soon" with live Download button once PDF is ready
-- `about.html` — Fellowship Phases section: Phase 3 deliverables are listed but should be confirmed once finalized
-- `resources.html` — Summary Presentation Deck: not yet listed as a document card; add when complete
+- **Delaware Student Legislature page** — the voluntary side initiative developed through the fellowship; noted in `about.html` but no dedicated page built
+- **Pilot program updates** — once Year 1 pilot begins, a page tracking site-level outcomes and community partner documentation
 
-### Font loading
+### Font loading note
 
-The site loads four Google Fonts families (Bebas Neue, Syne, Syne Mono, Libre Baskerville) from `@import` in `main.css`. On slow connections, there may be a brief flash of unstyled text. This is acceptable for a fellowship site but can be mitigated by adding `font-display: swap` or preloading the font URLs in `<head>`.
+The site loads four Google Fonts families via `@import` in `main.css`. On slow connections there may be a brief flash of unstyled text. Mitigate by adding `font-display: swap` or `<link rel="preload">` tags in `<head>` of each page.
 
 ---
 
-*Last updated: May 2025 — Nathan Sanchez, Network Delaware Research Fellowship*
+*Last updated: June 2026 — Nathan Sanchez & Constanza Perez, Network Delaware Research Fellowship*
