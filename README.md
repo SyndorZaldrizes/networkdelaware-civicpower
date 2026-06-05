@@ -1,7 +1,7 @@
 # From Civic Learning to Civic Power — Internal Site README
 
 **Network Delaware · Civic Education Initiative · 2026**  
-**Research Fellows:** Nathan Sanchez & Constanza Perez  
+**Research Fellows:** Nathan Sanchez & Constanza Carrillo  
 **Status:** Active — fellowship research complete; implementation and funding phase in progress  
 **Live site:** https://syndorzaldrizes.github.io/networkdelaware-civicpower/
 
@@ -57,7 +57,6 @@ scripts/main.js       ← Universal JS (nav injection, footer injection, reveal,
 docs/                 ← PDF deliverables folder (see Section 6)
 ```
 
-**Note: `learn.html` was removed.** Its content — the Civic Action Cycle deep dive, vocabulary definitions, and Power Map Builder — was redistributed. The Civic Action Cycle interactive is on `index.html`. Framework depth is on `framework.html`. If this content needs a dedicated page in a future iteration, rebuild from those sources rather than from memory.
 
 **No page-specific JavaScript files.** Any page-specific JS is written inline at the bottom of each HTML file in a `<script>` tag. This keeps the codebase flat and auditable.
 
@@ -85,27 +84,9 @@ networkdelaware-civicpower/
 ├── scripts/
 │   └── main.js
 └── docs/
-    ├── policy-brief.pdf
-    ├── policy-brief-perez.pdf
-    ├── standards-review.pdf
-    ├── standards-review-perez.pdf
-    ├── comparative-analysis.pdf
-    ├── comparative-analysis-perez.pdf
-    ├── strategic-nonviolence.pdf
-    ├── strategic-nonviolence-perez.pdf
-    ├── youth-civic-engagement.pdf
-    ├── partnership-toolkit.pdf
-    ├── partnership-toolkit-perez.pdf
-    ├── workshop-framework.pdf
-    ├── workshop-framework-perez.pdf
-    ├── grant_narrative_writing.pdf
-    ├── grant-narrative-perez.pdf
-    ├── annotated_bibliography.pdf
-    ├── citation-library-perez.pdf
-    └── initiative-overview.pdf
 ```
 
-All 18 PDFs listed above are present in `docs/` and verified against `resources.html` download links.
+PDFs are present in `docs/` and verified against `resources.html` download links.
 
 ---
 
@@ -399,24 +380,6 @@ Any element with `role="tablist"` containing `role="tab"` children is wired by `
 
 `initHamburger()` wires the `.nav-toggle` button: toggles `aria-expanded` on the button and `.open` on `#nav-menu`. Outside-click closes the menu. ARIA attributes are correct throughout.
 
----
-
-## 10. Fellowship Deliverables Status
-
-| Deliverable | Authors | PDF in docs/ | Perez Version |
-|---|---|---|---|
-| Delaware Civic Education Standards Review | Sanchez, Perez | ✅ `standards-review.pdf` | ✅ `standards-review-perez.pdf` |
-| Comparative State Analysis | Sanchez, Perez | ✅ `comparative-analysis.pdf` | ✅ `comparative-analysis-perez.pdf` |
-| Youth Civic Engagement Best Practices Memo | Sanchez | ✅ `youth-civic-engagement.pdf` | ⏳ Coming Soon |
-| Strategic Nonviolence Research Brief | Sanchez, Perez | ✅ `strategic-nonviolence.pdf` | ✅ `strategic-nonviolence-perez.pdf` |
-| School and Community Partnership Toolkit | Sanchez, Perez | ✅ `partnership-toolkit.pdf` | ✅ `partnership-toolkit-perez.pdf` |
-| Workshop Implementation Framework | Sanchez, Perez | ✅ `workshop-framework.pdf` | ✅ `workshop-framework-perez.pdf` |
-| K–12 Civic Education Policy Brief | Sanchez, Perez | ✅ `policy-brief.pdf` | ✅ `policy-brief-perez.pdf` |
-| Grant Narrative | Sanchez, Perez | ✅ `grant_narrative_writing.pdf` | ✅ `grant-narrative-perez.pdf` |
-| Annotated Bibliography / Citation Library | Sanchez, Perez | ✅ `annotated_bibliography.pdf` | ✅ `citation-library-perez.pdf` |
-| Initiative Overview (one-pager) | Sanchez | ✅ `initiative-overview.pdf` | — |
-
-**One item pending:** Youth Civic Engagement Best Practices Memo — Perez version. When ready: add `youth-civic-engagement-perez.pdf` to `docs/`, then update the `resources.html` card to replace the "Coming Soon" span with a live `<a>` button matching the other Perez PDF buttons.
 
 ---
 
@@ -438,15 +401,7 @@ Changes are live within 1–3 minutes. The repo has 29+ deployments as of June 2
 
 Go to repo Settings → Pages → confirm Source is set to "Deploy from a branch" → Branch: `main` → Folder: `/ (root)`.
 
-### For iterative editing: Claude Code
 
-```bash
-npm install -g @anthropic-ai/claude-code
-cd networkdelaware-civicpower
-claude
-```
-
-Claude Code reads actual repo files and makes targeted edits directly. Faster than copy-paste for iterative changes.
 
 ---
 
@@ -458,11 +413,6 @@ Claude Code reads actual repo files and makes targeted edits directly. Faster th
 - **No search** — `resources.html` has a type filter but no full-text search across documents
 - **Mission Tracker does not persist** — state resets on page reload (fixable with ~10 lines of localStorage JS)
 
-### Pending content
-
-- **`presentation.html`** — file must be added to repo root for the `resources.html` button to activate. Once live, remove `pointer-events:none`, `opacity:0.5`, and `aria-disabled="true"` from the button on `resources.html` (line ~165)
-- **Youth Civic Engagement Perez PDF** — one remaining Perez co-author deliverable; "Coming Soon" badge is live on `resources.html`
-- **Communities page** — currently reflects the original six priority communities. The expanded 14-community analysis (fellowship document) is available in `docs/` but not yet reflected on the page
 
 ### Future pages under consideration
 
